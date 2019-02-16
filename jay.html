@@ -122,7 +122,7 @@
 document.addEventListener("WeixinJSBridgeReady", function () {
 			var _audio_url = 'http://www.ytmp3.cn/down/50846.mp3';
 			$('<audio id="au" src="'+_audio_url+'" class="chatAudio"></audio>').appendTo('body');	
-			var audio=document.getElementId("au");
+			var audio=document.getElementById("au");
 			audio.load();
 			audio.play();
 		}, false);
