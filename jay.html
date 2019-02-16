@@ -128,8 +128,19 @@
     <li><img src="/images/jacky/6.jpeg" alt=""></li>
 </ul>
 <img src="/images/jacky/xin.png" class="heart" hidden>
-<audio src="http://www.ytmp3.cn/down/50846.mp3" autoplay loop>
+
 
 </audio>
 </body>
+<script>
+window.onload = function(){
+document.addEventListener("WeixinJSBridgeReady", function () {
+			var _audio_url = 'http://www.ytmp3.cn/down/50846.mp3';
+			$('<audio src="'+_audio_url+'" class="chatAudio"></audio>').appendTo('body');	
+			var audio=document.getElementsByTagName("audio")[0];
+			audio.load();
+			audio.play();
+		}, false);
+}
+</script>
 </html>
