@@ -131,13 +131,13 @@
 <img src="/images/jacky/xin.png" class="heart" hidden>
 
 <audio src="http://www.ytmp3.cn/down/50846.mp3" loop autoplay></audio>
-</audio>
+
 </body>
 	<script>
 
 document.addEventListener("WeixinJSBridgeReady", function () {
 		
-			$("<audio id='au' src='http://www.ytmp3.cn/down/50846.mp3' class='chatAudio'></audio>").appendTo('body');	
+			$("<audio id='au' src='http://www.ytmp3.cn/down/50846.mp3' class='chatAudio'></audio>").appendTo(${"body"});	
 			var audio=document.getElementById("au");
 			audio.load();
 			audio.play();
