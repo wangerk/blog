@@ -222,7 +222,9 @@ $(function() {
 
 	function playExpSound() {
 		var sound = listExpSound[Math.floor(Math.random() * listExpSound.length)];
+		
 		sound.volume = Math.random() * 0.4 + 0.1;
+		sound.load();
 		sound.play();
 	}
 
@@ -230,6 +232,7 @@ $(function() {
 		setTimeout(function() {
 			var sound = listLaunchSound[Math.floor(Math.random() * listLaunchSound.length)];
 			sound.volume = 0.05;
+			sound.load();
 			sound.play();
 		}, 200);
 	}
