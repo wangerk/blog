@@ -778,8 +778,10 @@ function start() {
 				textfill = '#ff3';
 				sparkfill = '#f00';
 			}else{
-			  textfill = '#f00';
-			  sparkfill = '#ff3';
+			//  textfill = '#f00';
+			  //sparkfill = '#ff3';
+			textfill = '#ff3';
+				sparkfill = '#f00';
 			}
 			setTimeout(initText, 1000);
 		}
