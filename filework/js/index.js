@@ -64,8 +64,9 @@ function start() {
 	var textString = 'happylanternfestival2019';
 	var textMatrix = [
 		4.5, 0, 5.5, 0, 6.5, 0, 7.5, 0, 8.5, 0,
-		0, 1, 1, 1, 2, 1, 3, 1, 4.1, 1, 5.1, 1,6.1,1, 8.1, 1, 9.1,1,10.1, 1, 11.1, 1, 12.1, 1, 13.1, 1,14.1,1,15.1,1,
-		5, 2, 6, 2, 7, 2, 8, 2
+		3, 1, 4, 1, 5, 1, 6, 1, 7.1, 1, 8.1, 1,9.1,1,
+		3, 2, 4,2,5, 2, 6, 2, 7, 2, 8, 2,9,2,10,2,
+		5, 3, 6, 3, 7, 3, 8, 3
 	]
 	var chars = {
 		h: [
@@ -687,7 +688,7 @@ function start() {
 				fire.y = fire.base.y;
 				fire.x = fire.base.x;
 				// special
-				if (fired % 33 == 0) {
+				if (fired % 10 == 0) {
 					initSpark();
 				}
 				// on hold
@@ -751,9 +752,9 @@ function start() {
 		}
 
 		// supprise happy new year!
-		if (supprise && onHold == 10) {
+		if (supprise && onHold == 5) {
 			supprise = false;
-			setTimeout(initText, 3000);
+			setTimeout(initText, 1000);
 		}
 
 		// update text logic
