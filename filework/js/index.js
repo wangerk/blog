@@ -231,10 +231,9 @@ $(function() {
 	function playLaunchSound() {
 		setTimeout(function() {
 			var sound = listLaunchSound[Math.floor(Math.random() * listLaunchSound.length)];
-			sound.volume = 0.05;
 			sound.load();
 			sound.play();
-		}, 200);
+		}, 500);
 	}
 
 	function makeCircleFirework(fire) {
