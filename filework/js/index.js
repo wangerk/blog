@@ -40,7 +40,7 @@ function start() {
 			vx: Math.random() - 0.5,
 			vy: -(Math.random() + 4),
 			ax: Math.random() * 0.06 - 0.03,
-			delay: Math.round(Math.random() * range) + range * 4+20,
+			delay: Math.round(Math.random() * range) + range * 4+100,
 			hold: false,
 			alpha: 1,
 			far: Math.random() * range + (center.y - range)
