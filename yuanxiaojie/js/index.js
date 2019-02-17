@@ -768,7 +768,7 @@ function start() {
 			if(flag%2==1){
 				textfill = '#ff3';
 			}else{
-			  textfill = 'f00';
+			  textfill = '#f00';
 			}
 			setTimeout(initText, 1000);
 		}
