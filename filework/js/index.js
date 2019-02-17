@@ -691,7 +691,7 @@ function start() {
 					initSpark();
 				}
 				// on hold
-				supprise = fired % 100 == 0 ? true : supprise;
+				supprise = fired % 30 == 0 ? true : supprise;
 				if (supprise) {
 					fire.vx = 0;
 					fire.vy = 0;
