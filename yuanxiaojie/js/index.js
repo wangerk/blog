@@ -70,7 +70,7 @@ function start() {
 		3, 2, 4,2,5, 2, 6, 2, 7, 2, 8, 2,9,2,10,2,
 		5, 3, 6, 3, 7, 3, 8, 3
 	];
-	var textString1 = 'iloveyou';
+	var textString1 = 'happylanternfestival2019';
 	var textMatrix1 = [
 		4.5, 0, 5.5, 0, 6.5, 0, 7.5, 0, 8.5, 0,
 		3, 1, 4, 1, 5, 1, 6, 1, 7.1, 1, 8.1, 1,9.1,1,
@@ -182,6 +182,15 @@ function start() {
 	}
 
 	function initText() {
+	var textString = '';
+	var textMatrix ='';
+			if(flag%2==1){
+				textString = textString0;
+				textMatrix =textMatrix0;
+			}else{
+			 textString = textString1;
+				textMatrix =textMatrix1;
+			}
 		var i = textIndex;
 		var velocity = Math.random() * 0.25 + 1;
 		var shift = { x: -(Math.random() + 2), y: -(Math.random() + 3) };
