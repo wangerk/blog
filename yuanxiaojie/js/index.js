@@ -33,6 +33,7 @@ function start() {
 	var actions = [makeDoubleFullCircleFirework, makePlanetCircleFirework, makeFullCircleFirework, makeDoubleCircleFirework, makeHeartFirework, makeCircleFirework, makeRandomFirework];
 	var flag = 0;
 	var textfill = '#ff3';
+	var sparkfill = '#f00'
 	for (var i = 0; i < fireNumber; i++) {
 		var fire = {
 			x: Math.random() * range / 2 - range / 4 + center.x,
@@ -70,12 +71,11 @@ function start() {
 		3, 2, 4,2,5, 2, 6, 2, 7, 2, 8, 2,9,2,10,2,
 		5, 3, 6, 3, 7, 3, 8, 3
 	];
-	var textString1 = 'happylanternfestival2019';
+	var textString1 = 'il0vey0u';
 	var textMatrix1 = [
-		4.5, 0, 5.5, 0, 6.5, 0, 7.5, 0, 8.5, 0,
-		3, 1, 4, 1, 5, 1, 6, 1, 7.1, 1, 8.1, 1,9.1,1,
-		3, 2, 4,2,5, 2, 6, 2, 7, 2, 8, 2,9,2,10,2,
-		5, 3, 6, 3, 7, 3, 8, 3
+		
+		0, 1, 2, 1, 3, 1, 4, 1, 5, 1, 7, 1,8,1,9,1
+		
 	];
 	var chars = {
 		h: [
@@ -247,7 +247,7 @@ function start() {
 				x: x,
 				y: Math.random() * range * 0.25 + canvas.height,
 				size: Math.random() + 2,
-				fill: textfill,
+				fill: sparkfill,
 				vx: vx,
 				vy: vy,
 				ax: ax,
@@ -776,8 +776,10 @@ function start() {
 			flag++;
 			if(flag%2==1){
 				textfill = '#ff3';
+				sparkfill = '#f00';
 			}else{
 			  textfill = '#f00';
+			  sparkfill = '#ff3';
 			}
 			setTimeout(initText, 1000);
 		}
