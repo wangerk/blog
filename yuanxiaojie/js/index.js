@@ -264,6 +264,7 @@ function start() {
 	function playLaunchSound() {
 		setTimeout(function() {
 			var sound = listLaunchSound[Math.floor(Math.random() * listLaunchSound.length)];
+			sound.volume = 0.2;
 			sound.play();
 		}, 200);
 	}
