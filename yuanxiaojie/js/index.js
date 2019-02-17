@@ -31,12 +31,14 @@ function start() {
 	var supprise = false;
 	var textIndex = 0;
 	var actions = [makeDoubleFullCircleFirework, makePlanetCircleFirework, makeFullCircleFirework, makeDoubleCircleFirework, makeHeartFirework, makeCircleFirework, makeRandomFirework];
+	var flag = 0;
+	var textfill = '#ff3';
 	for (var i = 0; i < fireNumber; i++) {
 		var fire = {
 			x: Math.random() * range / 2 - range / 4 + center.x,
 			y: Math.random() * range * 2.5 + canvas.height,
 			size: Math.random() + 0.5,
-			fill: '#ff3',
+			fill: textfill,
 			vx: Math.random() - 0.5,
 			vy: -(Math.random() + 4),
 			ax: Math.random() * 0.06 - 0.03,
@@ -61,13 +63,20 @@ function start() {
 	var listLaunchSound = $('audio.launch');
 
 	// define array position of text
-	var textString = 'happylanternfestival2019';
-	var textMatrix = [
+	var textString0 = 'happylanternfestival2019';
+	var textMatrix0 = [
 		4.5, 0, 5.5, 0, 6.5, 0, 7.5, 0, 8.5, 0,
 		3, 1, 4, 1, 5, 1, 6, 1, 7.1, 1, 8.1, 1,9.1,1,
 		3, 2, 4,2,5, 2, 6, 2, 7, 2, 8, 2,9,2,10,2,
 		5, 3, 6, 3, 7, 3, 8, 3
-	]
+	];
+	var textString1 = 'iloveyou';
+	var textMatrix1 = [
+		4.5, 0, 5.5, 0, 6.5, 0, 7.5, 0, 8.5, 0,
+		3, 1, 4, 1, 5, 1, 6, 1, 7.1, 1, 8.1, 1,9.1,1,
+		3, 2, 4,2,5, 2, 6, 2, 7, 2, 8, 2,9,2,10,2,
+		5, 3, 6, 3, 7, 3, 8, 3
+	];
 	var chars = {
 		h: [
 			0, 0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7,
@@ -190,7 +199,7 @@ function start() {
 				y: center.y + top,
 				left: center.x + left,
 				size: Math.random() + 0.5,
-				fill: '#ff3',
+				fill: textfill,
 				vx: x * (velocity + (Math.random() - 0.5) * 0.5),
 				vy: y * (velocity + (Math.random() - 0.5) * 0.5),
 				ay: 0.08,
@@ -229,7 +238,7 @@ function start() {
 				x: x,
 				y: Math.random() * range * 0.25 + canvas.height,
 				size: Math.random() + 2,
-				fill: '#ff3',
+				fill: textfill,
 				vx: vx,
 				vy: vy,
 				ax: ax,
@@ -755,6 +764,12 @@ function start() {
 		// supprise happy new year!
 		if (supprise && onHold == 5) {
 			supprise = false;
+			flag++;
+			if(flag%2==1){
+				textfill = '#ff3';
+			}else{
+			  textfill = 'f00';
+			}
 			setTimeout(initText, 1000);
 		}
 
