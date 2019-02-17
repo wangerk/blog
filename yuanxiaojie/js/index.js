@@ -75,7 +75,7 @@ function start() {
 	var textMatrix1 = [
 		6.5,0,
 		5, 1, 6, 1, 7, 1, 8,1,
-		5.5,2,6.5,2,7.5,2
+		6,2,7,2,8,2
 		
 	];
 	var chars = {
