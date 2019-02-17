@@ -776,11 +776,11 @@ function start() {
 			flag++;
 			if(flag%2==1){
 				textfill = '#ff3';
-				sparkfill = '#f00';
+				sparkfill = '#ff3';
 			}else{
 			//  textfill = '#f00';
 			  //sparkfill = '#ff3';
-			textfill = '#ff3';
+			textfill = '#f00';
 				sparkfill = '#f00';
 			}
 			setTimeout(initText, 1000);
