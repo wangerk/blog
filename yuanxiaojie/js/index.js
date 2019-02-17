@@ -183,7 +183,7 @@ function start() {
 
 	function initText() {
 	var textString = '';
-	var textMatrix ='';
+	var textMatrix =[];
 			if(flag%2==1){
 				textString = textString0;
 				textMatrix =textMatrix0;
