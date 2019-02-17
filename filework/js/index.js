@@ -224,16 +224,14 @@ function start() {
 		var sound = listExpSound[Math.floor(Math.random() * listExpSound.length)];
 		
 		sound.volume = Math.random() * 0.4 + 0.1;
-		sound.load();
 		sound.play();
 	}
 
 	function playLaunchSound() {
 		setTimeout(function() {
 			var sound = listLaunchSound[Math.floor(Math.random() * listLaunchSound.length)];
-			sound.load();
 			sound.play();
-		}, 500);
+		}, 2000);
 	}
 
 	function makeCircleFirework(fire) {
