@@ -1,4 +1,4 @@
-$(function() {
+function start() {
 	var canvas = $('#canvas')[0];
 	canvas.width = $(window).width();
 	canvas.height = $(window).height();
@@ -861,4 +861,4 @@ $(function() {
 			ctx.fillRect(text.x - text.size, text.y - text.size, text.size * 2, text.size * 2);
 		}
 	}
-})
+}
