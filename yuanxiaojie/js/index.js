@@ -33,7 +33,7 @@ function start() {
 	var actions = [makeDoubleFullCircleFirework, makePlanetCircleFirework, makeFullCircleFirework, makeDoubleCircleFirework, makeHeartFirework, makeCircleFirework, makeRandomFirework];
 	var flag = 0;
 	var textfill = '#ff3';
-	var sparkfill = '#f00'
+	var sparkfill = '#ff3'
 	for (var i = 0; i < fireNumber; i++) {
 		var fire = {
 			x: Math.random() * range / 2 - range / 4 + center.x,
@@ -776,12 +776,12 @@ function start() {
 			flag++;
 			if(flag%2==1){
 				textfill = '#ff3';
-				sparkfill = '#ff3';
+				sparkfill = '#f00';
 			}else{
 			//  textfill = '#f00';
 			  //sparkfill = '#ff3';
 			textfill = '#f00';
-				sparkfill = '#f00';
+				sparkfill = '#ff3';
 			}
 			setTimeout(initText, 1000);
 		}
