@@ -96,8 +96,8 @@ function step() {
 }
 
 function adjustNodeDrivenByMouse() {
-    nodes[0].x += (mousePos[0] - nodes[0].x) / easingFactor;
-    nodes[0].y += (mousePos[1] - nodes[0].y) / easingFactor;
+    //nodes[0].x += (mousePos[0] - nodes[0].x) / easingFactor;
+    //nodes[0].y += (mousePos[1] - nodes[0].y) / easingFactor;
 }
 function render() {
   
