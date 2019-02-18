@@ -18,7 +18,7 @@ var pageWidth = window.innerWidth, //´°¿Ú¿í¶È
     render();
 	
 	function constructNodes() {
-    for (var i = 0; i < 50; i++) {
+    for (var i = 0; i < 20; i++) {
         var node = {
             drivenByMouse: i == 0,
             x: Math.random() * canvasEl.width,
