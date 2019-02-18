@@ -25,7 +25,7 @@ var pageWidth = window.innerWidth, //´°¿Ú¿í¶È
             y: Math.random() * canvasEl.height*0.2,
             vx: Math.random() * 1 - 0.5,
             vy: 0,
-            radius: Math.random() > 0.9 ? 3 + Math.random() * 3 : 3 + Math.random() * 3
+            radius: 3 + Math.random() * 3
         };
 
         nodes.push(node);
