@@ -11,7 +11,11 @@ var nodeColor = '#fff'; //点颜色
 var edgeColor = '#fff'; //边颜色
 var pageWidth = window.innerWidth, //窗口宽度 
     pageHeight = window.innerHeight; //窗口高度
-	
+	  if (nodes.length == 0) {
+        constructNodes();
+    }
+
+    render();
 	
 	function constructNodes() {
     for (var i = 0; i < 100; i++) {
@@ -140,4 +144,5 @@ window.onmousemove = function (e) {
 }
 
 window.requestAnimationFrame(step);
+alert(1111);
 }
