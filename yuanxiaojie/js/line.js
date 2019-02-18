@@ -22,7 +22,7 @@ var pageWidth = window.innerWidth, //´°¿Ú¿í¶È
         var node = {
             drivenByMouse: i == 0,
             x: Math.random() * canvasEl.width,
-            y: Math.random() * canvasEl.height,
+            y: Math.random() * canvasEl.height*0.5,
             vx: Math.random() * 1 - 0.5,
             vy: Math.random() * 1 - 0.5,
             radius: Math.random() > 0.9 ? 3 + Math.random() * 3 : 1 + Math.random() * 3
@@ -144,5 +144,5 @@ window.onmousemove = function (e) {
 }
 
 window.requestAnimationFrame(step);
-alert(1111);
+
 }
