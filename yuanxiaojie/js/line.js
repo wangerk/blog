@@ -24,7 +24,7 @@ var pageWidth = window.innerWidth, //´°¿Ú¿í¶È
             x: Math.random() * canvasEl.width,
             y: Math.random() * canvasEl.height*0.2,
             vx: Math.random() * 1 - 0.5,
-            vy: Math.random() * 1 - 0.5,
+            vy: 0,
             radius: Math.random() > 0.9 ? 3 + Math.random() * 3 : 1 + Math.random() * 3
         };
 
