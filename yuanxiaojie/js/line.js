@@ -23,7 +23,7 @@ var pageWidth = window.innerWidth, //´°¿Ú¿í¶È
             drivenByMouse: i == 0,
             x: Math.random() * canvasEl.width,
             y: Math.random() * canvasEl.height*0.2,
-            vx: Math.random() * 1 - 0.5,
+            vx: (Math.random() * 1 - 0.5)*2,
             vy: 0,
             radius: 3 + Math.random() * 3
         };
