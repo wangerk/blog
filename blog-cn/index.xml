@@ -21,30 +21,36 @@
     </item>
     
     <item>
-      <title>机器学习与逻辑编程</title>
-      <link>http://wangerk.com/blog-cn/2019/02/15/maching-learning/</link>
-      <pubDate>Fri, 15 Feb 2019 18:56:37 +0800</pubDate>
+      <title>java工程师成神之路</title>
+      <link>http://wangerk.com/blog-cn/java/to-be-top-javaer/</link>
+      <pubDate>Fri, 15 Feb 2019 20:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2019/02/15/maching-learning/</guid>
-      <description>##测试测试测试</description>
-    </item>
-    
-    <item>
-      <title>解谜计算机科学</title>
-      <link>http://wangerk.com/blog-cn/2019/02/15/computer-science/</link>
-      <pubDate>Fri, 15 Feb 2019 17:56:37 +0800</pubDate>
-      
-      <guid>http://wangerk.com/blog-cn/2019/02/15/computer-science/</guid>
-      <description>##测试测试测试</description>
-    </item>
-    
-    <item>
-      <title>为什么拍照是个坏习惯</title>
-      <link>http://wangerk.com/blog-cn/2019/02/15/photograph/</link>
-      <pubDate>Fri, 15 Feb 2019 15:56:37 +0800</pubDate>
-      
-      <guid>http://wangerk.com/blog-cn/2019/02/15/photograph/</guid>
-      <description>##测试测试测试</description>
+      <guid>http://wangerk.com/blog-cn/java/to-be-top-javaer/</guid>
+      <description>目录： 《基础篇》JVM——JVM内存结构
+《基础篇》JVM——Java内存模型
+《基础篇》JVM——Java对象模型
+《基础篇》JVM——HotSpot
+《基础篇》JVM——垃圾回收
+《基础篇》JVM——JVM参数及调优
+《基础篇》JVM——常用Java命令
+《基础篇》编译与反编译
+《基础篇》Java基础知识——阅读源代码
+《基础篇》Java基础知识——String相关
+《基础篇》Java基础知识——Java中各种关键字
+《基础篇》Java基础知识——自动拆装箱
+《基础篇》Java基础知识——枚举
+《基础篇》Java基础知识——反射
+《基础篇》Java基础知识——序列化
+《基础篇》Java基础知识——JMS
+《基础篇》Java基础知识——泛型
+《基础篇》Java基础知识——常用的Java工具库
+《基础篇》Java基础知识——单元测试
+《进阶篇》设计模式——设计模式合集
+《高级篇》Java并发编程——锁
+《高级篇》大数据知识—— Zookeeper合集
+《高级篇》网络安全知识—— 解决webx的xss和csrf漏洞
+《进阶篇》网络编程知识——常用协议
+《扩展篇》分布式—— 分布式合集</description>
     </item>
     
   </channel>

@@ -8,23 +8,30 @@
   </url>
   
   <url>
+    <loc>http://wangerk.com/blog-cn/java/to-be-top-javaer/</loc>
+    <lastmod>2019-02-15T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://wangerk.com/reward/pay-blog/</loc>
     <lastmod>2019-02-15T20:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2019/02/15/maching-learning/</loc>
-    <lastmod>2019-02-15T18:56:37+08:00</lastmod>
+    <loc>http://wangerk.com/basics/jvm/java-memory-model/</loc>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2019/02/15/computer-science/</loc>
-    <lastmod>2019-02-15T17:56:37+08:00</lastmod>
+    <loc>http://wangerk.com/basics/jvm/java-object-model/</loc>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2019/02/15/photograph/</loc>
-    <lastmod>2019-02-15T15:56:37+08:00</lastmod>
+    <loc>http://wangerk.com/basics/jvm/jvm-memory-structure/</loc>
+  </url>
+  
+  <url>
+    <loc>http://wangerk.com/basics/</loc>
+    <priority>0</priority>
   </url>
   
   <url>
