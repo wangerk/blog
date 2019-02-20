@@ -54,22 +54,12 @@
     </item>
     
     <item>
-      <title>博文的自愿付费方式</title>
-      <link>http://wangerk.com/reward/pay-blog/</link>
+      <title>Java内存模型</title>
+      <link>http://wangerk.com/basics/jvm/java-memory-model/</link>
       <pubDate>Fri, 15 Feb 2019 20:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/reward/pay-blog/</guid>
-      <description>喜欢我的文章的人，可以自愿付费购买。你可以使用以下方式付款。
- 支付宝：  微信：  PayPal：请点击[付款链接]  </description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>http://wangerk.com/basics/jvm/java-memory-model/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>http://wangerk.com/basics/jvm/java-memory-model/</guid>
-      <description>Java内存模型  本文是《成神之路系列文章》中的一篇，主要是关于JVM的一些介绍。
+      <description>本文是《JAVA技术栈系列文章》中的一篇，主要是关于JVM的一些介绍。
 持续更新中
  Java内存模型 JVM内存结构 VS Java内存模型 VS Java对象模型(Hollis原创)
 再有人问你Java内存模型是什么，就把这篇文章发给他。(Hollis原创)
@@ -88,25 +78,12 @@ Java 理论与实践: 修复 Java 内存模型，第 2 部分（拓展阅读）<
     </item>
     
     <item>
-      <title></title>
-      <link>http://wangerk.com/basics/jvm/java-object-model/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://wangerk.com/basics/jvm/java-object-model/</guid>
-      <description>本文是《成神之路系列文章》中的一篇，主要是关于JVM的一些介绍。
-持续更新中
- JVM内存结构 VS Java内存模型 VS Java对象模型
-深入理解多线程（二）—— Java的对象模型
-深入理解多线程（三）—— Java的对象头</description>
-    </item>
-    
-    <item>
-      <title></title>
+      <title>Java内存模型，Java内存管理，Java堆和栈，垃圾回收</title>
       <link>http://wangerk.com/basics/jvm/jvm-memory-structure/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 15 Feb 2019 20:55:53 +0800</pubDate>
       
       <guid>http://wangerk.com/basics/jvm/jvm-memory-structure/</guid>
-      <description>Java内存模型，Java内存管理，Java堆和栈，垃圾回收  本文是《成神之路系列文章》中的一篇，主要是关于JVM的一些介绍。
+      <description>本文是《JAVA技术栈系列文章》中的一篇，主要是关于JVM的一些介绍。
 持续更新中
  参考文章：
 Java虚拟机的内存组成以及堆内存介绍
@@ -116,6 +93,29 @@ Java 内存之方法区和运行时常量池
 从0到1起步-跟我进入堆外内存的奇妙世界
 JVM内存结构 VS Java内存模型 VS Java对象模型
 参考书籍：《深入理解Java虚拟机》</description>
+    </item>
+    
+    <item>
+      <title>Java对象模型</title>
+      <link>http://wangerk.com/basics/jvm/java-object-model/</link>
+      <pubDate>Fri, 15 Feb 2019 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/basics/jvm/java-object-model/</guid>
+      <description>本文是《JAVA技术栈系列文章》中的一篇，主要是关于JVM的一些介绍。
+持续更新中
+ JVM内存结构 VS Java内存模型 VS Java对象模型
+深入理解多线程（二）—— Java的对象模型
+深入理解多线程（三）—— Java的对象头</description>
+    </item>
+    
+    <item>
+      <title>博文的自愿付费方式</title>
+      <link>http://wangerk.com/reward/pay-blog/</link>
+      <pubDate>Fri, 15 Feb 2019 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/reward/pay-blog/</guid>
+      <description>喜欢我的文章的人，可以自愿付费购买。你可以使用以下方式付款。
+ 支付宝：  微信：  PayPal：请点击[付款链接]  </description>
     </item>
     
   </channel>

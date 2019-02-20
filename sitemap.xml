@@ -13,24 +13,28 @@
   </url>
   
   <url>
+    <loc>http://wangerk.com/basics/jvm/java-memory-model/</loc>
+    <lastmod>2019-02-15T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wangerk.com/basics/jvm/jvm-memory-structure/</loc>
+    <lastmod>2019-02-15T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wangerk.com/basics/jvm/java-object-model/</loc>
+    <lastmod>2019-02-15T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://wangerk.com/reward/pay-blog/</loc>
     <lastmod>2019-02-15T20:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/basics/jvm/java-memory-model/</loc>
-  </url>
-  
-  <url>
-    <loc>http://wangerk.com/basics/jvm/java-object-model/</loc>
-  </url>
-  
-  <url>
-    <loc>http://wangerk.com/basics/jvm/jvm-memory-structure/</loc>
-  </url>
-  
-  <url>
     <loc>http://wangerk.com/basics/</loc>
+    <lastmod>2019-02-15T20:55:53+08:00</lastmod>
     <priority>0</priority>
   </url>
   
