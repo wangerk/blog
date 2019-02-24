@@ -119,21 +119,30 @@ JVM内存结构 VS Java内存模型 VS Java对象模型
     </item>
     
     <item>
+      <title>iOS多线程(GCD)合成图片~demo</title>
+      <link>http://wangerk.com/blog-cn/2017/05/31/gcd-join-images/</link>
+      <pubDate>Wed, 31 May 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/05/31/gcd-join-images/</guid>
+      <description> 图片合成效果 //创建队列组 dispatch_group_tgroup =dispatch_group_create(); //1.开子线程下载图片 //创建队列(并发) dispatch_queue_tqueue =dispatch_get_global_queue(0,0); //异步执行并发队列 dispatch_group_async(group, queue, ^{ //1.获取url地址 NSURL*url = [NSURL URLWithString:@&amp;quot;https://imgsa.baidu.com/baike/c0=baike180,5,5,180,60/sign=b531c24482025aafc73f76999a84c001/b21c8701a18b87d6435d2f9b070828381f30fd13.jpg&amp;quot;]; //2.下载图片 NSData *data = [NSData dataWithContentsOfURL:url]; //3.把二进制数据转换成图片 self.image1= [UIImage imageWithData:data]; }); //下载图片2 dispatch_group_async(group, queue, ^{ //1.获取url地址 NSURL*url = [NSURL URLWithString:@&amp;quot;https://imgsa.baidu.com/baike/c0=baike220,5,5,220,73/sign=62c273b38a13632701e0ca61f0e6cb89/8644ebf81a4c510faae40d756059252dd42aa5b9.jpg&amp;quot;]; //2.下载图片 NSData*data = [NSData dataWithContentsOfURL:url]; //3.把二进制数据转换成图片 self.image2= [UIImage imageWithData:data]; }); //合成 dispatch_group_notify(group, queue, ^{ //开启图形上下文 UIGraphicsBeginImageContext(CGSizeMake(200,200)); //画1 [self.image1 drawInRect:CGRectMake(0,0,200,100)]; //画2 [self.image2 drawInRect:CGRectMake(0,100,200,100)]; //根据图形上下文拿到图片 UIImage*image =UIGraphicsGetImageFromCurrentImageContext(); //关闭上下文 UIGraphicsEndImageContext(); dispatch_async(dispatch_get_main_queue(), ^{ self.imageView.image= image; });  </description>
+    </item>
+    
+    <item>
+      <title>iOS自动适应UILabel的宽度~demo</title>
+      <link>http://wangerk.com/blog-cn/2017/05/30/uilable-adjust-width/</link>
+      <pubDate>Mon, 30 May 2016 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/05/30/uilable-adjust-width/</guid>
+      <description>#import &amp;quot;UILabel+Extension.h&amp;quot; - (void)viewDidLoad { [super viewDidLoad]; //直接引用分类功能 [UILabel createLabelWithContent:@&amp;quot;10011111111110&amp;quot; addView:self.view lableX:10 lableY:111 lableH:30 fontSize:16 backgroundColor:[UIColor redColor] textColor:[UIColor blueColor] borderColor:[UIColor yellowColor]]; } + (instancetype)createLabelWithContent:(NSString *)content addView:(UIView *)view lableX:(CGFloat)lableX lableY:(CGFloat)lableY lableH:(CGFloat)lableH fontSize:(CGFloat)fontSize backgroundColor:(UIColor *)backgroundColor textColor:(UIColor*)textColor borderColor:(UIColor *)borderColor{ NSString *string = [NSString stringWithFormat:@&amp;quot;%@&amp;quot;,content]; CGRect textRect = [self boundingString:string size:CGSizeMake([UIScreenmainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height *2) fontSize:fontSize]; CGFloat rowWidth = 0.0; if (string.length == 1) { rowWidth = textRect.size.width + 35; }else{ rowWidth = textRect.size.width + 25; } UILabel *lable = [[UILabel alloc]initWithFrame:CGRectMake(lableX, lableY, rowWidth, lableH)]; lable.</description>
+    </item>
+    
+    <item>
       <title>iOS点击view退出键盘</title>
       <link>http://wangerk.com/blog-cn/2016/04/15/resign-keyboard/</link>
       <pubDate>Fri, 15 Apr 2016 20:55:53 +0800</pubDate>
       
       <guid>http://wangerk.com/blog-cn/2016/04/15/resign-keyboard/</guid>
       <description>//创建 UITapGestureRecognizer *tapGest = [[UITapGestureRecognizer alloc]init]; //监听 [tapGest addTarget:self action:@selector(tapAction)]; [self.view addGestureRecognizer:tapGest]; //退出键盘 - (void)tapAction { //放弃第一响应者resignFirstResponder [self.text resignFirstResponder]; }  </description>
-    </item>
-    
-    <item>
-      <title>iOS自动适应UILabel的宽度~demo</title>
-      <link>http://wangerk.com/blog-cn/2017/05/30/uilable-adjust-width/</link>
-      <pubDate>Fri, 15 Apr 2016 20:55:53 +0800</pubDate>
-      
-      <guid>http://wangerk.com/blog-cn/2017/05/30/uilable-adjust-width/</guid>
-      <description>#import &amp;quot;UILabel+Extension.h&amp;quot; - (void)viewDidLoad { [super viewDidLoad]; //直接引用分类功能 [UILabel createLabelWithContent:@&amp;quot;10011111111110&amp;quot; addView:self.view lableX:10 lableY:111 lableH:30 fontSize:16 backgroundColor:[UIColor redColor] textColor:[UIColor blueColor] borderColor:[UIColor yellowColor]]; } + (instancetype)createLabelWithContent:(NSString *)content addView:(UIView *)view lableX:(CGFloat)lableX lableY:(CGFloat)lableY lableH:(CGFloat)lableH fontSize:(CGFloat)fontSize backgroundColor:(UIColor *)backgroundColor textColor:(UIColor*)textColor borderColor:(UIColor *)borderColor{ NSString *string = [NSString stringWithFormat:@&amp;quot;%@&amp;quot;,content]; CGRect textRect = [self boundingString:string size:CGSizeMake([UIScreenmainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height *2) fontSize:fontSize]; CGFloat rowWidth = 0.0; if (string.length == 1) { rowWidth = textRect.size.width + 35; }else{ rowWidth = textRect.size.width + 25; } UILabel *lable = [[UILabel alloc]initWithFrame:CGRectMake(lableX, lableY, rowWidth, lableH)]; lable.</description>
     </item>
     
   </channel>
