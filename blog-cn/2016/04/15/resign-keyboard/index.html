@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
     
     
-    <title>Blog-cns</title>
+    <title>iOS点击view退出键盘</title>
     
      <link rel="shortcut icon" href="/images/w.jpg">
 
@@ -61,61 +61,25 @@
     
 
 
-  <div class="outer">
-  <ul class="list-group">
-    
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>iOS点击view退出键盘</h2>
+        <pre><code class="language-objc">//创建
+   UITapGestureRecognizer *tapGest = [[UITapGestureRecognizer alloc]init];           
+  //监听     
+   [tapGest addTarget:self action:@selector(tapAction)];  
+   [self.view addGestureRecognizer:tapGest];
+//退出键盘
+- (void)tapAction
+{
+    //放弃第一响应者resignFirstResponder
+    [self.text resignFirstResponder];
+}
+</code></pre>
 
-    <li class="list-group-item title">
-      
-         
-        
-        
-            
-                <a href="/blog-cn/java/to-be-top-javaer/">JAVA技术栈 </a>
-            
-        
-      
-    </li>
-    
-
-    <li class="list-group-item title">
-      
-         
-        
-        
-            
-                <a href="/blog-cn/2019/02/16/setting/">Mac OS X常见设置 </a>
-            
-        
-      
-    </li>
-    
-
-    <li class="list-group-item title">
-      
-         
-        
-        
-            
-                <a href="/blog-cn/2017/05/30/uilable-adjust-width/">iOS自动适应UILabel的宽度~demo </a>
-            
-        
-      
-    </li>
-    
-
-    <li class="list-group-item title">
-      
-         
-        
-        
-            
-                <a href="/blog-cn/2016/04/15/resign-keyboard/">iOS点击view退出键盘 </a>
-            
-        
-      
-    </li>
-    
-  </ul>
+  </div>
 
 

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>iOS自动适应UILabel的宽度~demo</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>iOS自动适应UILabel的宽度~demo</h2>
+        <p><img src="../demo.png" alt="图片" /></p>
+
+<pre><code class="language-objc">#import &quot;UILabel+Extension.h&quot;
+- (void)viewDidLoad {
+    [super viewDidLoad];
+     //直接引用分类功能
+
+    [UILabel createLabelWithContent:@&quot;10011111111110&quot; addView:self.view lableX:10 lableY:111 lableH:30 fontSize:16 backgroundColor:[UIColor redColor] textColor:[UIColor blueColor] borderColor:[UIColor yellowColor]];    
+
+ 
+
+}
+
+ 
+
++ (instancetype)createLabelWithContent:(NSString *)content addView:(UIView *)view lableX:(CGFloat)lableX lableY:(CGFloat)lableY lableH:(CGFloat)lableH fontSize:(CGFloat)fontSize backgroundColor:(UIColor *)backgroundColor textColor:(UIColor*)textColor borderColor:(UIColor *)borderColor{
+
+    
+
+    NSString *string = [NSString stringWithFormat:@&quot;%@&quot;,content];
+
+    CGRect textRect = [self boundingString:string size:CGSizeMake([UIScreenmainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height *2) fontSize:fontSize];
+
+    
+
+    CGFloat rowWidth = 0.0;
+
+    if (string.length == 1) {
+
+        rowWidth = textRect.size.width + 35;
+
+    }else{
+
+        rowWidth = textRect.size.width + 25;
+
+    }
+
+    UILabel *lable = [[UILabel alloc]initWithFrame:CGRectMake(lableX, lableY, rowWidth, lableH)];
+
+    lable.layer.masksToBounds = YES;
+
+    lable.layer.cornerRadius = 15;
+
+    lable.layer.borderColor = borderColor.CGColor;
+
+    lable.layer.borderWidth = 1;
+
+    lable.backgroundColor = backgroundColor;
+
+    lable.textAlignment = NSTextAlignmentCenter;
+
+    lable.textColor = textColor;
+
+    lable.text = string;
+
+    [view addSubview:lable];    
+
+    return lable;
+
+}
+
+ 
+
+//自动适应 lable 的宽度 和 高度
+
++ (CGRect)boundingString:(NSString *)string size:(CGSize)size fontSize:(NSInteger)fontSize
+
+{
+
+    NSStringDrawingOptions options = NSStringDrawingTruncatesLastVisibleLine |NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading;
+
+    
+
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFontsystemFontOfSize:fontSize]};    
+
+    return [string boundingRectWithSize:size options:optionsattributes:attributes context:nil];
+
+}
+
+</code></pre>
+
+  </div>
+
+

@@ -53,5 +53,23 @@
       <description>本小节知识点:  【理解】查看本机配置 【理解】系统开/关机 【理解】键盘设置 【理解】鼠标设置 【理解】网络设置  1.查看本机配置  点击屏幕左上角的黑色苹果   点击&amp;rdquo;关于本机&amp;rdquo;  2.系统开/关机  点击屏幕左上角的黑色苹果 选择&amp;rdquo;睡眠&amp;rdquo; or &amp;ldquo;重新启动&amp;rdquo; or &amp;ldquo;关机&amp;rdquo;   关机快捷键  command + option + control + △   3.键盘设置  点击屏幕左上角的黑色苹果 点击&amp;rdquo;系统偏好设置&amp;rdquo;   选择&amp;rdquo;键盘&amp;rdquo;   设置输入法  4.鼠标设置  查找鼠标   注意, 如果找不到需要关闭鼠标后重新打开   找到后点击继续   看到此图代表鼠标连接成功, 鼠标只需要配对一次, 以后系统会自动配对   注意默认情况下Mac系统不会像windows一样开启鼠标右键, 需要我们手动开启  5.网络设置  点击屏幕左上角的黑色苹果 点击&amp;rdquo;系统偏好设置&amp;rdquo;   选择&amp;rdquo;网络&amp;rdquo;   自动获取IP的方式上网   手动设置IP的方式上网  （本文建议零售价 ￥1，如果你觉得这篇文章有启发，可以点击这里付费)</description>
     </item>
     
+    <item>
+      <title>iOS点击view退出键盘</title>
+      <link>http://wangerk.com/blog-cn/2016/04/15/resign-keyboard/</link>
+      <pubDate>Fri, 15 Apr 2016 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2016/04/15/resign-keyboard/</guid>
+      <description>//创建 UITapGestureRecognizer *tapGest = [[UITapGestureRecognizer alloc]init]; //监听 [tapGest addTarget:self action:@selector(tapAction)]; [self.view addGestureRecognizer:tapGest]; //退出键盘 - (void)tapAction { //放弃第一响应者resignFirstResponder [self.text resignFirstResponder]; }  </description>
+    </item>
+    
+    <item>
+      <title>iOS自动适应UILabel的宽度~demo</title>
+      <link>http://wangerk.com/blog-cn/2017/05/30/uilable-adjust-width/</link>
+      <pubDate>Fri, 15 Apr 2016 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/05/30/uilable-adjust-width/</guid>
+      <description>#import &amp;quot;UILabel+Extension.h&amp;quot; - (void)viewDidLoad { [super viewDidLoad]; //直接引用分类功能 [UILabel createLabelWithContent:@&amp;quot;10011111111110&amp;quot; addView:self.view lableX:10 lableY:111 lableH:30 fontSize:16 backgroundColor:[UIColor redColor] textColor:[UIColor blueColor] borderColor:[UIColor yellowColor]]; } + (instancetype)createLabelWithContent:(NSString *)content addView:(UIView *)view lableX:(CGFloat)lableX lableY:(CGFloat)lableY lableH:(CGFloat)lableH fontSize:(CGFloat)fontSize backgroundColor:(UIColor *)backgroundColor textColor:(UIColor*)textColor borderColor:(UIColor *)borderColor{ NSString *string = [NSString stringWithFormat:@&amp;quot;%@&amp;quot;,content]; CGRect textRect = [self boundingString:string size:CGSizeMake([UIScreenmainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height *2) fontSize:fontSize]; CGFloat rowWidth = 0.0; if (string.length == 1) { rowWidth = textRect.size.width + 35; }else{ rowWidth = textRect.size.width + 25; } UILabel *lable = [[UILabel alloc]initWithFrame:CGRectMake(lableX, lableY, rowWidth, lableH)]; lable.</description>
+    </item>
+    
   </channel>
 </rss>
