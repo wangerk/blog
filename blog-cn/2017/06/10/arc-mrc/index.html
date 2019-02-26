@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>iOS ARC和MRC混合开发</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>iOS ARC和MRC混合开发</h2>
+        <p>ARC &amp; MRC 混合开发</p>
+
+<p>在项目开发中，遇到使用MRC开发的第三方库怎么办？</p>
+
+<p>例如：ASI</p>
+
+<p>1&gt;尝试使用Xcode的转换工具（失败率比较高）</p>
+
+<p>2&gt; 在编译选项中，为MRC的程序添加-fno-objc-arc标记，表明在编译时，该文件使用MRC编译</p>
+
+<p>备注：</p>
+
+<p>(1) 演示中使用的RegexKitLite还需要导入libicucore.dylib动态库</p>
+
+<p>(2) 如果要在MRC项目中添加ARC的文件，可以使用 -fobjc-arc 标记即可</p>
+
+<p>3&gt; 将MRC的第三方库直接编译成静态库使用</p>
+
+<p>注意：在编译静态库时，不能添加动态库引用</p>
+
+<p>说明：</p>
+
+<p>RegexKitLite是对NSString添加的正则表达式分类</p>
+
+<p>*** 在项目中，如果使用的静态库中包含分类，则需要在Other Link Flag中添加 -ObjC选项</p>
+
+  </div>
+
+

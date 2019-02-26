@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>iOS监控联网状态</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>iOS监控联网状态</h2>
+        <ol>
+<li><p>AFN监控联网状态</p>
+
+<pre><code>AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
+// 提示：要监控网络连接状态，必须要先调用单例的startMonitoring方法
+[manager startMonitoring];
+[manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+NSLog(@&quot;%d&quot;, status);
+}];
+</code></pre></li>
+
+<li><p>Reachability监控联网状态苹果提供,导入这两个类使用</p>
+
+<pre><code>// 1.检测wifi状态
+Reachability *wifi = [Reachability reachabilityForLocalWiFi];
+// 2.检测手机是否能上网络(WIFI\3G\2.5G)
+Reachability *conn = [Reachability reachabilityForInternetConnection];
+// 3.判断网络状态
+if ([wifi currentReachabilityStatus] != NotReachable) { // 有wifi
+    NSLog(@&quot;有wifi&quot;);
+} else if ([conn currentReachabilityStatus] != NotReachable) { // 没有使用wifi, 使用手机自带网络进行上网
+    NSLog(@&quot;使用手机自带网络进行上网&quot;);
+} else { // 没有网络
+    NSLog(@&quot;没有网络&quot;);
+}
+</code></pre>
+
+<p>①判断联网状态</p>
+
+<pre><code>// 用WIFI
+// [wifi currentReachabilityStatus] != NotReachable
+// [conn currentReachabilityStatus] != NotReachable
+// 没有用WIFI, 只用了手机网络
+// [wifi currentReachabilityStatus] == NotReachable
+// [conn currentReachabilityStatus] != NotReachable
+// 没有网络
+// [wifi currentReachabilityStatus] == NotReachable
+// [conn currentReachabilityStatus] == NotReachable
+</code></pre>
+
+<p>②实时监听网络状态</p>
+
+<pre><code>#import &quot;ViewController.h&quot;
+#import &quot;Reachability.h&quot;
+@interface HMViewController ()
+@property (nonatomic, strong) Reachability *conn;
+@end
+@implementation HMViewController
+-(void)viewDidLoad
+{
+[super viewDidLoad];
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkNetworkState) name:kReachabilityChangedNotification object:nil];
+self.conn = [Reachability reachabilityForInternetConnection];
+[self.conn startNotifier];
+}
+-(void)dealloc
+{
+[self.conn stopNotifier];
+[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+-(void)checkNetworkState
+{
+// 1.检测wifi状态
+Reachability *wifi = [Reachability reachabilityForLocalWiFi];
+// 2.检测手机是否能上网络(WIFI\3G\2.5G)
+Reachability *conn = [Reachability reachabilityForInternetConnection];
+// 3.判断网络状态
+if ([wifi currentReachabilityStatus] != NotReachable) { // 有wifi
+    NSLog(@&quot;有wifi&quot;);
+} else if ([conn currentReachabilityStatus] != NotReachable) { // 没有使用wifi, 使用手机自带网络进行上网
+    NSLog(@&quot;使用手机自带网络进行上网&quot;);
+} else { // 没有网络
+    NSLog(@&quot;没有网络&quot;);
+}
+}
+@end
+</code></pre></li>
+</ol>
+
+  </div>
+
+

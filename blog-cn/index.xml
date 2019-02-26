@@ -54,6 +54,169 @@
     </item>
     
     <item>
+      <title>博文的自愿付费方式</title>
+      <link>http://wangerk.com/blog-cn/2017/06/12/nsset-nsmutableset/</link>
+      <pubDate>Mon, 12 Jun 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/06/12/nsset-nsmutableset/</guid>
+      <description>NSSet和NSMutableSet是无序的, 但是它保证数据的唯一性。当插入相同的数据时，不会有任何效果。从内部实现来说是hash表，所以可以常数时间内查找一个数据。
+ 散列表（Hash table，也叫哈希表），是根据关键码值(Key value)而直接进行访问的数据结构。也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做散列函数，存放记录的数组叫做散列表。
+ 给定表M，存在函数f(key)，对任意给定的关键字值key，代入函数后若能得到包含该关键字的记录在表中的地址，则称表M为哈希(Hash）表，函数f(key)为哈希(Hash) 函数
+NSSet和NSMutableSet是无序的, 但是它保证数据的唯一性。当插入相同的数据时，不会有任何效果。从内部实现来说是hash表，所以可以常数时间内查找一个数据。
+ IOS开发之&amp;mdash;-NSSet和NSMutableSet
+ 1、NSSet的使用
+ [NSSet setWithSet:(NSSet *)set]; 用另外一个set对象构造
+ [NSSet setWithArray:(NSArray *)array];用数组构造
+ [NSSet setWithObjects:&amp;hellip;]:创建集合对象，并且初始化集合中的数值，结尾必需使用nil标志。
+ [set count] ; 得到这个结合对象的长度。
+ [set containsObject:&amp;hellip;]: 判断这个集合中是否存在传入的对象，返回Bool值。
+ [set objectEnumerator]: 将集合放入迭代器。
+ [enumerator nextObject]:得到迭代器中的下一个节点数据，使用while遍历这个迭代器，方可遍历集合对象中的对象。
+ [set isEqualToSet:objset]:判断两个集合是否完全相等,返回Bool值。
+ [set isSubsetOfSet:objset]:判断集合中的所有数据是否都相等与objeset集合中,返回Bool值。
+ [set allObjects];
+  示例代码：
+ 1.1 以NSArray构造set
+  NSArray *array = [[NSArray alloc] initWithObjects:@&amp;ldquo;对象abc&amp;rdquo;,@&amp;ldquo;rongfzh&amp;rdquo;, @&amp;ldquo;totogo2010&amp;rdquo;,nil];
+ NSSet *set3 = [NSSet setWithArray:array];</description>
+    </item>
+    
+    <item>
+      <title>iOS ARC和MRC混合开发</title>
+      <link>http://wangerk.com/blog-cn/2017/06/10/arc-mrc/</link>
+      <pubDate>Sat, 10 Jun 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/06/10/arc-mrc/</guid>
+      <description>ARC &amp;amp; MRC 混合开发
+在项目开发中，遇到使用MRC开发的第三方库怎么办？
+例如：ASI
+1&amp;gt;尝试使用Xcode的转换工具（失败率比较高）
+2&amp;gt; 在编译选项中，为MRC的程序添加-fno-objc-arc标记，表明在编译时，该文件使用MRC编译
+备注：
+(1) 演示中使用的RegexKitLite还需要导入libicucore.dylib动态库
+(2) 如果要在MRC项目中添加ARC的文件，可以使用 -fobjc-arc 标记即可
+3&amp;gt; 将MRC的第三方库直接编译成静态库使用
+注意：在编译静态库时，不能添加动态库引用
+说明：
+RegexKitLite是对NSString添加的正则表达式分类
+*** 在项目中，如果使用的静态库中包含分类，则需要在Other Link Flag中添加 -ObjC选项</description>
+    </item>
+    
+    <item>
+      <title>iOS 程序启动的完整过程</title>
+      <link>http://wangerk.com/blog-cn/2017/06/09/program-flow/</link>
+      <pubDate>Fri, 09 Jun 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/06/09/program-flow/</guid>
+      <description>1步.main函数
+2步.UIApplicationMain
+ 创建UIApplication对象
+ 创建UIApplication的delegate对象
+  3步.delegate对象开始处理(监听)系统事件(没有storyboard)
+ 程序启动完毕的时候, 就会调用代理的application:didFinishLaunchingWithOptions:方法
+ 在application:didFinishLaunchingWithOptions:中创建UIWindow
+ 创建和设置UIWindow的rootViewController
+ 显示窗口
+  3.1步.根据Info.plist获得最主要storyboard的文件名,加载最主要的storyboard(有storyboard)
+ 创建UIWindow
+ 创建和设置UIWindow的rootViewController
+ 显示窗口
+  </description>
+    </item>
+    
+    <item>
+      <title>iOS 客户端HTTP状态码</title>
+      <link>http://wangerk.com/blog-cn/2017/06/07/http-code/</link>
+      <pubDate>Wed, 07 Jun 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/06/07/http-code/</guid>
+      <description>1xx消息
+这一类型的状态码，代表请求已被接受，需要继续处理。这类响应是临时响应，只包含状态行和某些可选的响应头信息，并以空行结束。由于HTTP/1.0协议中没有定义任何1xx状态码，所以除非在某些试验条件下，服务器禁止向此类客户端发送1xx响应。 这些状态码代表的响应都是信息性的，标示客户应该采取的其他行动。
+100 Continue
+ 客户端应当继续发送请求。这个临时响应是用来通知客户端它的部分请求已经被服务器接收，且仍未被拒绝。客户端应当继续发送请求的剩余部分，或者如果请求已经完成，忽略这个响应。服务器必须在请求完成后向客户端发送一个最终响应。
+101 Switching Protocols
+ 服务器已经理解了客户端的请求，并将通过Upgrade消息头通知客户端采用不同的协议来完成这个请求。在发送完这个响应最后的空行后，服务器将会切换到在Upgrade消息头中定义的那些协议。: 只有在切换新的协议更有好处的时候才应该采取类似措施。例如，切换到新的HTTP版本比旧版本更有优势，或者切换到一个实时且同步的协议以传送利用此类特性的资源。
+102 Processing
+ 由WebDAV（RFC 2518）扩展的状态码，代表处理将被继续执行。
+2xx成功
+这一类型的状态码，代表请求已成功被服务器接收、理解、并接受。
+200 OK
+ 请求已成功，请求所希望的响应头或数据体将随此响应返回。
+201 Created
+ 请求已经被实现，而且有一个新的资源已经依据请求的需要而创建，且其URI已经随Location头信息返回。假如需要的资源无法及时创建的话，应当返回&amp;rsquo;202 Accepted&amp;rsquo;。
+202 Accepted
+ 服务器已接受请求，但尚未处理。正如它可能被拒绝一样，最终该请求可能会也可能不会被执行。在异步操作的场合下，没有比发送这个状态码更方便的做法了。:返回202状态码的响应的目的是允许服务器接受其他过程的请求（例如某个每天只执行一次的基于批处理的操作），而不必让客户端一直保持与服务器的连接直到批处理操作全部完成。在接受请求处理并返回202状态码的响应应当在返回的实体中包含一些指示处理当前状态的信息，以及指向处理状态监视器或状态预测的指针，以便用户能够估计操作是否已经完成。
+203 Non-Authoritative Information
+ 服务器已成功处理了请求，但返回的实体头部元信息不是在原始服务器上有效的确定集合，而是来自本地或者第三方的拷贝。当前的信息可能是原始版本的子集或者超集。例如，包含资源的元数据可能导致原始服务器知道元信息的超集。使用此状态码不是必须的，而且只有在响应不使用此状态码便会返回200 OK的情况下才是合适的。
+204 No Content
+ 服务器成功处理了请求，但不需要返回任何实体内容，并且希望返回更新了的元信息。响应可能通过实体头部的形式，返回新的或更新后的元信息。如果存在这些头部信息，则应当与所请求的变量相呼应。
+ 如果客户端是浏览器的话，那么用户浏览器应保留发送了该请求的页面，而不产生任何文档视图上的变化，即使按照规范新的或更新后的元信息应当被应用到用户浏览器活动视图中的文档。
+ 由于204响应被禁止包含任何消息体，因此它始终以消息头后的第一个空行结尾。
+205 Reset Content
+ 服务器成功处理了请求，且没有返回任何内容。但是与204响应不同，返回此状态码的响应要求请求者重置文档视图。该响应主要是被用于接受用户输入后，立即重置表单，以便用户能够轻松地开始另一次输入。
+ 与204响应一样，该响应也被禁止包含任何消息体，且以消息头后的第一个空行结束。
+206 Partial Content
+ 服务器已经成功处理了部分GET请求。类似于FlashGet或者迅雷这类的HTTP 下载工具都是使用此类响应实现断点续传或者将一个大文档分解为多个下载段同时下载。
+ 该请求必须包含Range头信息来指示客户端希望得到的内容范围，并且可能包含If-Range来作为请求条件。
+ 响应必须包含如下的头部域：
+ Content-Range用以指示本次响应中返回的内容的范围；如果是Content-Type为multipart/byteranges的多段下载，则每一multipart段中都应包含Content-Range域用以指示本段的内容范围。假如响应中包含Content-Length，那么它的数值必须匹配它返回的内容范围的真实字节数。
+ Date
+ ETag和／或Content-Location，假如同样的请求本应该返回200响应。</description>
+    </item>
+    
+    <item>
+      <title>iOS滚动到顶部</title>
+      <link>http://wangerk.com/blog-cn/2017/06/04/tap-scroll/</link>
+      <pubDate>Sun, 04 Jun 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/06/04/tap-scroll/</guid>
+      <description>效果 代码实现 #import &amp;quot;ViewController.h&amp;quot; @interface ViewController ()&amp;lt;UITableViewDelegate,UITableViewDataSource&amp;gt; //全局tableView @property (nonatomic,strong)UITableView *tableView; //全局滚动按钮 @property (nonatomic,strong)UIButton *btnTop; @end @implementation ViewController - (void)viewDidLoad { [superviewDidLoad]; //添加tableView [self.viewaddSubview:self.tableView]; //添加滚动按钮 [selfscrollTopView]; } #pragma mark - 设置tableView - (UITableView *)tableView{ if (!_tableView) { _tableView = [[UITableViewalloc]init]; _tableView.frame =CGRectMake(0,64,self.view.frame.size.width , self.view.frame.size.height); _tableView.backgroundColor = [UIColorlightGrayColor]; _tableView.delegate =self; _tableView.dataSource =self; _tableView.separatorStyle =UITableViewCellSeparatorStyleSingleLine; } return_tableView; } #pragma mark - tableView 数据源- //共多少组 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{ return 1; } //每组有多少行 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{ return 100; } //每行显示的内容 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{ //创建标识符 staticNSString *cellId =@&amp;quot;cellid&amp;quot;; UITableViewCell *cell = [tableViewdequeueReusableCellWithIdentifier:cellId]; //缓存池 if (!</description>
+    </item>
+    
+    <item>
+      <title>iOS 核心动画 图片抖动</title>
+      <link>http://wangerk.com/blog-cn/2017/06/03/pic-shake-keyanimation/</link>
+      <pubDate>Sat, 03 Jun 2017 19:07:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/06/03/pic-shake-keyanimation/</guid>
+      <description>#import &amp;quot;SHViewController.h&amp;quot; #define ANGLE_TO_RADIAN(angle) ((angle)/180.0 * M_PI) @interface SHViewController () //图标 @property (weak,nonatomic)IBOutletUIImageView *iconView; //开点按钮 - (IBAction)start; //结束按钮 - (IBAction)end; @end @implementation CZViewController - (void)viewDidLoad{ [superviewDidLoad]; } //开点按钮功能呢 - (IBAction)start { //实例化 CAKeyframeAnimation *anim = [CAKeyframeAnimationanimation]; //拿到动画 key anim.keyPath =@&amp;quot;transform.rotation&amp;quot;; // 动画时间 anim.duration =.25; // 重复的次数 //anim.repeatCount = 16; //无限次重复 anim.repeatCount =MAXFLOAT; //设置抖动数值 anim.values =@[@(ANGLE_TO_RADIAN(-5)),@(ANGLE_TO_RADIAN(5)),@(ANGLE_TO_RADIAN(-5))]; // 保持最后的状态 anim.removedOnCompletion =NO; //动画的填充模式 anim.fillMode =kCAFillModeForwards; //layer层实现动画 [self.iconView.layeraddAnimation:animforKey:@&amp;quot;shake&amp;quot;]; } //点击结束按钮 - (IBAction)end { //图标 [self.</description>
+    </item>
+    
+    <item>
+      <title>iOS UITableView常用方法合集</title>
+      <link>http://wangerk.com/blog-cn/2017/06/02/uitableview/</link>
+      <pubDate>Fri, 02 Jun 2017 07:57:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/06/02/uitableview/</guid>
+      <description>实现代理三部曲:
+一:遵守代理
+二:把 tableView.delegate = self
+三:实现代理方法
+ 代理实现 - (void)viewDidLoad { [super viewDidLoad]; self.view.backgroundColor = [UIColor whiteColor]; [self.view addSubview:self.tableView]; } #pragma mark - getter/setter - (UITableView *)tableView { if (!_tableView) { _tableView =[[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStyleGrouped]; _tableView.backgroundColor = RGB(239, 239, 239); _tableView.showsVerticalScrollIndicator = NO; _tableView.showsHorizontalScrollIndicator = NO; _tableView.delegate = self; _tableView.dataSource = self; //分割线颜色 _tableView.separatorStyle = UITableViewCellSeparatorStyleNone; } return _tableView; } ************ UITableView 方法 ************ //多少组 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{ return 6; } //多少行 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{ NSArray *arr = [dic objectForKey:[dic.</description>
+    </item>
+    
+    <item>
+      <title>iOS GCD定时器实现获取验证码的倒计时</title>
+      <link>http://wangerk.com/blog-cn/2017/06/01/gcd-timer/</link>
+      <pubDate>Thu, 01 Jun 2017 08:03:04 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/06/01/gcd-timer/</guid>
+      <description>//倒计时按钮 @property(nonatomic,strong)UIButton *btnCountdown; //用 GCD实现倒计时功能 - (void)btnCountdownClick{ //倒计时默认状体 [_btnCountdown setTitle:@&amp;quot;重发(60s)&amp;quot; forState:UIControlStateNormal]; //倒计时时间 __block int timeout=59; //倒计时全局队列 dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0); //设置一个事件处理器 dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue); //设置时间处理器时间 dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行 dispatch_source_set_event_handler(_timer, ^{ if(timeout&amp;lt;=0){ //倒计时结束，关闭 //取消事件处理器 dispatch_source_cancel(_timer); //回到主线程 dispatch_async(dispatch_get_main_queue(), ^{ //设置界面的按钮显示 根据自己需求设置 _btnCountdown.userInteractionEnabled = YES; //设置倒计时标题 [_btnCountdown setTitle:@&amp;quot;获取验证码&amp;quot; forState:UIControlStateNormal]; }); }else{ //去时间余 int seconds = timeout % 60; //拿到时间文字 NSString *strTime = [NSString stringWithFormat:@&amp;quot;%.2d&amp;quot;, seconds]; //回到主线程 dispatch_async(dispatch_get_main_queue(), ^{ //设置界面的按钮显示 根据自己需求设置 [UIView beginAnimations:nil context:nil]; //设置动画时间为1秒 [UIView setAnimationDuration:1]; //时间倒计时为0的时候显示重发?</description>
+    </item>
+    
+    <item>
+      <title>iOS监控联网状态</title>
+      <link>http://wangerk.com/blog-cn/2017/05/31/reachability/</link>
+      <pubDate>Wed, 31 May 2017 23:56:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/05/31/reachability/</guid>
+      <description>AFN监控联网状态
+AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager]; // 提示：要监控网络连接状态，必须要先调用单例的startMonitoring方法 [manager startMonitoring]; [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) { NSLog(@&amp;quot;%d&amp;quot;, status); }];  Reachability监控联网状态苹果提供,导入这两个类使用
+// 1.检测wifi状态 Reachability *wifi = [Reachability reachabilityForLocalWiFi]; // 2.检测手机是否能上网络(WIFI\3G\2.5G) Reachability *conn = [Reachability reachabilityForInternetConnection]; // 3.判断网络状态 if ([wifi currentReachabilityStatus] != NotReachable) { // 有wifi NSLog(@&amp;quot;有wifi&amp;quot;); } else if ([conn currentReachabilityStatus] != NotReachable) { // 没有使用wifi, 使用手机自带网络进行上网 NSLog(@&amp;quot;使用手机自带网络进行上网&amp;quot;); } else { // 没有网络 NSLog(@&amp;quot;没有网络&amp;quot;); }  ①判断联网状态
+// 用WIFI // [wifi currentReachabilityStatus] !</description>
+    </item>
+    
+    <item>
       <title>iOS GCD信号量线程同步</title>
       <link>http://wangerk.com/blog-cn/2017/05/31/dispatch_semaphore/</link>
       <pubDate>Wed, 31 May 2017 23:55:53 +0800</pubDate>

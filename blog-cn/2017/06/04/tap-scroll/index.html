@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>iOS滚动到顶部</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>iOS滚动到顶部</h2>
+        
+
+<h3 id="效果">效果</h3>
+
+<p><img src="../tapscroll.png" alt="图片" /></p>
+
+<h3 id="代码实现">代码实现</h3>
+
+<pre><code>#import &quot;ViewController.h&quot;
+ 
+@interface ViewController ()&lt;UITableViewDelegate,UITableViewDataSource&gt;
+ 
+//全局tableView
+@property (nonatomic,strong)UITableView *tableView;
+//全局滚动按钮
+@property (nonatomic,strong)UIButton *btnTop;
+@end
+ 
+ 
+@implementation ViewController
+ 
+- (void)viewDidLoad {
+    [superviewDidLoad];
+ 
+    //添加tableView
+    [self.viewaddSubview:self.tableView];
+ 
+    //添加滚动按钮
+    [selfscrollTopView];
+}
+ 
+#pragma mark - 设置tableView
+- (UITableView *)tableView{
+ 
+    if (!_tableView) {
+ 
+        _tableView = [[UITableViewalloc]init];
+        _tableView.frame =CGRectMake(0,64,self.view.frame.size.width , self.view.frame.size.height);
+        _tableView.backgroundColor = [UIColorlightGrayColor];
+        _tableView.delegate =self;
+        _tableView.dataSource =self;
+        _tableView.separatorStyle =UITableViewCellSeparatorStyleSingleLine;
+    }
+    return_tableView;
+}
+ 
+#pragma mark - tableView 数据源-
+//共多少组
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+ 
+//每组有多少行
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+ 
+    return 100;
+}
+ 
+//每行显示的内容
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+ 
+    //创建标识符
+    staticNSString *cellId =@&quot;cellid&quot;;
+    UITableViewCell *cell = [tableViewdequeueReusableCellWithIdentifier:cellId];
+ 
+    //缓存池
+    if (!cell) {
+        cell = [[UITableViewCellalloc]initWithStyle:UITableViewCellStyleSubtitlereuseIdentifier:cellId];
+    }
+ 
+    //标题
+    cell.textLabel.text = [NSStringstringWithFormat:@&quot;第 %ld个&quot;,(long)indexPath.row];
+    return cell;
+}
+ 
+//创建滚动顶部按钮
+- (void)scrollTopView{
+ 
+    _btnTop= [[UIButtonalloc]init];
+    _btnTop.frame =CGRectMake(self.view.bounds.size.width -54,self.view.bounds.size.height -98, 44, 44);
+ 
+    //添加图片
+    [_btnTopsetImage:[UIImageimageNamed:@&quot;icon_up&quot;]forState:UIControlStateNormal];
+    //设置先隐藏
+    _btnTop.hidden =YES;
+    //设置背景颜色方便测试
+    [_btnTopsetBackgroundColor:[UIColororangeColor]];
+    //监听
+    [_btnTopaddTarget:selfaction:@selector(btnClick)forControlEvents:UIControlEventTouchUpInside];
+ 
+    //添加视图
+    [self.viewaddSubview:_btnTop];
+ 
+}
+ 
+#pragma mark
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+ 
+    //动态计算高度
+    CGFloat gap =self.tableView.contentOffset.y -  scrollView.frame.size.height *1.5;
+    if (gap &lt;0) {
+        //设置小于0隐藏
+        self.btnTop.hidden =YES;
+    } else {
+        //设置大于0显示
+        self.btnTop.hidden =NO;
+    }
+}
+ 
+- (void)btnClick{
+ 
+ //回到顶部
+ [self.tableViewsetContentOffset:CGPointZero];
+}
+ 
+@end
+</code></pre>
+
+  </div>
+
+

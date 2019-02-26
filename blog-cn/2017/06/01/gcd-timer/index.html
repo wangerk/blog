@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>iOS GCD定时器实现获取验证码的倒计时</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>iOS GCD定时器实现获取验证码的倒计时</h2>
+        <pre><code>//倒计时按钮
+@property(nonatomic,strong)UIButton *btnCountdown;
+ 
+//用 GCD实现倒计时功能
+- (void)btnCountdownClick{
+    //倒计时默认状体
+    [_btnCountdown setTitle:@&quot;重发(60s)&quot; forState:UIControlStateNormal];
+    //倒计时时间
+    __block int timeout=59;
+    //倒计时全局队列
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    //设置一个事件处理器
+    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+    //设置时间处理器时间
+    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
+    dispatch_source_set_event_handler(_timer, ^{
+        if(timeout&lt;=0){ //倒计时结束，关闭
+            //取消事件处理器
+            dispatch_source_cancel(_timer);
+            //回到主线程
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //设置界面的按钮显示 根据自己需求设置
+               _btnCountdown.userInteractionEnabled = YES;
+                //设置倒计时标题
+                [_btnCountdown setTitle:@&quot;获取验证码&quot; forState:UIControlStateNormal];
+            });
+        }else{
+            //去时间余
+            int seconds = timeout % 60;
+            //拿到时间文字
+            NSString *strTime = [NSString stringWithFormat:@&quot;%.2d&quot;, seconds];
+            //回到主线程
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //设置界面的按钮显示 根据自己需求设置
+                [UIView beginAnimations:nil context:nil];
+                //设置动画时间为1秒
+                [UIView setAnimationDuration:1];
+                //时间倒计时为0的时候显示重发?秒
+                [_btnCountdown setTitle:[NSString stringWithFormat:@&quot;重发(%@秒)&quot;,strTime] forState:UIControlStateNormal];
+ 
+                [UIView commitAnimations];
+                _btnCountdown.userInteractionEnabled = NO;
+            });
+            timeout--;
+        }
+    });
+    dispatch_resume(_timer);
+}
+</code></pre>
+
+  </div>
+
+

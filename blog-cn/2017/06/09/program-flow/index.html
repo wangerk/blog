@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>iOS 程序启动的完整过程</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>iOS 程序启动的完整过程</h2>
+        <p>1步.main函数</p>
+
+<p>2步.UIApplicationMain</p>
+
+<ul>
+<li><p>创建UIApplication对象</p></li>
+
+<li><p>创建UIApplication的delegate对象</p></li>
+</ul>
+
+<p>3步.delegate对象开始处理(监听)系统事件(没有storyboard)</p>
+
+<ul>
+<li><p>程序启动完毕的时候, 就会调用代理的application:didFinishLaunchingWithOptions:方法</p></li>
+
+<li><p>在application:didFinishLaunchingWithOptions:中创建UIWindow</p></li>
+
+<li><p>创建和设置UIWindow的rootViewController</p></li>
+
+<li><p>显示窗口</p></li>
+</ul>
+
+<p>3.1步.根据Info.plist获得最主要storyboard的文件名,加载最主要的storyboard(有storyboard)</p>
+
+<ul>
+<li><p>创建UIWindow</p></li>
+
+<li><p>创建和设置UIWindow的rootViewController</p></li>
+
+<li><p>显示窗口</p></li>
+</ul>
+
+  </div>
+
+

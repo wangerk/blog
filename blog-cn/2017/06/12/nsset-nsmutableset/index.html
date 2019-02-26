@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>博文的自愿付费方式</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>博文的自愿付费方式</h2>
+        <p> NSSet和NSMutableSet是无序的, 但是它保证数据的唯一性。当插入相同的数据时，不会有任何效果。从内部实现来说是hash表，所以可以常数时间内查找一个数据。</p>
+
+<p> 散列表（Hash table，也叫哈希表），是根据关键码值(Key value)而直接进行访问的数据结构。也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做散列函数，存放记录的数组叫做散列表。</p>
+
+<p> 给定表M，存在函数f(key)，对任意给定的关键字值key，代入函数后若能得到包含该关键字的记录在表中的地址，则称表M为哈希(Hash）表，函数f(key)为哈希(Hash) 函数</p>
+
+<p>NSSet和NSMutableSet是无序的, 但是它保证数据的唯一性。当插入相同的数据时，不会有任何效果。从内部实现来说是hash表，所以可以常数时间内查找一个数据。</p>
+
+<p> IOS开发之&mdash;-NSSet和NSMutableSet</p>
+
+<p> 1、NSSet的使用</p>
+
+<p> [NSSet setWithSet:(NSSet *)set]; 用另外一个set对象构造</p>
+
+<p> [NSSet setWithArray:(NSArray *)array];用数组构造</p>
+
+<p> [NSSet setWithObjects:&hellip;]:创建集合对象，并且初始化集合中的数值，结尾必需使用nil标志。</p>
+
+<p> [set count] ; 得到这个结合对象的长度。</p>
+
+<p> [set containsObject:&hellip;]: 判断这个集合中是否存在传入的对象，返回Bool值。</p>
+
+<p> [set objectEnumerator]: 将集合放入迭代器。</p>
+
+<p> [enumerator nextObject]:得到迭代器中的下一个节点数据，使用while遍历这个迭代器，方可遍历集合对象中的对象。</p>
+
+<p> [set isEqualToSet:objset]:判断两个集合是否完全相等,返回Bool值。</p>
+
+<p> [set isSubsetOfSet:objset]:判断集合中的所有数据是否都相等与objeset集合中,返回Bool值。</p>
+
+<p> [set allObjects];</p>
+
+<p> </p>
+
+<p> 示例代码：</p>
+
+<p> 1.1 以NSArray构造set</p>
+
+<p> </p>
+
+<p> NSArray *array = [[NSArray alloc] initWithObjects:@&ldquo;对象abc&rdquo;,@&ldquo;rongfzh&rdquo;, @&ldquo;totogo2010&rdquo;,nil];</p>
+
+<p> NSSet *set3 = [NSSet setWithArray:array];</p>
+
+<p> NSLog(@&ldquo;%@&rdquo;, set3);</p>
+
+<p> 打印：</p>
+
+<p> </p>
+
+<p> 2012-07-10 09:39:02.015 objectiveC[720:403] {(</p>
+
+<p> rongfzh,</p>
+
+<p> &rdquo;\U5bf9\U8c61abc&rdquo;,</p>
+
+<p> totogo2010</p>
+
+<p> )}</p>
+
+<p> 1.2 set的一些比较方法的使用。</p>
+
+<p> </p>
+
+<p> </p>
+
+<p> int main(int argc, const char * argv[])</p>
+
+<p> {</p>
+
+<p> @autoreleasepool {</p>
+
+<p> NSSet *set = [NSSet setWithObjects:@&ldquo;25&rdquo;,@&ldquo;age&rdquo;,@&ldquo;张三&rdquo;,@&ldquo;name&rdquo;,@&ldquo;男&rdquo;,nil];</p>
+
+<p> NSSet *set1 = [NSSet setWithObjects:@&ldquo;25&rdquo;,@&ldquo;age&rdquo;,@&ldquo;张三&rdquo;,@&ldquo;name&rdquo;,@&ldquo;男&rdquo;,@&ldquo;性别&rdquo;,nil];</p>
+
+<p> </p>
+
+<p> NSLog(@&ldquo;set count:%lu&rdquo;, [set count]);</p>
+
+<p> //判断是否含有age字符串</p>
+
+<p> if([set containsObject:@&ldquo;age&rdquo;]) {</p>
+
+<p> NSLog(@&ldquo;set包含age&rdquo;);</p>
+
+<p> }</p>
+
+<p> //判断set 是否等于set1</p>
+
+<p> if ([set isEqualToSet:set1]) {</p>
+
+<p> NSLog(@&ldquo;set 等于 set1&rdquo;);</p>
+
+<p> }</p>
+
+<p> //判断set是否是否是set1的子集合</p>
+
+<p> if ([set isSubsetOfSet:set1]) {</p>
+
+<p> NSLog(@&ldquo;set isSubsetOfSet set1&rdquo;);</p>
+
+<p> }</p>
+
+<p> //获取所有set对象</p>
+
+<p> NSArray *array = [set allObjects];</p>
+
+<p> NSLog(@&ldquo;array:%@&ldquo;, array);</p>
+
+<p> </p>
+
+<p> //迭代遍历</p>
+
+<p> NSEnumerator *enumerator = [set objectEnumerator];</p>
+
+<p> for (NSObject *object in enumerator) {</p>
+
+<p> NSLog(@&ldquo;set1里的对象:%@&ldquo;, object);</p>
+
+<p> }</p>
+
+<p> }</p>
+
+<p> return 0;</p>
+
+<p> }</p>
+
+<p> </p>
+
+<p> 打印结果：</p>
+
+<p> </p>
+
+<p> 2011-06-16 08:50:32.018 objectiveC[939:403] set count:5</p>
+
+<p> 2011-06-16 08:50:32.020 objectiveC[939:403] set包含age</p>
+
+<p> 2011-06-16 08:50:32.021 objectiveC[939:403] set isSubsetOfSet set1</p>
+
+<p> 2011-06-16 08:50:32.023 objectiveC[939:403] array:(</p>
+
+<p> age,</p>
+
+<p> 25,</p>
+
+<p> &rdquo;\U7537&rdquo;,</p>
+
+<p> &rdquo;\U5f20\U4e09&rdquo;,</p>
+
+<p> name</p>
+
+<p> )</p>
+
+<p> 2011-06-16 08:50:32.018  objectiveC[939:403] set1里的对象:age</p>
+
+<p> 2011-06-16 08:50:32.028 objectiveC[939:403] set1里的对象:25</p>
+
+<p> 2011-06-16 08:50:32.028 objectiveC[939:403] set1里的对象:男</p>
+
+<p> 2011-06-16 08:50:32.029 objectiveC[939:403] set1里的对象:张三</p>
+
+<p> 2011-06-16 08:50:32.029 objectiveC[939:403] set1里的对象:name</p>
+
+<p> 2、NSMutableSet的使用</p>
+
+<p> NSMutableSet继承NSSet，它可以使用NSSet的方法。</p>
+
+<p> [NSMutableSet setWithCapacity:6]:创建可变集合对象，并且初始化长度为6。</p>
+
+<p> [set addObject: obj] : 向集合中动态的添加对象。</p>
+
+<p> [set removeObject:obj]:删除集合中的一个对象。</p>
+
+<p> [set removeAllObjects]:删除集合中的所有对象。</p>
+
+<p> [set unionSet:obj]:向集合中添加一个obj集合的所有数据。</p>
+
+<p> [set minusSet:obj]:向集合中删除一个obj集合的所有数据。</p>
+
+<p> [set intersectSet]:向集合中删除一个不包含obj集合的所有数据。</p>
+
+<p> 示例代码：</p>
+
+<p> </p>
+
+<p> </p>
+
+<p> int main(int argc, const char * argv[])</p>
+
+<p> {</p>
+
+<p> @autoreleasepool {</p>
+
+<p> NSMutableSet *muSet = [NSMutableSet setWithCapacity:6];</p>
+
+<p> [muSet addObject:@&ldquo;对象1&rdquo;];</p>
+
+<p> NSSet *set = [NSSet setWithObjects:@&ldquo;对象2&rdquo;,@&ldquo;对象3&rdquo;, @&ldquo;倒计时&rdquo;, nil];</p>
+
+<p> //添加set数据</p>
+
+<p> [muSet unionSet:set];</p>
+
+<p> for (NSObject *object in muSet) {</p>
+
+<p> NSLog(@&ldquo;all nuSet:%@&ldquo;,object);</p>
+
+<p> }</p>
+
+<p> NSSet *set1 = [NSSet setWithObjects:@&ldquo;对象2&rdquo;,@&ldquo;对象3&rdquo;, nil];</p>
+
+<p> </p>
+
+<p> //在muSet中删除包含set1总数据</p>
+
+<p> [muSet minusSet:set1];</p>
+
+<p> for (NSObject *object in muSet) {</p>
+
+<p> NSLog(@&ldquo;after minusSet:%@&ldquo;,object);</p>
+
+<p> }</p>
+
+<p> </p>
+
+<p> }</p>
+
+<p> return 0;</p>
+
+<p> }</p>
+
+<p> </p>
+
+<p> 打印结果：</p>
+
+<p> </p>
+
+<p> 2011-06-16 09:10:08.196 objectiveC[1156:403] all nuSet:对象1</p>
+
+<p> 2011-06-16 09:10:08.196 objectiveC[1156:403] all nuSet:倒计时</p>
+
+<p> 2011-06-16 09:10:08.196 objectiveC[1156:403] all nuSet:对象2</p>
+
+<p> 2011-06-16 09:10:08.197 objectiveC[1156:403] all nuSet:对象3</p>
+
+<p> 2011-06-16 09:10:08.197 objectiveC[1156:403] after minusSet:对象1</p>
+
+<p> 2011-06-16 09:10:08.198 objectiveC[1156:403] after minusSet:倒计时</p>
+
+  </div>
+
+

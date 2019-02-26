@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>iOS UITableView常用方法合集</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>iOS UITableView常用方法合集</h2>
+        
+
+<blockquote>
+<p>实现代理三部曲:<br />
+  一:遵守代理<UITableViewDelegate,UITableViewDataSource><br />
+  二:把 tableView.delegate = self<br />
+  三:实现代理方法</p>
+</blockquote>
+
+<h3 id="代理实现">代理实现</h3>
+
+<pre><code>- (void)viewDidLoad {
+ 
+    [super viewDidLoad];
+ 
+    self.view.backgroundColor = [UIColor whiteColor];   
+    [self.view addSubview:self.tableView];
+}
+ 
+#pragma mark - getter/setter
+- (UITableView *)tableView {
+ 
+    if (!_tableView) {
+        _tableView =[[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStyleGrouped];
+        _tableView.backgroundColor = RGB(239, 239, 239);
+        _tableView.showsVerticalScrollIndicator = NO;
+        _tableView.showsHorizontalScrollIndicator = NO;
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+ 
+         //分割线颜色
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+ 
+    }
+    return _tableView;
+}
+ 
+ 
+************ UITableView 方法 ************
+ 
+//多少组
+ 
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 6;
+}
+ 
+//多少行
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    NSArray *arr = [dic objectForKey:[dic.allKeys objectAtIndex:section]];
+    return 10;
+}
+ 
+//每行显示什么内容
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+ 
+    static NSString *cellId = @&quot;CELLID&quot;;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    if (!cell) {
+        cell  = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
+    }
+    return cell;
+}
+ 
+//组头名字
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    return @&quot;石虎&quot;;
+}
+ 
+//点击选中
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+ 
+     //跳转到二级界面
+    SHMessageViewController *mess = [[SHMessageViewController alloc]init];
+    //跳转
+    [self presentViewController:mess animated:YES completion:nil];
+}
+ 
+ 取消选中时候用的方法   （不常用）
+ - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+//控制分区个数
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 2;
+}
+ 
+//section 上 Header 显示的内容
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    return @&quot;section 上 Header 显示的内容&quot;;
+}
+ 
+//section 上 Footer 显示的内容
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section{
+    return @&quot;section 上 Footer 显示的内容&quot;;
+}
+ 
+//section 顶部的高度
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 20;
+}
+//cell 的高度
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+     return 50;
+}
+ 
+//该方法返回值用于在表格右边建立一个浮动的索引
+- ( NSArray *)sectionIndexTitlesForTableView:( UITableView *)tableView{
+ 
+  return [NSArray array];
+}
+ 
+//当用户将要选中表格中的某行时触发方法
+- ( NSIndexPath *)tableView:( UITableView *)tableView willSelectRowAtIndexPath:( NSIndexPath *)indexPath;
+//当用户完成选中表格中的某行时触发方法
+-( void )tableView:( UITableView *)tableView didSelectRowAtIndexPath:( NSIndexPath *)indexPath
+//当用户将要取消选中表格中某行时触发
+- ( NSIndexPath *)tableView:( UITableView *)tableView willDeselectRowAtIndexPath:( NSIndexPath *)indexPath
+ 
+//当用户完成取消选中表格中某行时触发
+- ( void )tableView:( UITableView *)tableView didDeselectRowAtIndexPath:( NSIndexPath *)indexPath
+</code></pre>
+
+<h3 id="uitableviewcell-方法">UITableViewCell 方法</h3>
+
+<pre><code> 0.当一个 cell 被选中的方法 
+ 
+ - (void)setSelected:(BOOL)selected animated:(BOOL)animated
+ 
+ 1.返回表格中指定indexPath对应的cell
+ - ( UITableViewCell *)cellForRowAtIndexPath:( NSIndexPath *)indexPath;
+ 
+ 2.返回指定cell的indexPath
+ - ( NSIndexPath *)indexPathForCell:( UITableViewCell *)cell;
+ 
+ 3.返回表格中指定点所在的indexPath
+ - ( NSIndexPath *)indexPathForRowAtPoint:( CGPoint )point;
+ 
+ 4.返回表格中指定区域内所有indexPath 组成的数组
+ - ( NSArray *)indexPathsForRowsInRect:( CGRect )rect;
+ 
+ 5.返回表格中所有可见区域内cell的数组
+ - ( NSArray *)visibleCells;
+ 
+ 6.返回表格中所有可见区域内cell对应indexPath所组成的数组
+ - ( NSArray *)indexPathsForVisibleRows;
+ 
+ 7.控制该表格滚动到指定indexPath对应的cell的顶端 中间 或者下方
+ - ( void )scrollToRowAtIndexPath:( NSIndexPath *)indexPath atScrollPosition:( UITableViewScrollPosition )scrollPosition animated:( BOOL )animated;
+ 
+ 8.控制该表格滚动到选中cell的顶端 中间 或者下方
+ -( void )scrollToNearestSelectedRowAtScrollPosition:( UITableViewScrollPosition )scrollPosition animated:( BOOL )animated;
+</code></pre>
+
+<h3 id="单元格的选中-属性">单元格的选中&ndash;属性</h3>
+
+<pre><code> 0.获取选中cell对应的indexPath  
+ - ( NSIndexPath *)indexPathForSelectedRow;  
+ 1.控制该表格是否允许被选中
+ @property ( nonatomic ) BOOL allowsSelection
+ 2.控制该表格是否允许多选
+ @property ( nonatomic ) BOOL allowsMultipleSelection
+ 3.控制表格处于编辑状态时是否允许被选中
+ @property ( nonatomic ) BOOL allowsSelectionDuringEditing;
+ 4.控制表格处于编辑状态时是否允许被多选
+ @property ( nonatomic ) BOOL allowsMultipleSelectionDuringEditing
+ 5.获取所有被选中的cell对应的indexPath组成的数组
+ - ( NSArray *)indexPathsForSelectedRows
+ 7.控制该表格选中指定indexPath对应的表格行,最后一个参数控制是否滚动到被选中行的顶端 中间 和底部
+ - ( void )selectRowAtIndexPath:( NSIndexPath *)indexPath animated:( BOOL )animated scrollPosition:( UITableViewScrollPosition )scrollPosition;
+ 8.控制取消选中该表格中指定indexPath对应的表格行
+ - ( void )deselectRowAtIndexPath:( NSIndexPath *)indexPath animated:( BOOL )animated;
+</code></pre>
+
+<h3 id="关于对表格的编辑-方法">关于对表格的编辑 方法</h3>
+
+<pre><code> 1.对表格控件执行多个连续的插入,删除和移动操作之后调用这个方法结束
+ - ( void )endUpdates;
+ 
+ 2.对表格控件执行多个连续的插入,删除和移动操作之前调用这个方法开始更新
+ - ( void )beginUpdates;
+ 
+ 3.删除一个或多个indexPath处的cell
+ - ( void )deleteRowsAtIndexPaths:( NSArray *)indexPaths withRowAnimation:( UITableViewRowAnimation )animation;
+ 
+ 4.在一个或多个indexPath处插入cell
+ - ( void )insertRowsAtIndexPaths:( NSArray *)indexPaths withRowAnimation:( UITableViewRowAnimation )animation;
+ 
+ 5.将制定indexPath处的cell移动到另个一indexPath处
+ - ( void )moveRowAtIndexPath:( NSIndexPath *)indexPath toIndexPath:( NSIndexPath *)newIndexPath
+ 
+ 6.将指定分区移动到另一个位置
+ - ( void )moveSection:( NSInteger )section toSection:( NSInteger )newSection
+ 
+ 7.删除指定indexSet所包含的一个或多个分区号所对应的分区
+ - ( void )deleteSections:( NSIndexSet *)sections withRowAnimation:( UITableViewRowAnimation )animation;
+ 
+ 8.指定的indexSet所包含的一个或多个分区号对应的位置插入分区
+ - ( void )insertSections:( NSIndexSet *)sections withRowAnimation:( UITableViewRowAnimation )animation;
+ 
+ 9.当用户对指定表格行编辑(包括插入和删除)时触发该方法
+ - ( void )tableView:( UITableView *)tableView commitEditingStyle:( UITableViewCellEditingStyle )editingStyle forRowAtIndexPath:( NSIndexPath *)indexPath;
+ 
+ 10.该方法返回值决定指定indexPath对应的cell是否可以编辑
+ - ( BOOL )tableView:( UITableView *)tableView canEditRowAtIndexPath:( NSIndexPath *)indexPath;
+ 
+ 11.该方法返回值决定指定indexPath对应的cell是否可以移动
+ - ( BOOL )tableView:( UITableView *)tableView canMoveRowAtIndexPath:( NSIndexPath *)indexPath;
+ 
+ 12.开始/完成 编辑时调用的两个方法
+ - ( void )tableView:( UITableView *)tableView willBeginEditingRowAtIndexPath:( NSIndexPath *)indexPath;
+ 
+ - ( void )tableView:( UITableView *)tableView didEndEditingRowAtIndexPath:( NSIndexPath *)indexPath;
+ 
+ 13.该方法返回值决定了 indexPath处的cell 的编辑状态  返回值为枚举类型 分别为 None Delete Insert
+ - ( UITableViewCellEditingStyle )tableView:( UITableView *)tableView editingStyleForRowAtIndexPath:( NSIndexPath *)indexPath;
+ 
+ 14.该方法决定了 cell处于被编辑状态时是否应该缩进  若未重写 所有cell处于编辑状态时都会缩进
+ - ( BOOL )tableView:( UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:( NSIndexPath *)indexPath;
+ 
+ 15.该方法触发移动  通常对数据进行处理(重要)
+ - ( void )tableView:( UITableView *)tableView moveRowAtIndexPath:( NSIndexPath *)sourceIndexPath toIndexPath:( NSIndexPath *)destinationIndexPath;
+</code></pre>
+
+  </div>
+
+
