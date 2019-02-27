@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>同步锁原理合集</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>同步锁原理合集</h2>
+        
+
+<h3 id="一-概念">一、概念</h3>
+
+<blockquote>
+<p>我们在使用多线程的时候多个线程可能会访问同一块资源，这样就很容易引发数据错乱和数据安全等问题，这时候就需要我们保证每次只有一个线程访问这一块资源，锁 应运而生。</p>
+</blockquote>
+
+<p>不同锁的效率比较:
+<img src="../lockcmp.png" alt="" /></p>
+
+<h3 id="二-锁-锁">二、锁🔐锁</h3>
+
+<h4 id="osspinlock-自旋锁">OSSpinLock (自旋锁)</h4>
+
+<blockquote>
+<p>自旋锁的实现原理比较简单，就是死循环。当a线程获得锁以后，b线程想要获取锁就需要等待a线程释放锁。在没有获得锁的期间，b线程会一直处于忙等的状态。如果a线程在临界区的执行时间过长，则b线程会消耗大量的cpu时间，不太划算。所以，自旋锁用在临界区执行时间比较短的环境性能会很高。</p>
+</blockquote>
+
+<p>注:苹果爸爸已经在iOS10.0以后废弃了这种锁机制,使用os_unfair_lock 替换,
+顾名思义能够保证不同优先级的线程申请锁的时候不会发生优先级反转问题.</p>
+
+<h4 id="os-unfair-lock-自旋锁">os_unfair_lock(自旋锁)</h4>
+
+<blockquote>
+<p>注:解决不同优先级的线程申请锁的时候不会发生优先级反转问题.不过相对于 OSSpinLock , os_unfair_lock性能方面减弱了许多.</p>
+</blockquote>
+
+<h4 id="dispatch-semaphore-信号量">dispatch_semaphore (信号量)</h4>
+
+<blockquote>
+<p>注: dispatch_semaphore  其他两个功能<br />
+1.还可以起到阻塞线程的作用.<br />
+2.可以实现定时器功能,这里不做过多介绍.</p>
+</blockquote>
+
+<h4 id="pthread-mutex-互斥锁">pthread_mutex(互斥锁)</h4>
+
+<blockquote>
+<p>pthread_mutex表示互斥锁，和信号量的实现原理类似，也是阻塞线程并进入睡眠，需要进行上下文切换。</p>
+</blockquote>
+
+<pre><code>pthread_mutexattr_t attr;
+pthread_mutexattr_init(&amp;attr);
+pthread_mutexattr_settype(&amp;attr, PTHREAD_MUTEX_NORMAL);
+ 
+pthread_mutex_t lock;
+pthread_mutex_init(&amp;lock, &amp;attr);    //设置属性
+ 
+pthread_mutex_lock(&amp;lock);    //上锁
+//需要执行的代码
+pthread_mutex_unlock(&amp;lock);    //解锁
+</code></pre>
+
+<h4 id="nslock-互斥锁-对象锁">NSLock(互斥锁、对象锁)</h4>
+
+<blockquote>
+<p>NSLock在内部封装了一个 pthread_mutex，属性为 PTHREAD_MUTEX_ERRORCHECK。</p>
+</blockquote>
+
+<pre><code>NSLock *lock = [NSLock new];
+ 
+[lock lock];
+ 
+//需要执行的代码
+ 
+[lock unlock];
+</code></pre>
+
+<h4 id="nscondition-条件锁-对象锁">NSCondition(条件锁、对象锁)</h4>
+
+<blockquote>
+<p>NSCondition封装了一个互斥锁和条件变量。互斥锁保证线程安全，条件变量保证执行顺序。</p>
+</blockquote>
+
+<pre><code>NSCondition *lock = [NSCondition new];
+ 
+[lock lock];
+ 
+//需要执行的代码
+ 
+[lock unlock];
+</code></pre>
+
+<h4 id="pthread-mutex-recursive-递归锁">pthread_mutex(recursive)(递归锁)</h4>
+
+<blockquote>
+<p>pthread_mutex锁的一种，属于递归锁。一般一个线程只能申请一把锁，但是，如果是递归锁，则可以申请很多把锁，只要上锁和解锁的操作数量就不会报错。</p>
+</blockquote>
+
+<pre><code>pthread_mutexattr_t attr;
+pthread_mutexattr_init(&amp;attr);
+pthread_mutexattr_settype(&amp;attr, PTHREAD_MUTEX_RECURSIVE);
+ 
+pthread_mutex_t lock;
+pthread_mutex_init(&amp;lock, &amp;attr); //设置属性
+ 
+pthread_mutex_lock(&amp;lock);       //上锁
+//需要执行的代码
+pthread_mutex_unlock(&amp;lock);     //解锁
+</code></pre>
+
+<blockquote>
+<p>注: 递归锁可以被同一线程多次请求，而不会引起死锁。<br />
+即在同一线程中在未解锁之前还可以上锁, 执行锁中的代码。<br />
+这主要是用在循环或递归操作中。</p>
+</blockquote>
+
+<h4 id="nsrecursivelock-递归锁-对象锁">NSRecursiveLock(递归锁、对象锁)</h4>
+
+<blockquote>
+<p>递归锁，pthread_mutex(recursive)的封装。</p>
+</blockquote>
+
+<pre><code>NSRecursiveLock *lock = [NSRecursiveLock new];
+ 
+[lock lock];
+ 
+//需要执行的代码
+ 
+[lock unlock];
+</code></pre>
+
+<h4 id="nsconditionlock-条件锁-对象锁">NSConditionLock(条件锁、对象锁)</h4>
+
+<blockquote>
+<p>NSConditionLock借助 NSCondition 来实现，本质是生产者-消费者模型。</p>
+</blockquote>
+
+<pre><code>NSConditionLock *lock = [NSConditionLock new];
+ 
+[lock lock];
+ 
+//需要执行的代码
+ 
+[lock unlock];
+</code></pre>
+
+<h4 id="synchronized-条件锁">@synchronized(条件锁)</h4>
+
+<blockquote>
+<p>一个对象层面的锁，锁住了整个对象，底层使用了互斥递归锁来实现。</p>
+</blockquote>
+
+<pre><code>NSObject *object = [NSObject new];
+ 
+@synchronized(object) {
+ 
+    //需要执行的代码
+ 
+}
+</code></pre>
+
+<h3 id="三-总结">三、总结</h3>
+
+<blockquote>
+<p>@synchronized互斥锁：当上一个线程的任务没有执行完毕的时候（被锁住），那么下一个线程会进入睡眠状态等待任务执行完毕，当上一个线程的任务执行完毕，下一个线程会自动唤醒然后执行任务。</p>
+
+<p>应用场景: @synchronized：适用线程不多，任务量不大的多线程加锁</p>
+
+<p>注意点：<br />
+1.如果多线程访问同一个资源，那么必须使用同一把锁才能锁住<br />
+2.在开发中，尽量不要加锁，能在服务端做尽量在服务端做，如果必须要加锁，一定要记住，锁的范围不能太大，哪里有安全隐患就加在哪里。<br />
+3.技巧：因为必须使用同一把锁，开发中如果需要加锁，直接使用 self 即可。<br />
+@synchronized(self) {//加锁<br />
+}//解锁</p>
+</blockquote>
+
+<p>.</p>
+
+<blockquote>
+<p>atomic 自旋锁：当上一个线程的任务没有执行完毕的时候（被锁住），那么下一个线程会一直等待（不会睡眠），当上一个线程的任务执行完毕，下一个线程会立即执行。</p>
+
+<p>atomic 自旋锁应用场景：比较适合做一些不耗时的操作</p>
+
+<p>注意点:<br />
+只会给 setter 方法加锁，并不会给getter方法加锁。</p>
+</blockquote>
+
+<p>.</p>
+
+<blockquote>
+<p>NSLock：其实NSLock并没有想象中的那么差，不知道大家为什么不推荐使用</p>
+</blockquote>
+
+<p>.</p>
+
+<blockquote>
+<p>dispatch_semaphore_t：使用信号来做加锁，性能提升显著<br />
+NSCondition：使用其做多线程之间的通信调用不是线程安全的</p>
+</blockquote>
+
+<p>.</p>
+
+<blockquote>
+<p>NSConditionLock：单纯加锁性能非常低，比NSLock低很多，但是可以用来做多线程处理不同任务的通信调用<br />
+NSRecursiveLock：递归锁的性能出奇的高，但是只能作为递归使用,所以限制了使用场景</p>
+</blockquote>
+
+<p>.</p>
+
+<blockquote>
+<p>NSDistributedLock：因为是MAC开发的，就不讨论了<br />
+POSIX(pthread_mutex)：底层的api，复杂的多线程处理建议使用，并且可以封装自己的多线程</p>
+</blockquote>
+
+<p>.</p>
+
+<blockquote>
+<p>OSSpinLock：性能也非常高，可惜出现了线程问题<br />
+dispatch_barrier_async/dispatch_barrier_sync：测试中发现dispatch_barrier_sync比dispatch_barrier_async性能要高，真是大出意外</p>
+</blockquote>
+
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzA3NzM0NzkxMQ==&amp;mid=2655360357&amp;idx=1&amp;sn=081b7b883c338a4b6ded65fbbd6a0982&amp;chksm=84e2584db395d15b9c962acd4433364bfae7d7db73b631baf929ad054e0965189dc6a41a77a6&amp;mpshare=1&amp;scene=1&amp;srcid=#rd">参考</a></p>
+
+  </div>
+
+

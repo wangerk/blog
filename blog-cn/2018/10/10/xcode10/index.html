@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>Xcode10升级项目报错解决方法</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>Xcode10升级项目报错解决方法</h2>
+        
+
+<h3 id="一-概念">一、概念</h3>
+
+<blockquote>
+<p>Xcode10新特性</p>
+</blockquote>
+
+<p>图1:
+<img src="../1.png" alt="" />
+图2:
+<img src="../2.png" alt="" /></p>
+
+<h3 id="二-问题directory-not-found-for-option">二、问题directory not found for option</h3>
+
+<blockquote>
+<p>1.iOS &ldquo;directory not found for option &lsquo;-L/Users/&hellip;/Pods/build/Debug-iphoneos/…“解决方案</p>
+</blockquote>
+
+<p>图3:编译错误
+<img src="../3.png" alt="" /></p>
+
+<blockquote>
+<p>2.解决方案:<br />
+在Target－Build Settings中找到Search Paths－Library Search Paths，删除掉在警告中所示的该路径。</p>
+</blockquote>
+
+<p>图4:
+<img src="../4.png" alt="" /></p>
+
+<blockquote>
+<p>3.注意: 先 clean  、编译 在运行。</p>
+</blockquote>
+
+<h3 id="三-问题-script-phase-cp-copy-pods-resources">三、问题 script phase &ldquo;[CP]Copy Pods Resources&rdquo;</h3>
+
+<blockquote>
+<p>1.script phase &ldquo;[CP]Copy Pods Resources&rdquo; ~解决方法</p>
+</blockquote>
+
+<p>图5:编译错误
+<img src="../5.png" alt="" /></p>
+
+<blockquote>
+<p>2.解决方案：<br />
+在Target－Build Phases —  [CP]Copy Pods Resources — Output Files 下的 ${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}  删除</p>
+</blockquote>
+
+<p>图6:删除
+<img src="../6.png" alt="" /></p>
+
+<p>图7:
+<img src="../7.png" alt="" /></p>
+
+<blockquote>
+<p>3.注意: 先 clean  、编译 在运行。</p>
+</blockquote>
+
+<h3 id="四-问题-library-not-found-for-libstdc">四、问题 library not found for -libstdc++</h3>
+
+<blockquote>
+<p>在升级Xcode10后运行项目会发出报了一个错“library not found for -libstdc++(libstdc++.6、libstdc++6.0.9)”，很简单，就是因为xocde10后这个libstd++.6.0.9库已经废弃了。</p>
+</blockquote>
+
+<p>.</p>
+
+<blockquote>
+<p>1.苹果在XCode10中移除了libstdc++(libstdc++.6、libstdc++6.0.9)库。</p>
+</blockquote>
+
+<p>图8:
+<img src="../8.png" alt="" /></p>
+
+<blockquote>
+<p>删除步骤：<br />
+TARGETS—&gt;Build Phases—&gt;Link Binary With Libraries，删除libstdc++(libstdc++.6、libstdc++6.0.9) ，添加libc++；</p>
+</blockquote>
+
+<p>图9:
+<img src="../9.png" alt="" /></p>
+
+<blockquote>
+<p>2.Pods—&gt;Targets Support Files—&gt;Pods-XXXX.release.xcconfig ，查找libstdc++(libstdc++.6、libstdc++6.0.9)，将其删除；</p>
+</blockquote>
+
+<p>图10:
+<img src="../10.png" alt="" /></p>
+
+  </div>
+
+

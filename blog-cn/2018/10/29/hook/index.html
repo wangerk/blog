@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>HOOK技术</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>HOOK技术</h2>
+        
+
+<h3 id="一-概念">一、概念</h3>
+
+<blockquote>
+<p>HOOK，中文译为“挂钩”或“钩子”。在iOS逆向中是指改变程序运行流程的一种技术。通过hook可以让别人的程序执行自己所写的代码。在逆向中经常使用这种技术。所以在学习过程中，我们重点要了解其原理，这样能够对恶意代码进行有效的防护。</p>
+</blockquote>
+
+<h3 id="二-ios中hook技术的几种方式">二、iOS中HOOK技术的几种方式</h3>
+
+<blockquote>
+<p><strong>Method Swizzle</strong><br />
+利用OC的<strong>Runtime</strong>特性，动态改变SEL（方法编号）和IMP（方法实现）的对应关系，达到<strong>OC</strong>方法调用流程改变的目的。主要用于OC方法。</p>
+</blockquote>
+
+<p>.</p>
+
+<blockquote>
+<p><strong>fishhook</strong><br />
+它是Facebook提供的一个动态修改链接mach-O文件的工具。利用MachO文件加载原理，通过修改懒加载和非懒加载两个表的指针达到C函数HOOK的目的。</p>
+</blockquote>
+
+<p>.</p>
+
+<blockquote>
+<p><strong>Cydia Substrate</strong> <br />
+Cydia Substrate 原名为 <strong>Mobile Substrate</strong> ，它的主要作用是针对OC方法、C函数以及函数地址进行HOOK操作。当然它并不是仅仅针对iOS而设计的，安卓一样可以用。官方地址：<a href="http://www.cydiasubstrate.com/">http://www.cydiasubstrate.com/</a></p>
+</blockquote>
+
+<h3 id="三-原理图">三、原理图</h3>
+
+<p><img src="../1.png" alt="" /></p>
+
+<h3 id="四-代码">四、代码</h3>
+
+<p><img src="../2.png" alt="" /></p>
+
+  </div>
+
+

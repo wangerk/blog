@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>让UIView和UIButton的左上角和右上角为圆角</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>让UIView和UIButton的左上角和右上角为圆角</h2>
+        
+
+<h3 id="uiview-的左上角和右上角为圆角">UIView 的左上角和右上角为圆角</h3>
+
+<pre><code>-(UIView *)platFormRadiusView{
+
+    if (!_platFormRadiusView) {
+
+        _platFormRadiusView = [[UIView alloc] init];
+
+        _platFormRadiusView.backgroundColor = [UIColor redColor];
+
+        _platFormRadiusView.frame = CGRectMake(0, 100,self.view.frame.size.width , 200);
+
+        [self.view addSubview:_platFormRadiusView];
+
+ 
+
+        // 左上和右上为圆角
+
+        UIBezierPath *cornerRadiusPath = [UIBezierPath bezierPathWithRoundedRect:_platFormRadiusView.bounds byRoundingCorners:UIRectCornerTopRight | UIRectCornerTopLeft cornerRadii:CGSizeMake(15, 15)];
+
+        
+
+        CAShapeLayer *cornerRadiusLayer = [ [CAShapeLayer alloc ] init];
+
+        cornerRadiusLayer.frame = _platFormRadiusView.bounds;
+
+        cornerRadiusLayer.path = cornerRadiusPath.CGPath;                   _platFormRadiusView.layer.mask = cornerRadiusLayer;
+
+    }
+
+    return _platFormRadiusView;
+
+}
+</code></pre>
+
+<h3 id="uibutton-的左上角和右上角为圆角">UIButton 的左上角和右上角为圆角</h3>
+
+<pre><code>-(void)platFormRadiusButton{
+
+    UIButton *shButton = [UIButton buttonWithType:UIButtonTypeCustom];
+
+    shButton.frame = CGRectMake(0, 100, self.view.frame.size.width, 200);
+
+    shButton.backgroundColor = [UIColor redColor];
+
+    [shButton setTitle:@&quot;石虎测试Button&quot; forState:0];
+
+    shButton.tag = 1;
+
+    [self.view addSubview:shButton];
+
+    //设置圆角
+
+ UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:shButton.bounds byRoundingCorners:UIRectCornerTopRight | UIRectCornerTopLeft cornerRadii:CGSizeMake(15, 15)];
+
+    
+
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+
+    maskLayer.frame = shButton.bounds;
+
+    maskLayer.path = maskPath.CGPath;
+
+    shButton.layer.mask = maskLayer;
+
+}
+</code></pre>
+
+  </div>
+
+

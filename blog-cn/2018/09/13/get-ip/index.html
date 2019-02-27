@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>获取手机的IP地址(内网与外网)</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>获取手机的IP地址(内网与外网)</h2>
+        
+
+<h3 id="获取内网ip">获取内网IP</h3>
+
+<pre><code>#import &lt;ifaddrs.h&gt;
+#import &lt;arpa/inet.h&gt;
+#import &lt;net/if.h&gt;
+ 
+#define IOS_CELLULAR    @&quot;pdp_ip0&quot;
+#define IOS_WIFI        @&quot;en0&quot;
+#define IOS_VPN         @&quot;utun0&quot;
+#define IP_ADDR_IPv4    @&quot;ipv4&quot;
+#define IP_ADDR_IPv6    @&quot;ipv6&quot;
+ 
+ 
+#pragma mark - 获取设备当前网络IP地址
++ (NSString *)getIPAddress:(BOOL)preferIPv4
+{
+    NSArray *searchArray = preferIPv4 ?
+    @[ IOS_VPN @&quot;/&quot; IP_ADDR_IPv4, IOS_VPN @&quot;/&quot; IP_ADDR_IPv6, IOS_WIFI @&quot;/&quot; IP_ADDR_IPv4, IOS_WIFI @&quot;/&quot; IP_ADDR_IPv6, IOS_CELLULAR @&quot;/&quot; IP_ADDR_IPv4, IOS_CELLULAR @&quot;/&quot; IP_ADDR_IPv6 ] :
+    @[ IOS_VPN @&quot;/&quot; IP_ADDR_IPv6, IOS_VPN @&quot;/&quot; IP_ADDR_IPv4, IOS_WIFI @&quot;/&quot; IP_ADDR_IPv6, IOS_WIFI @&quot;/&quot; IP_ADDR_IPv4, IOS_CELLULAR @&quot;/&quot; IP_ADDR_IPv6, IOS_CELLULAR @&quot;/&quot; IP_ADDR_IPv4 ] ;
+ 
+    NSDictionary *addresses = [self getIPAddresses];
+    NSLog(@&quot;addresses: %@&quot;, addresses);
+ 
+    __block NSString *address;
+    [searchArray enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop)
+     {
+         address = addresses[key];
+         //筛选出IP地址格式
+         if([self isValidatIP:address]) *stop = YES;
+     } ];
+    return address ? address : @&quot;0.0.0.0&quot;;
+}
+ 
++ (BOOL)isValidatIP:(NSString *)ipAddress {
+    if (ipAddress.length == 0) {
+        return NO;
+    }
+    NSString *urlRegEx = @&quot;^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.&quot;
+    &quot;([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.&quot;
+    &quot;([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.&quot;
+    &quot;([01]?\\d\\d?|2[0-4]\\d|25[0-5])$&quot;;
+ 
+    NSError *error;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:urlRegEx options:0 error:&amp;error];
+ 
+    if (regex != nil) {
+        NSTextCheckingResult *firstMatch=[regex firstMatchInString:ipAddress options:0 range:NSMakeRange(0, [ipAddress length])];
+ 
+        if (firstMatch) {
+            NSRange resultRange = [firstMatch rangeAtIndex:0];
+            NSString *result=[ipAddress substringWithRange:resultRange];
+            //输出结果
+            NSLog(@&quot;%@&quot;,result);
+            return YES;
+        }
+    }
+    return NO;
+}
+ 
++ (NSDictionary *)getIPAddresses
+{
+    NSMutableDictionary *addresses = [NSMutableDictionary dictionaryWithCapacity:8];
+ 
+    // retrieve the current interfaces - returns 0 on success
+    struct ifaddrs *interfaces;
+    if(!getifaddrs(&amp;interfaces)) {
+        // Loop through linked list of interfaces
+        struct ifaddrs *interface;
+        for(interface=interfaces; interface; interface=interface-&gt;ifa_next) {
+            if(!(interface-&gt;ifa_flags &amp; IFF_UP) /* || (interface-&gt;ifa_flags &amp; IFF_LOOPBACK) */ ) {
+                continue; // deeply nested code harder to read
+            }
+            const struct sockaddr_in *addr = (const struct sockaddr_in*)interface-&gt;ifa_addr;
+            char addrBuf[ MAX(INET_ADDRSTRLEN, INET6_ADDRSTRLEN) ];
+            if(addr &amp;&amp; (addr-&gt;sin_family==AF_INET || addr-&gt;sin_family==AF_INET6)) {
+                NSString *name = [NSString stringWithUTF8String:interface-&gt;ifa_name];
+                NSString *type;
+                if(addr-&gt;sin_family == AF_INET) {
+                    if(inet_ntop(AF_INET, &amp;addr-&gt;sin_addr, addrBuf, INET_ADDRSTRLEN)) {
+                        type = IP_ADDR_IPv4;
+                    }
+                } else {
+                    const struct sockaddr_in6 *addr6 = (const struct sockaddr_in6*)interface-&gt;ifa_addr;
+                    if(inet_ntop(AF_INET6, &amp;addr6-&gt;sin6_addr, addrBuf, INET6_ADDRSTRLEN)) {
+                        type = IP_ADDR_IPv6;
+                    }
+                }
+                if(type) {
+                    NSString *key = [NSString stringWithFormat:@&quot;%@/%@&quot;, name, type];
+                    addresses[key] = [NSString stringWithUTF8String:addrBuf];
+                }
+            }
+        }
+        // Free memory
+        freeifaddrs(interfaces);
+    }
+    return [addresses count] ? addresses : nil;
+}
+</code></pre>
+
+<h3 id="获取外网ip的方法">获取外网IP的方法:</h3>
+
+<pre><code>//方法一：
+NSError *error; 
+NSURL *ipURL = [NSURL URLWithString:@&quot;http://ifconfig.me/ip&quot;];
+NSString *ip = [NSString stringWithContentsOfURL:ipURL encoding:NSUTF8StringEncoding error:&amp;error];
+//方法二：个人推荐用这个请求，速度比较快
+/*
+http://ipof.in/json
+http://ipof.in/xml
+http://ipof.in/txt
+If you want HTTPS you can use the same URLs with https prefix. The advantage being that even if you are on a Wifi you will get the public address.
+ */
+NSError *error; 
+NSURL *ipURL = [NSURL URLWithString:@&quot;http://ipof.in/txt&quot;];
+NSString *ip = [NSString stringWithContentsOfURL:ipURL encoding:NSUTF8StringEncoding error:&amp;error];
+</code></pre>
+
+  </div>
+
+

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>SEL存储位置、原理</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>SEL存储位置、原理</h2>
+        
+
+<h3 id="一-概念">一、概念</h3>
+
+<p>1.SEL类型是OC中用来定义方法的关键字，和其他语言不同的是SEL类型虽然是方法定义，但却不从属于任何类实例，其值是通过@selector进行计算，可以把它当做一个函数指针来使用，当然它实际上并不是一个函数指针，而是const char*。</p>
+
+<p>2.SEL类型可以在编译时通过@selector()直接创建，也可以用NSSelectorFromString()函数创建，这个函数允许你通过名字调用方法。</p>
+
+<p> 例如：</p>
+
+<p> [object performSelector:@selector(doSomething)]];</p>
+
+<p> 它和如下代码等价：[object doSomething];</p>
+
+<p>3.各种语言都有传递函数的方法:C语言使用函数指针，C++中有函数引用，OC使用选择器selector和block。</p>
+
+<h3 id="二-方法的存储位置">二、方法的存储位置</h3>
+
+<pre><code>@interface Person：NSObject
+
++(void)test1；
+
+-(void)test2;
+
+@end
+Person *person = [[Person alloc]init];
+</code></pre>
+
+<p>在内存中如下：
+<img src="../1.jpg" alt="" /></p>
+
+<p>2.在内存中每个类的方法都存储在类对象中，</p>
+
+<p>  每个方法都有一个与之对应的SEL类型的数据，</p>
+
+<p>  根据一个SEL数据就可以找到对应的方法地址，进而调用方法。</p>
+
+<p>  SEL类型的定义：typedef struct objc_selector *SEL.</p>
+
+<p>  *************************</p>
+
+<p>  SEL对象的创建</p>
+
+<p>  SEL s1  = @selector（test1）；</p>
+
+<p>  SEL s2 = NSSelectorFromString（@“test1”）</p>
+
+<p> 注意:SEL就是对方法的一种包装。</p>
+
+  </div>
+
+

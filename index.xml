@@ -119,7 +119,290 @@ JVM内存结构 VS Java内存模型 VS Java对象模型
     </item>
     
     <item>
-      <title>iOS NSSet和NSMutableSet</title>
+      <title>交易支付密码UI</title>
+      <link>http://wangerk.com/blog-cn/2018/11/30/pay-password/</link>
+      <pubDate>Fri, 30 Nov 2018 21:56:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2018/11/30/pay-password/</guid>
+      <description>概念  一行代码实现  ///MARK:- 实例化一个密码 显示view -(void)addPasswordTextView:(CGRect)frame { _passwordTextView = [[SHPasswordTextView alloc]initWithFrame:frame count:6 margin:20 passwordFont:50 forType:SHPasswordTextTypeRectangle block:^(NSString * _Nonnull passwordStr) { NSLog(@&amp;quot;passwordStr == %@&amp;quot;,passwordStr); }]; //_passwordTextView.passwordSecureEntry = YES;//安全密码 [self.view addSubview:_passwordTextView]; }   选择样式  //提供5种样式展示 typedef NS_ENUM(NSInteger, SHPasswordTextType){ SHPasswordTextTypeNormal = 1 &amp;lt;&amp;lt; 0, /**默认 __*/ SHPasswordTextTypeAnimation_line = 1 &amp;lt;&amp;lt; 1, /**line动画__*/ SHPasswordTextTypeAnimation_font = 1 &amp;lt;&amp;lt; 2, /**字体动画__*/ SHPasswordTextTypeAnimation_lineAndFont = 1 &amp;lt;&amp;lt; 3, /**line和字体动画__*/ SHPasswordTextTypeRectangle = 1 &amp;lt;&amp;lt; 4 /**方块形☐☐*/ };  效果  矩形输入密码图:  安全输入密码图:  带有动画输入支付密码图:   下载demo https://gitee.</description>
+    </item>
+    
+    <item>
+      <title>AppStore申请加急审核及Apple联系方式大全</title>
+      <link>http://wangerk.com/blog-cn/2018/11/19/appstore-accelerate/</link>
+      <pubDate>Mon, 19 Nov 2018 15:24:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2018/11/19/appstore-accelerate/</guid>
+      <description> 一、概念  1.直接提交申诉理由 (里面还有一起其他功能 如申请加急审核等.)
+https://developer.apple.com/contact/app-store/?topic=appeal
+2.开发问题, 貌似也可以问一些审核问题
+https://developer.apple.com/contact/submit.PHP
+3.苹果相关地区联系电话 ,中国区的为 4006 701 855
+貌似审核周末继续 电话客户周末不上班
+01085255770 苹果审核团队的电话
+https://developer.apple.com/contact/phone.php
+4.各地区 Apple 开发者支持电话号码:https://developer.apple.com/cn/contact/phone.php
+太平洋标准时间上午11点&amp;ndash;晚上8点之间通过美国审核电话001 408 7830508
+注意: 如果是座机要在前面多加一个0.
+ 二、实际操作  提交审核后进去下面链接申请加急审核
+链接：https://developer.apple.com/appstore/contact/appreviewteam/index.html
+在I would like to选择加急审核(默认选项)
+图1:选择原因 图2:填写联系方式 图3:填写 APP 信息 图4:备注内容 注意: ⚠️这里可以填写中文，据说最好用英文，不过我自己写的是中文。
+另外要注意的是理由一般是用户安全问题或者崩溃问题成功率会高一些
+还有一点要注意的是，如果是崩溃问题，你最好写上操作步骤，让审核员去重现这个问题。
+ </description>
+    </item>
+    
+    <item>
+      <title>同步锁原理合集</title>
+      <link>http://wangerk.com/blog-cn/2018/11/14/lock/</link>
+      <pubDate>Wed, 14 Nov 2018 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2018/11/14/lock/</guid>
+      <description>一、概念  我们在使用多线程的时候多个线程可能会访问同一块资源，这样就很容易引发数据错乱和数据安全等问题，这时候就需要我们保证每次只有一个线程访问这一块资源，锁 应运而生。
+ 不同锁的效率比较: 二、锁🔐锁 OSSpinLock (自旋锁)  自旋锁的实现原理比较简单，就是死循环。当a线程获得锁以后，b线程想要获取锁就需要等待a线程释放锁。在没有获得锁的期间，b线程会一直处于忙等的状态。如果a线程在临界区的执行时间过长，则b线程会消耗大量的cpu时间，不太划算。所以，自旋锁用在临界区执行时间比较短的环境性能会很高。
+ 注:苹果爸爸已经在iOS10.0以后废弃了这种锁机制,使用os_unfair_lock 替换, 顾名思义能够保证不同优先级的线程申请锁的时候不会发生优先级反转问题.
+os_unfair_lock(自旋锁)  注:解决不同优先级的线程申请锁的时候不会发生优先级反转问题.不过相对于 OSSpinLock , os_unfair_lock性能方面减弱了许多.
+ dispatch_semaphore (信号量)  注: dispatch_semaphore 其他两个功能
+1.还可以起到阻塞线程的作用.
+2.可以实现定时器功能,这里不做过多介绍.
+ pthread_mutex(互斥锁)  pthread_mutex表示互斥锁，和信号量的实现原理类似，也是阻塞线程并进入睡眠，需要进行上下文切换。
+ pthread_mutexattr_t attr; pthread_mutexattr_init(&amp;amp;attr); pthread_mutexattr_settype(&amp;amp;attr, PTHREAD_MUTEX_NORMAL); pthread_mutex_t lock; pthread_mutex_init(&amp;amp;lock, &amp;amp;attr); //设置属性 pthread_mutex_lock(&amp;amp;lock); //上锁 //需要执行的代码 pthread_mutex_unlock(&amp;amp;lock); //解锁  NSLock(互斥锁、对象锁)  NSLock在内部封装了一个 pthread_mutex，属性为 PTHREAD_MUTEX_ERRORCHECK。
+ NSLock *lock = [NSLock new]; [lock lock]; //需要执行的代码 [lock unlock];  NSCondition(条件锁、对象锁)  NSCondition封装了一个互斥锁和条件变量。互斥锁保证线程安全，条件变量保证执行顺序。</description>
+    </item>
+    
+    <item>
+      <title>HOOK技术</title>
+      <link>http://wangerk.com/blog-cn/2018/10/29/hook/</link>
+      <pubDate>Mon, 29 Oct 2018 19:39:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2018/10/29/hook/</guid>
+      <description> 一、概念  HOOK，中文译为“挂钩”或“钩子”。在iOS逆向中是指改变程序运行流程的一种技术。通过hook可以让别人的程序执行自己所写的代码。在逆向中经常使用这种技术。所以在学习过程中，我们重点要了解其原理，这样能够对恶意代码进行有效的防护。
+ 二、iOS中HOOK技术的几种方式  Method Swizzle
+利用OC的Runtime特性，动态改变SEL（方法编号）和IMP（方法实现）的对应关系，达到OC方法调用流程改变的目的。主要用于OC方法。
+ .
+ fishhook
+它是Facebook提供的一个动态修改链接mach-O文件的工具。利用MachO文件加载原理，通过修改懒加载和非懒加载两个表的指针达到C函数HOOK的目的。
+ .
+ Cydia Substrate Cydia Substrate 原名为 Mobile Substrate ，它的主要作用是针对OC方法、C函数以及函数地址进行HOOK操作。当然它并不是仅仅针对iOS而设计的，安卓一样可以用。官方地址：http://www.cydiasubstrate.com/
+ 三、原理图 四、代码 </description>
+    </item>
+    
+    <item>
+      <title>Xcode10升级项目报错解决方法</title>
+      <link>http://wangerk.com/blog-cn/2018/10/10/xcode10/</link>
+      <pubDate>Wed, 10 Oct 2018 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2018/10/10/xcode10/</guid>
+      <description>一、概念  Xcode10新特性
+ 图1: 图2: 二、问题directory not found for option  1.iOS &amp;ldquo;directory not found for option &amp;lsquo;-L/Users/&amp;hellip;/Pods/build/Debug-iphoneos/…“解决方案
+ 图3:编译错误  2.解决方案:
+在Target－Build Settings中找到Search Paths－Library Search Paths，删除掉在警告中所示的该路径。
+ 图4:  3.注意: 先 clean 、编译 在运行。
+ 三、问题 script phase &amp;ldquo;[CP]Copy Pods Resources&amp;rdquo;  1.script phase &amp;ldquo;[CP]Copy Pods Resources&amp;rdquo; ~解决方法
+ 图5:编译错误  2.解决方案：
+在Target－Build Phases — [CP]Copy Pods Resources — Output Files 下的 ${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH} 删除
+ 图6:删除 图7:  3.</description>
+    </item>
+    
+    <item>
+      <title>AppStore上传项目报隐私政策网址(URL)错误</title>
+      <link>http://wangerk.com/blog-cn/2018/10/09/privacy/</link>
+      <pubDate>Tue, 09 Oct 2018 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2018/10/09/privacy/</guid>
+      <description> 一、概念  问题：使用权限 [ com.apple.developer.in-app-payments] 的 App 必须为[Simplified Chinese]提供隐私政策网址(URL)。如果您的 App 不使用这些权限，请将它们从您的 App 中移除并上传新的二进制文件。
+ 二、问题展示 图1:  关键是：隐私政策网址(URL)！！！
+在构建APP版本的时候需要你提供政策网址URL，而这个是非必填的；
+当你app里面包含登录注册功能、支付功能等时。这个选项是必须的！！！
+ 三、解决方法：  这是我本app注册的协议的网址添加到 隐私政策网址(URL)下面并且保存即可.
+ 图2:  进入ituns Connect -&amp;gt;我的APP-&amp;gt;app信息
+ 图3: </description>
+    </item>
+    
+    <item>
+      <title>iOS连接外设的几种方式</title>
+      <link>http://wangerk.com/blog-cn/2018/09/21/ios-connection/</link>
+      <pubDate>Fri, 21 Sep 2018 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2018/09/21/ios-connection/</guid>
+      <description> 一、概念  一般iOS开发者做APP开发大部分时候都是通过Http(s)请求跟后台服务器打交道，做一些信息展示和用户交互。很少涉及到去跟外部硬件设备连接的开发。随着近年来车联网和物联网的兴起，智能家居和智能硬件的逐步火热，越来越多的app被开发出来，用来跟硬件设备进行来连接，获取硬件相关信息展示或者发送指令控制硬件来提供服务。故本文就针对iOS的app如何跟外部设备进行连接通信这个问题跟大家交流一下。本文原创，欢迎转载，转载请注明出处，如有不正确的地方恳请各位看官指正。
+ 可以分为三大类：  第一类是通过网络端口，建立Socket使用TCP/IP协议族进行通信，天然支持多通道，想要几个通道就建几个socket就行了。它主要有三种方式，第一种方式是Wi-Fi连接，优点是：简单，不需要集成MFi芯片，只要对应的硬件有无线网卡，然后手机和硬件连接到同一个局域网中就可以使用socket通过网络协议通信了。缺点也很明显：
+（1)无线连接信号容易受到干扰，不太稳定，容易断开；
+（2）如果硬件使用的场合没有公共wifi，就需要手机自建热点共享，硬件进行热点接入，操作步骤较多，对用户来说学习使用成本较高，并且热点共享要求手机本身的数据移动网络是稳定的，在没有移动数据网络信号的地方，热点无法建立。
+ .
+ 需要先打开个人热点共享；
+使用网络端口的第三种方式是NCM，就是把USB端口虚拟成标准的网络端口，然后手机和外设就能通过有线网络直连了，可以理解成手机和外设通过一跟网线连起来了，然后就可以用socket通过TCP，UDP进行通信了。它的优点是：有线连接，非常稳定，带宽足够；也不依赖移动网络信号；但是它的缺点就是：需要集成MFI芯片并进行MFI认证，有一定门槛。更变态的是这么好的一种方式，目前苹果只提到可以在它自己的CarPlay使用，其他硬件并没有说禁止或者允许使用。如果硬件使用NCM跟iOS系统的App通信，可能通过MFI认证是有风险的。
+关于如何使用Socket进行TCP、UDP连接，推荐github上的开源项目CocoaAsyncSocket。
+ .
+ iOS App连接外部硬件的第二大类是EAP，全拼是External Accessory Protocol，外部设备协议。这个是苹果推荐使用的外设连接方式。需要外设集成MFI芯片进行MFI认证。手机端开发相对简单，只要集成 iOS系统提供的一个框架ExternalAccessory.framework，并且在info.plist中配置好协议字符串(Supported external accessory protocols），当iOS 设备通过USB线或者蓝牙连接到对应硬件时，iOS系统会把符合MFI认证要求的外设抽象成了一个流对象，App通过指定的协议字符串来创建一个EASession类的实例来访问到该流对象，就能通过NSInputStream和NSOutputStream跟硬件件进行通信了。它有两种模式，一种是叫EASession的模式，它带宽相对较低，但是允许同时通过多个协议字符串创建多个会话，也就是说直接支持多个通道；另外一种是Native Transport的模式，这种模式的优点是带宽足够大，理论值是100MB以上，但是不支持多通道，如果业务层需要支持多数据通道的话需要App自己进行通道的复用与拆分，并且Native Transport需要iPhone工作在USB host模式，硬件需要支持USB 模式切换。
+关于如何使用EAP跟外部设备进行通信，可以参考苹果官方的Demo进行入门和学习。
+ .
+ 第三大类就是BLE，低功耗蓝牙，是iOS7.0以后才支持的连接方式。它的优点是不需要集成MFI芯片做认证，功耗低，手机端开发也相对简单，集成iOS系统提供的CoreBluetooth.framework就行。缺点是：带宽很低，一般适合于只需要传输少量数据的场景。比如前两年非常火爆的各种所谓智能硬件，像智能水杯，智能体重计，运动手环等，都是采用这种连接方式。
+关于如何使用BLE进行硬件连接，可以参考本人在github的一个小开源项目（https://github.com/luoxubin/BlueTooth4.0）。另外本人自己业余时间也做过一个BLE连接外设的App-裤宝（名字有创意吧，裤子里的宝贝，是跟我另外两个小伙伴一起做的创业项目，目前该项目黄了， 不过app还在线上，AppStore里搜索“裤宝”可以下载。
+ .
+ 总结一下，图中带MFI字样的表示该连接方式需要硬件集成MFi芯片，做MFi认证。关于苹果的MFI认证，对iOS开发中来说其实是一个比较陌生并且繁琐的topic，原因如下：
+ .
+ （1）网上鲜有资料，Google基本上查不到。 因为MFi认证是由硬件生产商主导进行的，苹果首先对硬件生产商的实力（质量，信誉，生产规模）有很苛刻的要求，满足要求的才有进行MFI认证的资格。满足MFi认证资格要求的硬件生产商，提交了MFi产品计划后才能得到苹果MFi开发的官方文档，这个文档是带水印的，不允许外泄；
+（2）MFi认证周期很长，过程也很复杂；
+（3）苹果官方沟通渠道很窄，电话打不通，邮件回复不及时。
+ </description>
+    </item>
+    
+    <item>
+      <title>监听应用程序被杀死</title>
+      <link>http://wangerk.com/blog-cn/2018/09/16/observe-dead/</link>
+      <pubDate>Sun, 16 Sep 2018 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2018/09/16/observe-dead/</guid>
+      <description> 监听应用进入后台 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sh_comeHome:) name:@&amp;quot;UIApplicationDidEnterBackgroundNotification&amp;quot; object:nil];  (void)sh_comeHome:(UIApplication *)application { NSLog(@&amp;quot;进入后台&amp;quot;); }  监听应用程序被杀死 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate:) name:@&amp;quot;UIApplicationWillTerminateNotification&amp;quot; object:nil];  (void)applicationWillTerminate:(UIApplication *)application { NSLog(@&amp;quot;程序被杀死&amp;quot;); }  </description>
+    </item>
+    
+    <item>
+      <title>获取手机的IP地址(内网与外网)</title>
+      <link>http://wangerk.com/blog-cn/2018/09/13/get-ip/</link>
+      <pubDate>Thu, 13 Sep 2018 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2018/09/13/get-ip/</guid>
+      <description>获取内网IP #import &amp;lt;ifaddrs.h&amp;gt; #import &amp;lt;arpa/inet.h&amp;gt; #import &amp;lt;net/if.h&amp;gt; #define IOS_CELLULAR @&amp;quot;pdp_ip0&amp;quot; #define IOS_WIFI @&amp;quot;en0&amp;quot; #define IOS_VPN @&amp;quot;utun0&amp;quot; #define IP_ADDR_IPv4 @&amp;quot;ipv4&amp;quot; #define IP_ADDR_IPv6 @&amp;quot;ipv6&amp;quot; #pragma mark - 获取设备当前网络IP地址 + (NSString *)getIPAddress:(BOOL)preferIPv4 { NSArray *searchArray = preferIPv4 ? @[ IOS_VPN @&amp;quot;/&amp;quot; IP_ADDR_IPv4, IOS_VPN @&amp;quot;/&amp;quot; IP_ADDR_IPv6, IOS_WIFI @&amp;quot;/&amp;quot; IP_ADDR_IPv4, IOS_WIFI @&amp;quot;/&amp;quot; IP_ADDR_IPv6, IOS_CELLULAR @&amp;quot;/&amp;quot; IP_ADDR_IPv4, IOS_CELLULAR @&amp;quot;/&amp;quot; IP_ADDR_IPv6 ] : @[ IOS_VPN @&amp;quot;/&amp;quot; IP_ADDR_IPv6, IOS_VPN @&amp;quot;/&amp;quot; IP_ADDR_IPv4, IOS_WIFI @&amp;quot;/&amp;quot; IP_ADDR_IPv6, IOS_WIFI @&amp;quot;/&amp;quot; IP_ADDR_IPv4, IOS_CELLULAR @&amp;quot;/&amp;quot; IP_ADDR_IPv6, IOS_CELLULAR @&amp;quot;/&amp;quot; IP_ADDR_IPv4 ] ; NSDictionary *addresses = [self getIPAddresses]; NSLog(@&amp;quot;addresses: %@&amp;quot;, addresses); __block NSString *address; [searchArray enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop) { address = addresses[key]; //筛选出IP地址格式 if([self isValidatIP:address]) *stop = YES; } ]; return address ?</description>
+    </item>
+    
+    <item>
+      <title>项目架构模式(MVC、MVVM、MVCS、VIPER的选择)</title>
+      <link>http://wangerk.com/blog-cn/2018/09/12/architecture/</link>
+      <pubDate>Wed, 12 Sep 2018 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2018/09/12/architecture/</guid>
+      <description>一、概念 没有最好的架构，只有适合自己的业务的架构才是最好的架构，并且它是逐步地变强变大。
+架构，又名软件架构，是有关软件整体结构与组件的抽象描述，用于指导大型软件系统各个方面的设计。
+二、iOS的系统架构分为四个层次： 核心操作系统层（Core OS layer）、核心服务层（Core Services layer）、媒体层（Media layer）和可触摸层（Cocoa Touch layer）。下面是IOS系统结构图。 1、Core OS是位于iOS系统架构最下面的一层是核心操作系统层，它包括内存管理、文件系统、电源管理以及一些其他的操作系统任务。它可以直接和硬件设备进行交互。作为app开发者不需要与这一层打交道。
+ 2、Core Services是核心服务层，可以通过它来访问iOS的一些服务。
+ 3、Media是媒体层，通过它我们可以在应用程序中使用各种媒体文件，进行音频与视频的录制，图形的绘制，以及制作基础的动画效果。  4、Cocoa Touch是可触摸层，这一层为我们的应用程序开发提供了各种有用的框架，并且大部分与用户界面有关，本质上来说它负责用户在iOS设备上的触摸交互操作。
+iOS是基于UNIX内核，android是基于Linux内核，iOS和android作为两款优秀的手机操作系统，他们有共性有区别，下面分享一张android系统架构图： 三、常见的分层架构 有三层架构：视图层、业务层、数据层。
+也有四层架构：视图层、业务层、网络层、本地数据层。
+这里说三层、四层，跟TCP/IP所谓的五层或者七层不是同一种概念。再具体说就是：你的架构在逻辑上设计的是几层那就是几层，具体每一层的名称和作用，没有特定的规范, 这主要是针对模块分类而言的。
+ 1.视图层设计方案
+ 2.网络层设计方案  3.本地持久化方案
+ 4.动态部署方案
+上面这四大点，稍微细说一下就是：
+ 页面如何组织，才能尽可能降低业务方代码的耦合度？尽可能降低业务方开发界面的复杂度，提高他们的效率？ 如何让业务开发工程师方便安全地调用网络API？然后尽可能保证用户在各种网络环境下都能有良好的体验？ 当数据有在本地存取的需求的时候，如何能够保证数据在本地的合理安排？如何尽可能地减小性能消耗？ iOS应用有审核周期，如何能够通过不发版本的方式展示新的内容给用户？如何修复紧急bug？  四、视图层设计方案 一般来说，一个不够好的View层架构，主要原因有以下五种：
+ 1.代码混乱不规范
+ 2.过多继承导致的复杂依赖关系
+ 3.模块化程度不够高，组件粒度不够细
+ 4.横向依赖
+ 5.架构设计失去传承
+View层的代码结构规范 制定代码规范严格来讲不属于View层架构的事情，但它对View层架构未来的影响会比较大，也是属于架构师在设计View层架构时需要考虑的事情。制定View层规范的重要性在于：
+ 1.提高业务方View层的可读性可维护性
+ 2.防止业务代码对架构产生腐蚀  3.确保传承
+ 4.保持架构发展的方向不轻易被不合理的意见所左右
+五、架构模式(MVC、MVVM、MVCS、VIPER的选择) MVC
+ 任务均摊–View和Model确实是分开的，但是View和Controller却是紧密耦合的 可测试性–由于糟糕的分散性，只能对Model进行测试 易用性–与其他几种模式相比最小的代码量。熟悉的人很多，因而即使对于经验不那么丰富的开发者来讲维护起来也较为容易。 MVVM</description>
+    </item>
+    
+    <item>
+      <title>让UIView和UIButton的左上角和右上角为圆角</title>
+      <link>http://wangerk.com/blog-cn/2018/08/26/border-radius/</link>
+      <pubDate>Sun, 26 Aug 2018 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2018/08/26/border-radius/</guid>
+      <description>UIView 的左上角和右上角为圆角 -(UIView *)platFormRadiusView{ if (!_platFormRadiusView) { _platFormRadiusView = [[UIView alloc] init]; _platFormRadiusView.backgroundColor = [UIColor redColor]; _platFormRadiusView.frame = CGRectMake(0, 100,self.view.frame.size.width , 200); [self.view addSubview:_platFormRadiusView]; // 左上和右上为圆角 UIBezierPath *cornerRadiusPath = [UIBezierPath bezierPathWithRoundedRect:_platFormRadiusView.bounds byRoundingCorners:UIRectCornerTopRight | UIRectCornerTopLeft cornerRadii:CGSizeMake(15, 15)]; CAShapeLayer *cornerRadiusLayer = [ [CAShapeLayer alloc ] init]; cornerRadiusLayer.frame = _platFormRadiusView.bounds; cornerRadiusLayer.path = cornerRadiusPath.CGPath; _platFormRadiusView.layer.mask = cornerRadiusLayer; } return _platFormRadiusView; }  UIButton 的左上角和右上角为圆角 -(void)platFormRadiusButton{ UIButton *shButton = [UIButton buttonWithType:UIButtonTypeCustom]; shButton.frame = CGRectMake(0, 100, self.</description>
+    </item>
+    
+    <item>
+      <title>返回到任意界面(控制器)</title>
+      <link>http://wangerk.com/blog-cn/2018/08/25/to-any-controller/</link>
+      <pubDate>Sat, 25 Aug 2018 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2018/08/25/to-any-controller/</guid>
+      <description>方式一:根据指定的类名返回  for (UIViewController *controller in self.navigationController.viewControllers) { if ([controller isKindOfClass:[要返回的类名 class]]) { [self.navigationController popToViewController:controller animated:YES]; } }  方式二:根据栈的索引返回  NSArray *temArray = self.navigationController.viewControllers; [self.navigationController popToViewController:[temArray objectAtIndex:1] animated:YES]; 打印: Printing description of temArray: &amp;lt;__NSArrayI 0x1054a20c0&amp;gt;( &amp;lt;MeasureVC: 0x10183f800&amp;gt;, &amp;lt;SHAskDoctorViewController: 0x104791c40&amp;gt;, &amp;lt;SHChooseDoctorViewController: 0x1047b8170&amp;gt;, &amp;lt;SHDoctorVisitsViewController: 0x10af7d640&amp;gt;, &amp;lt;SHMicroLetterPayViewController: 0x10bf26430&amp;gt; )  方式三:类似方式一,推荐使用方式一  NSArray *temArray = self.navigationController.viewControllers; SHSpecialHistoryViewController *test = [[SHSpecialHistoryViewController alloc] init]; for(UIViewController *temVC in temArray){ if([temVC isKindOfClass:[test class]]) { [self.navigationController popToViewController:temVC animated:YES]; } }  方式四:修改rootViewController  AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].</description>
+    </item>
+    
+    <item>
+      <title>OC中分类Category实现原理</title>
+      <link>http://wangerk.com/blog-cn/2018/01/31/category/</link>
+      <pubDate>Wed, 31 Jan 2018 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2018/01/31/category/</guid>
+      <description>一、概念 1.前言
+category是Objective-C 2.0之后添加的语言特性，
+category的主要作用是为已经存在的类添加方法。
+2.设计思想
+Objective-C 中的 Category 就是对装饰模式的一种具体实现。它的主要作用是在不改变原有类的前提下，动态地给这个类添加一些方法。
+在 Objective-C 中的具体体现为：实例（类）方法、属性和协议。
+二、使用场景 1.给现有的类添加方法；
+2.将一个类的实现拆分成多个独立的源文件;
+好处:
+ a)可以减少单个文件的体积
+ b)可以把不同的功能组织到不同的category里
+ c)可以由多个开发者共同完成一个类
+ d)可以按需加载想要的category 等等。
+3.声明私有的方法。
+三、实现原理 1.我们不主动引入 Category 的头文件，Category 中的方法都会被添加进主类中。我们可以通过 - performSelector: 等方式 对 Category 中的相应方法进行调用
+ a)将 Category 和它的主类（或元类）注册到哈希表中；
+ b)如果主类（或元类）已实现，那么重建它的方法列表。
+2.在这里分了两种情况进行处理：Category 中的实例方法和属性被整合到主类中；而类方法则被整合到元类中。另外，对协议的处理比较特殊，Category 中的协议被同时整合到了主类和元类中。
+3.注意到，不管是哪种情况，最终都是通过调用 staticvoid remethodizeClass(Class cls) 函数来重新整理类的数据的。
+四、category结构体 1.所有的OC类和对象，在runtime层都是用struct表示的，category也不例外，在runtime层，category用结构体category_t.
+2.category结构体的定义：
+struct category_t { const char *name; //类的名字（name） classref_t cls; //类（cls） struct method_list_t *instanceMethods; //category中所有给类添加的实例方法的列表（instanceMethods） struct method_list_t *classMethods; //category中所有添加的类方法的列表（classMethods） struct protocol_list_t *protocols; //category实现的所有协议的列表（protocols） struct property_list_t *instanceProperties; //category中添加的所有属性（instanceProperties） };   3.</description>
+    </item>
+    
+    <item>
+      <title>组件化</title>
+      <link>http://wangerk.com/blog-cn/2018/01/15/components/</link>
+      <pubDate>Mon, 15 Jan 2018 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2018/01/15/components/</guid>
+      <description>一、概念 1.为什么要组件化？
+ * 组件和组件之间没有明确的约束；
+ * 组件单独开发、单独测试，不能揉入主项目中开发，测试也可以针对性的测试；
+ * 解决人多（更好的协作）、需求多（更好的功能模块划分）的问题；
+ * 解决项目模块间的代码耦合问题；（坚决抵制业务组件间代码直接引用）
+2.如何拆分组件？
+ 基础功能组件：（类似于性能统计、Networking、Patch、网络诊断等）
+ 按功能分库，不涉及产品业务需求，跟库Library类似
+ 通过良好的接口拱上层业务组件调用；
+ 不写入产品定制逻辑，通过扩展接口完成定制；
+ 基础UI组件：（例如下拉刷新组件、iCausel类似的组件）
+ 产品内通用UI组件；（各个业务模块依赖使用，但需要保持好定制扩展的设计）
+ 公共通用UI组件；（不涉及具体产品的视觉设计， 目前较少）
+ 产品业务组件：（例如圈子、1元购、登录、客服MM等）
+ 业务功能间相对独立，相互间没有Model共享的依赖；
+ 业务之间的页面调用只能通过UIBus进行跳转；
+ 业务之间的逻辑Action调用只能通过服务提供；
+二、方案 方案一、url-block
+ 这是蘑菇街中应用的一种页面间调用的方式，通过在启动时注册组件提供的服务，把调用组件使用的url和组件提供的服务block对应起来，保存到内存中。在使用组件的服务时，通过url找到对应的block，然后获取服务
+下图是url-block的架构图： 方案二、target-action
+ casa的方案是通过给组件包装一层wrapper来给外界提供服务，然后调用者通过依赖中间件来使用服务；其中，中间件是通过runtime来调用组件的服务，是真正意义上的解耦，也是该方案最核心的地方。具体实施过程是给组件封装一层target对象来对外提供服务，不会对原来组件造成入侵；然后，通过实现中间件的category来提供服务给调用者，这样使用者只需要依赖中间件，而组件则不需要依赖中间件。
+下图是casa的组件化方案架构图： 方案三、protocol-class
+针对方案一的问题，蘑菇街又提出了另一种组件化的方案，就是通过protocol定义服务接口，组件通过实现该接口来提供接口定义的服务，具体实现就是把protocol和class做一个映射，同时在内存中保存一张映射表，使用的时候，就通过protocol找到对应的class来获取需要的服务。</description>
+    </item>
+    
+    <item>
+      <title>SEL存储位置、原理</title>
+      <link>http://wangerk.com/blog-cn/2018/01/14/sel/</link>
+      <pubDate>Sun, 14 Jan 2018 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2018/01/14/sel/</guid>
+      <description>一、概念 1.SEL类型是OC中用来定义方法的关键字，和其他语言不同的是SEL类型虽然是方法定义，但却不从属于任何类实例，其值是通过@selector进行计算，可以把它当做一个函数指针来使用，当然它实际上并不是一个函数指针，而是const char*。
+2.SEL类型可以在编译时通过@selector()直接创建，也可以用NSSelectorFromString()函数创建，这个函数允许你通过名字调用方法。
+ 例如：
+ [object performSelector:@selector(doSomething)]];
+ 它和如下代码等价：[object doSomething];
+3.各种语言都有传递函数的方法:C语言使用函数指针，C++中有函数引用，OC使用选择器selector和block。
+二、方法的存储位置 @interface Person：NSObject +(void)test1； -(void)test2; @end Person *person = [[Person alloc]init];  在内存中如下： 2.在内存中每个类的方法都存储在类对象中，
+ 每个方法都有一个与之对应的SEL类型的数据，
+ 根据一个SEL数据就可以找到对应的方法地址，进而调用方法。
+ SEL类型的定义：typedef struct objc_selector *SEL.
+ *************************
+ SEL对象的创建
+ SEL s1 = @selector（test1）；
+ SEL s2 = NSSelectorFromString（@“test1”）
+ 注意:SEL就是对方法的一种包装。</description>
+    </item>
+    
+    <item>
+      <title>NSSet和NSMutableSet</title>
       <link>http://wangerk.com/blog-cn/2017/06/12/nsset-nsmutableset/</link>
       <pubDate>Mon, 12 Jun 2017 20:55:53 +0800</pubDate>
       
@@ -147,7 +430,7 @@ NSSet和NSMutableSet是无序的, 但是它保证数据的唯一性。当插入�
     </item>
     
     <item>
-      <title>iOS ARC和MRC混合开发</title>
+      <title>ARC和MRC混合开发</title>
       <link>http://wangerk.com/blog-cn/2017/06/10/arc-mrc/</link>
       <pubDate>Sat, 10 Jun 2017 20:55:53 +0800</pubDate>
       
@@ -168,7 +451,7 @@ RegexKitLite是对NSString添加的正则表达式分类
     </item>
     
     <item>
-      <title>iOS 程序启动的完整过程</title>
+      <title>程序启动的完整过程</title>
       <link>http://wangerk.com/blog-cn/2017/06/09/program-flow/</link>
       <pubDate>Fri, 09 Jun 2017 20:55:53 +0800</pubDate>
       
@@ -190,7 +473,7 @@ RegexKitLite是对NSString添加的正则表达式分类
     </item>
     
     <item>
-      <title>iOS 客户端HTTP状态码</title>
+      <title>客户端HTTP状态码</title>
       <link>http://wangerk.com/blog-cn/2017/06/07/http-code/</link>
       <pubDate>Wed, 07 Jun 2017 20:55:53 +0800</pubDate>
       
@@ -230,7 +513,7 @@ RegexKitLite是对NSString添加的正则表达式分类
     </item>
     
     <item>
-      <title>iOS滚动到顶部</title>
+      <title>滚动到顶部</title>
       <link>http://wangerk.com/blog-cn/2017/06/04/tap-scroll/</link>
       <pubDate>Sun, 04 Jun 2017 20:55:53 +0800</pubDate>
       
@@ -239,7 +522,7 @@ RegexKitLite是对NSString添加的正则表达式分类
     </item>
     
     <item>
-      <title>iOS 核心动画 图片抖动</title>
+      <title>核心动画 图片抖动</title>
       <link>http://wangerk.com/blog-cn/2017/06/03/pic-shake-keyanimation/</link>
       <pubDate>Sat, 03 Jun 2017 19:07:53 +0800</pubDate>
       
@@ -248,7 +531,7 @@ RegexKitLite是对NSString添加的正则表达式分类
     </item>
     
     <item>
-      <title>iOS UITableView常用方法合集</title>
+      <title>UITableView常用方法合集</title>
       <link>http://wangerk.com/blog-cn/2017/06/02/uitableview/</link>
       <pubDate>Fri, 02 Jun 2017 07:57:53 +0800</pubDate>
       
@@ -261,7 +544,7 @@ RegexKitLite是对NSString添加的正则表达式分类
     </item>
     
     <item>
-      <title>iOS GCD定时器实现获取验证码的倒计时</title>
+      <title>GCD定时器实现获取验证码的倒计时</title>
       <link>http://wangerk.com/blog-cn/2017/06/01/gcd-timer/</link>
       <pubDate>Thu, 01 Jun 2017 08:03:04 +0800</pubDate>
       
@@ -270,7 +553,7 @@ RegexKitLite是对NSString添加的正则表达式分类
     </item>
     
     <item>
-      <title>iOS监控联网状态</title>
+      <title>监控联网状态</title>
       <link>http://wangerk.com/blog-cn/2017/05/31/reachability/</link>
       <pubDate>Wed, 31 May 2017 23:56:53 +0800</pubDate>
       
@@ -282,7 +565,7 @@ AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedMana
     </item>
     
     <item>
-      <title>iOS GCD信号量线程同步</title>
+      <title>GCD信号量线程同步</title>
       <link>http://wangerk.com/blog-cn/2017/05/31/dispatch_semaphore/</link>
       <pubDate>Wed, 31 May 2017 23:55:53 +0800</pubDate>
       
@@ -302,7 +585,7 @@ DISPATCH_TIME_NOW　表示当前； DISPATCH_TIME_FOREVER　表示遥远的未�
     </item>
     
     <item>
-      <title>iOS多线程(GCD)合成图片~demo</title>
+      <title>多线程(GCD)合成图片~demo</title>
       <link>http://wangerk.com/blog-cn/2017/05/31/gcd-join-images/</link>
       <pubDate>Wed, 31 May 2017 20:55:53 +0800</pubDate>
       
@@ -311,7 +594,7 @@ DISPATCH_TIME_NOW　表示当前； DISPATCH_TIME_FOREVER　表示遥远的未�
     </item>
     
     <item>
-      <title>iOS自动适应UILabel的宽度~demo</title>
+      <title>自动适应UILabel的宽度~demo</title>
       <link>http://wangerk.com/blog-cn/2017/05/30/uilable-adjust-width/</link>
       <pubDate>Mon, 30 May 2016 20:55:53 +0800</pubDate>
       
@@ -320,7 +603,7 @@ DISPATCH_TIME_NOW　表示当前； DISPATCH_TIME_FOREVER　表示遥远的未�
     </item>
     
     <item>
-      <title>iOS点击view退出键盘</title>
+      <title>点击view退出键盘</title>
       <link>http://wangerk.com/blog-cn/2016/04/15/resign-keyboard/</link>
       <pubDate>Fri, 15 Apr 2016 20:55:53 +0800</pubDate>
       
