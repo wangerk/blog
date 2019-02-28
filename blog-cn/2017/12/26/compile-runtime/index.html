@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>编译时和运行时</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>编译时和运行时</h2>
+        
+
+<h3 id="一-概念">一、概念</h3>
+
+<p><strong>编译时</strong></p>
+
+<p>编译时:就是正在编译的时候.其实编译时就是简单的作一些翻译工作,</p>
+
+<p>编译:    就是编译器帮你把源代码翻译成机器能识别的代码.(当然只是一般意义上这么说,实际上可能只是翻译成某个中间状态的语言.比如Java只有JVM识别的字节码,C#中只有CLR能识别的MSIL.另外还有啥链接器.汇编器.为了了便于理解我们可以统称为编译器)</p>
+
+<p><strong>运行时</strong></p>
+
+<p>运行时就是代码跑起来了.被装载到内存中去了.(你的代码保存在磁盘上没装入内存之前是个死家伙.只有跑到内存中才变成活的).而运行时类型检查就与前面讲的编译时类型检查(或者静态类型检查)不一样.不是简单的扫描代码.而是在内存中做些操作,做些判断.</p>
+
+<h3 id="二-例子说明">二、例子说明：</h3>
+
+<p> 1.string在编译时和运行时分别时什么类型的对象?</p>
+
+<p>    NSString*string = (NSString *)[[NSData alloc] init];</p>
+
+<p>    编译时是NSString的类型;</p>
+
+<p>    运行时是NSData类型的对象</p>
+
+<p> 2.例子</p>
+
+<p>    Father fa;</p>
+
+<p>    Son so;</p>
+
+<p>    fa = so;</p>
+
+<p>    fa.Fun();   //在编译时,实际上是把Fun当作Father类中的Fun看待.</p>
+
+<p>    //但在运行时实际上这里的Fun是调用的Son中的函数Fun.所以不做运行时类型检查是没法确定的啊.</p>
+
+  </div>
+
+

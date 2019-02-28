@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>多线程操作数组</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>多线程操作数组</h2>
+        
+
+<h3 id="一-概念">一、概念</h3>
+
+<p>1.含义:</p>
+
+<p>@synchronized(self) {</p>
+
+<p>}</p>
+
+<p>//这个其实就是 一个加锁。如果self 其他线程访问，则会阻塞。这样做一般是用来对单</p>
+
+<p>2.重写构造方法   </p>
+
+<p>   @interface SHSafetyArray : NSObject</p>
+
+<p>    {</p>
+
+<p>     @private</p>
+
+<p>      NSMutableArray *_mutableArray; //声明数组</p>
+
+<p>    }</p>
+
+<p>          //遍历加锁</p>
+
+<p>    - (void) multi:(void (^)(NSObject*)) multipass;</p>
+
+<p>    @end</p>
+
+<p>    @implementation SHSafetyArray</p>
+
+<p>         //初始化</p>
+
+<p>    - (id)init { </p>
+
+<p>        if (self = [super init]) {</p>
+
+<p>            _mutableArray = [[NSMutableArrayalloc]init];</p>
+
+<p>        }</p>
+
+<p>        return self;</p>
+
+<p>    }</p>
+
+<p>//遍历加锁</p>
+
+<p>    - (void)multi:(void (^)(NSObject *)) multipass {</p>
+
+<p>        </p>
+
+<p>        @synchronized(self) {</p>
+
+<p>            for (NSObject *objin_mutableArray) {</p>
+
+<p>                multipass(obj);</p>
+
+<p>            }</p>
+
+<p>        }</p>
+
+<p>    }</p>
+
+<p>    @end</p>
+
+<p>注意:这样就会线程安全的</p>
+
+  </div>
+
+

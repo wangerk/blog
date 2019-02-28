@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>多线程技术之GCD</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>多线程技术之GCD</h2>
+        <p>GCD（Grand Central Dispatch）是 Apple 公司为了提高 OS X 和 iOS 系统在多核处理器上运行并行代码的能力而开发的一系列相关技术，它提供了对线程的高级抽象。GCD 是一整套技术，包含了语言级别的新功能，运行时库，系统级别的优化，这些一起为并发代码的执行提供了系统级别的广泛优化。所以，GCD 也是 Apple 推荐的多线程编程工具。</p>
+
+<p>GCD 是系统层面的技术，除了可以被系统级应用使用，也可以被更普通的高级应用使用。使用 GCD 之后，应用就可以轻松地在多核系统上高效运行并发代码，而不用考虑繁琐的底层问题。GCD 在系统层面工作，能很好地满足所有应用的并行运行需求，将可用系统资源平衡地分配给它们。</p>
+
+<p>GCD 提供了一套纯 C API。但是，它提供的 API 简单易用并且有功能强大的任务管理和多线程编程能力。GCD 需要和 blocks（Objective－C 的闭包）配合使用。block 是 GCD 执行单元。GCD 的任务需要被拆解到 block 中。block 被排入 GCD 的分发队列，GCD 会为你排期运行。GCD 创建，重用，销毁线程，基于系统资源以它认为合适的方式运行每个队列。所以，用户需要关心的细节并不多。</p>
+
+<p>GCD 的使用也很简单，假设抢面包是个耗时操作，前面例子中的 Geroge 和 Totty 的工作都可以实现如下：</p>
+
+<p>dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{</p>
+
+<p>    // 并发队列中做耗时操作</p>
+
+<p>    while (TRUE) {</p>
+
+<p>        if(_cake &gt; 0) {</p>
+
+<p>            // 耗时操作</p>
+
+<p>            [NSThread sleepForTimeInterval:0.5];</p>
+
+<p>            _cake&ndash;;</p>
+
+<p>            _occupied = kSum - _cake;</p>
+
+<p>        } else {</p>
+
+<p>            break;</p>
+
+<p>        }</p>
+
+<p>    }</p>
+
+<p>    </p>
+
+<p>    // 主队列中刷新界面</p>
+
+<p>    dispatch_async(dispatch_get_main_queue(), ^{</p>
+
+<p>        [self updateUI];</p>
+
+<p>    });</p>
+
+<p>});</p>
+
+<p>一、GCD 分发队列</p>
+
+<p>GCD 分发队列是执行任务的有力工具。使用分发队列，你可以异步或者阻塞执行任意多个 block 的代码。你可以使用分发队列来执行几乎任何线程任务。GCD 提供了简单易用的接口。</p>
+
+<p>二、在 GCD 中存在三种队列：</p>
+
+<p>1 串行分发队列（Serial dispatch queue）</p>
+
+<p>串行分发队列又被称为私有分发队列，按顺序执行队列中的任务，且同一时间只执行一个任务。串行分发队列常用于实现同步锁。下面代码创建了一个串行分发队列：</p>
+
+<p>dispatch_queue_t serialQueue = dispatch_queue_create(&ldquo;com.example.MyQueue&rdquo;,NULL);</p>
+
+<p>2 并发分发队列（Concurrent dispatch queue）</p>
+
+<p>串行分发队列又被称为全局分发队列，也按顺序执行队列中的任务，但是顺序开始的多个任务会并发同时执行。并发分发队列常用于管理并发任务。下面代码创建了一个并发分发队列：</p>
+
+<p>dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);</p>
+
+<p>3 主分发队列（Main dispatch queue）</p>
+
+<p>主分发队列是一个全局唯一的特殊的串行分发队列。队列中的任务会被在应用的主线程中执行。主分发队列可以用于执行 UI 相关的操作。取得主分发队列的方法：</p>
+
+<p>dispatch_queue_t mainQueue = dispatch_get_main_queue();</p>
+
+<p>GCD 任务执行方式</p>
+
+<p>GCD 中有两种任务执行方式：</p>
+
+<p>异步执行, dispatch_async，意味将任务放入队列之后，主线程不会等待 block 的返回结果，而是立即继续执行下去。</p>
+
+<p>阻塞执行, dispatch_sync，意味将任务放入队列之后，主线程被阻塞，需要等待 block 的执行结果返回，才能继续执行下去。</p>
+
+<p>GCD 的其他主题</p>
+
+<p>GCD 有着丰富的功能，比如分发组（dispatch group），信号（semaphores），分发栅栏（dispatch barrier），分发源（dispatch source）等等。这些可以用于完成更复杂的多线程任务。详细可以查阅 Apple 关于 GCD 的文档。</p>
+
+<p>使用建议</p>
+
+<p>在能够使用 GCD 的地方，尽量使用 GCD</p>
+
+<p>Apple 公司宣称其在 GCD 技术中为更好地利用多核硬件系统做了很多的优化。所以，在性能方面 GCD 是不用担心的。而且 GCD 也提供了相当丰富的 API，几乎可以完成绝大部分线程相关的编程任务。所以，在多线程相关主题的编程中，GCD 应该是首选。下面举一些可以推荐使用 GCD 的实际例子：</p>
+
+<p>1 使用 GCD 的 dispatch queue 实现同步锁</p>
+
+<p>同步锁的实现方案有不少，比如，如果仅仅是想对某个实例变量的读写操作加锁，可以使用属性（property）的 atomic 参数，对于一段代码加锁可以使用 @synchronized 块，或者 NSLock。</p>
+
+<p>@synchronized 和 NSLock 实现的同步锁：</p>
+
+<p>// Method 1</p>
+
+<ul>
+<li>(void)synchronizedMethod {</li>
+</ul>
+
+<p>    @synchronized(self) {</p>
+
+<p>        // safe</p>
+
+<p>    }</p>
+
+<p>}</p>
+
+<p>// Method 2</p>
+
+<p>_lock = [[NSLock alloc] init];</p>
+
+<ul>
+<li>(void)synchronizedMethod {</li>
+</ul>
+
+<p>    [_lock lock];</p>
+
+<p>    // Safe</p>
+
+<p>    [_lock unlock];</p>
+
+<p>}</p>
+
+<p>@synchronized 一般会以 self 为同步对象。重复调用 @synchronized(self) 是很危险的。如果多个属性这么做，每一个属性将会被和其它所有属性同步，这可能并不是你所希望的，更好的方法是每个属性的锁都是相互独立的。</p>
+
+<p>另一种方法是使用 NSLock 实现同步锁，这个方法不错，但是缺点是在极端环境下同步块可能会导致锁死，而且这种情况下处理锁死状态会有麻烦。</p>
+
+<p>一个替代方法是使用 GCD 的分发队列。将读和写分发到相同并发队列中，这样读操作会是并发的，多个线程可以同时执行写操作；而对于写操作，以分发栅栏（dispatch barrier）保证同时只有一个线程可以执行写操作，并且由于写操作无需返回，写操作还是异步马上返回的。这样，就得到了一个高效且线程安全的锁。代码看起来会像这样：</p>
+
+<p>_syncQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);</p>
+
+<ul>
+<li>(NSInteger)cake {</li>
+</ul>
+
+<p>    __block NSInteger localCake;</p>
+
+<p>    dispatch_sync(_syncQueue, ^{</p>
+
+<p>        localCake = _cake;</p>
+
+<p>    });</p>
+
+<p>    return localCake;</p>
+
+<p>}</p>
+
+<ul>
+<li>(void)setCake:(NSInteger)cake {</li>
+</ul>
+
+<p>    dispatch_barrier_async(_syncQueue, ^{</p>
+
+<p>        _cake = cake;</p>
+
+<p>    });</p>
+
+<p>}</p>
+
+<p>简单而言，上面的代码可以使读操作被竞争执行；写操作被互斥执行，并且异步返回。使用 GCD 实现的这个同步锁应该是效率最优且最安全的。</p>
+
+  </div>
+
+

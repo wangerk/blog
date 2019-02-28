@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>多线程技术之NSOperation</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>多线程技术之NSOperation</h2>
+        <p>1.NSOperation做的事情比 NSThread 更多一些。通过继承 NSOperation，可以使子类获得一些线程相关的特性，进而可以安全地管理线程生命周期。比如，以线程安全的方式建立状态，取消线程。配合 NSOperationQueue，可以控制线程间的优先级和依赖性。这就给出了一套线程管理的基本方法。</p>
+
+<p>  NSOperation 代表了一个独立的计算单元。一般，我们会把计算任务封装进 NSOperation 这个对象。NSOperation 是抽象类，但同时也提供了两个可以直接使用的实体子类：NSInvocationOperation 和 NSBlockOperation。NSInvocationOperation 用于将计算任务封装进方法，NSBlockOperation 用于将计算任务封装进 block。</p>
+
+<p> 2. NSOperationQueue 则用于执行计算任务，管理计算任务的优先级，处理计算任务之间的依赖性。NSOperation 被添加到 NSOperationQueue 中之后，队列会按优先级和进入顺序调度任务，NSOperation 对象会被自动执行。</p>
+
+<p> 仍然使用上一节 NSThread 中的模拟两人抢面包的例子。由于计算任务没有变化，所以 run 方法并不改变。但这里需要使用 NSOperation 和 NSOperationQueue 来代表两个抢面包的人，并给予他们不同的优先级。由于 NSOperation 也不处理线程间同步问题，所以你仍然需要一把在run 方法中会用到的线程锁：</p>
+
+<p> _lock = [[NSLock alloc] init];</p>
+
+<p> </p>
+
+<p> NSInvocationOperation *geroge = [[NSInvocationOperation alloc]initWithTarget:self</p>
+
+<p> selector:@selector(run:)  object:@&ldquo;Geroge&rdquo;];</p>
+
+<p> geroge.queuePriority = NSOperationQueuePriorityHigh;</p>
+
+<p> </p>
+
+<p> NSInvocationOperation *operationTwo = [[NSInvocationOperation alloc]initWithTarget:self</p>
+
+<p> selector:@selector(run:) object:@&ldquo;Totty&rdquo;];</p>
+
+<p> totty.queuePriority = NSOperationQueuePriorityLow;</p>
+
+<p> </p>
+
+<p> NSOperationQueue *queue = [[NSOperationQueue alloc] init];</p>
+
+<p> [queue setMaxConcurrentOperationCount:2];</p>
+
+<p> [queue addOperation:geroge];</p>
+
+<p> [queue addOperation:totty];</p>
+
+<p> NSOperation 提供以下任务优先级，以这些优先级设置变量 queuePriority 即可加快或者推迟操作的执行：</p>
+
+<p> * NSOperationQueuePriorityVeryHigh</p>
+
+<p> * NSOperationQueuePriorityHigh</p>
+
+<p> * NSOperationQueuePriorityNormal</p>
+
+<p> * NSOperationQueuePriorityLow</p>
+
+<p> * NSOperationQueuePriorityVeryLow</p>
+
+<p> NSOperation 使用状态机模型来表示状态。通常，你可以使用 KVO（Key-Value Observing）观察任务的执行状态。这是其他多线程工具所不具备的功能。NSOperation 提供以下状态：</p>
+
+<p> * isReady</p>
+
+<p> * isExecuting</p>
+
+<p> * isFinished</p>
+
+<p> NSOperation 对象之间的依赖性可以用如下代码表示：</p>
+
+<p> [refreshUIOperation addDependency:requestDataOperation];</p>
+
+<p> [operationQueue addOperation:requestDataOperation];</p>
+
+<p> [operationQueue addOperation:refreshUIOperation];</p>
+
+<p> 除非 requestDataOperation 的状态 isFinished 返回 YES，不然 refreshUIOperation 这个操作不会开始。</p>
+
+<p> NSOperation 还有一个非常有用功能，就是“取消”。这是其他多线程工具（包括后面要讲到的 GCD）都没有的。调用 NSOperation 的    cancel: 方法即可取消该任务。当你知道这个任务没有必要再执行下去时，尽早安全地取消它将有利于节省系统资源。</p>
+
+  </div>
+
+

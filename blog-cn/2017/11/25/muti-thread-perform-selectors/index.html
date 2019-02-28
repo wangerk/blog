@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>多线程技术之performSelectors</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>多线程技术之performSelectors</h2>
+        <p>NSObject 提供了以 performSelector 为前缀的一系列方法。它们可以让用户在指定线程中，或者立即，或者延迟执行某个方法调用。这个方法给了用户实现多线程编程最简单的方法。</p>
+
+<p>下面有一些例子：</p>
+
+<p> 1.在当前线程中执行方法：</p>
+
+<p>   - (void)performSelector:(SEL)aSelector withObject:(id)anArgument</p>
+
+<p> afterDelay:(NSTimeInterval)delay</p>
+
+<p>   - (void)performSelector:(SEL)aSelector withObject:(id)anArgument afterDelay:</p>
+
+<p> (NSTimeInterval)delay inModes:(NSArray *)modes</p>
+
+<p> 2.在指定线程中执行方法：</p>
+
+<p>   - (void)performSelector:(SEL)aSelector onThread:(NSThread *)thread</p>
+
+<p> withObject:(id)arg waitUntilDone:(BOOL)wait</p>
+
+<p> </p>
+
+<p>   - (void)performSelector:(SEL)aSelector onThread:(NSThread *)thread withObject:</p>
+
+<p> (id)arg waitUntilDone:(BOOL)wait modes:(NSArray *)array</p>
+
+<p> 3.在主线程中执行方法：</p>
+
+<p>   - (void)performSelectorOnMainThread: (SEL)selector withObject:(id)argument</p>
+
+<p> waitUntilDone:(BOOL)wait</p>
+
+<p>   - (void)performSelectorOnMainThread:(SEL)aSelector withObject:(id)arg</p>
+
+<p> waitUntilDone:(BOOL)wait modes:(NSArray *)array</p>
+
+<p> 4.在后台线程中执行方法：</p>
+
+<p>   - (void)performSelectorInBackground:(SEL)aSelector withObject:(id)arg</p>
+
+<p> 这一系列方法简单易用，但只提供了有限的几个选择：指定执行的方法（但传入方法的参数数量有限制）；指定是在当前线程，还是在主线程，还是在后台线程执行；指定是否需要阻塞当前线程等待结果。</p>
+
+<p> 例如，以下代码使得方法 foo: 在一个新的后台线程执行，并传入了 object 参数：</p>
+
+<p> SEL selector ＝ @selector(foo:);</p>
+
+<p> [self performSelectorInBackground:selector withObject:object];</p>
+
+<p> 以下代码使得 updateUI 方法在主线程内得到执行，并且当前线程会被阻塞，直到主线程执行完该函数：</p>
+
+<p> [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:YES];</p>
+
+  </div>
+
+

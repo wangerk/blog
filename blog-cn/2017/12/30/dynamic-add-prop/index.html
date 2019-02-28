@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>Runtime动态添加属性</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>Runtime动态添加属性</h2>
+        
+
+<h3 id="一-概念">一、概念</h3>
+
+<blockquote>
+<p>  1.runtime：动态添加属性:什么时候需要动态添加属性;<br />
+  2.开发场景：给系统的类添加属性的时候,可以使用runtime动态添加属性方法;<br />
+  3.本质:动态添加属性,就是让某个属性与对象产生关联。runtime一般都是针对系统的类;<br />
+  4.在分类中利用runtime动态添加属性;</p>
+</blockquote>
+
+<p><img src="../1.png" alt="" /></p>
+
+<h3 id="二-代码实现">二、代码实现</h3>
+
+<blockquote>
+<p>1.控制器代码:</p>
+</blockquote>
+
+<pre><code>//  Created by  on 2017/12/29.
+ 
+//  Copyright © 2017年 wangerk. All rights reserved.
+ 
+//
+ 
+ 
+#import &quot;SHAddAttributesViewController.h&quot;
+@interface SHAddAttributesViewController ()
+@end
+ 
+ 
+@implementation SHAddAttributesViewController
+ 
+- (void)viewDidLoad {
+ 
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor orangeColor];
+    //给系统NSObject类动态添加属性name
+ 
+    NSObject *objc = [[NSObject alloc] init];
+    objc.name = @&quot;123&quot;;
+    NSLog(@&quot;objc.name = %@&quot;,objc.name);
+}
+ 
+@end
+</code></pre>
+
+<blockquote>
+<p>2.分类代码</p>
+</blockquote>
+
+<pre><code>//  Created by  on 2017/12/29.
+ 
+//  Copyright © 2017年 wangerk. All rights reserved.
+ 
+//
+ 
+ 
+#import &quot;NSObject+Property.h&quot;
+#import &lt;objc/message.h&gt;
+ 
+// 定义关联的key
+static const char *key = &quot;name&quot;;
+ 
+@implementation NSObject (Property)
+ 
+- (void)setName:(NSString *)name{
+ 
+    // 让这个字符串与当前对象产生联系
+    // _name = name;
+ 
+    // object:给哪个对象添加属性
+ 
+    // key:属性名称
+ 
+    // value:属性值
+ 
+    // policy:保存策略
+ 
+    objc_setAssociatedObject(self, key, name, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    //objc_setAssociatedObject(self, @&quot;name&quot;, name, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+ 
+}
+ 
+ 
+- (NSString *)name{
+ 
+    // 根据关联的key，获取关联的值。
+    return objc_getAssociatedObject(self, key);
+    //return objc_getAssociatedObject(self, @&quot;name&quot;);
+ 
+}
+ 
+@end
+</code></pre>
+
+  </div>
+
+

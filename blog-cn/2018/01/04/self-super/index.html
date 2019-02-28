@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>self,super底层实现原理</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>self,super底层实现原理</h2>
+        <p>一、 self和super区别</p>
+
+<p> 1. self是类，super是预编译指令</p>
+
+<p> 2. self调用自己方法，super调用父类方法</p>
+
+<p> 3.【self class】和【super class】输出是一样的</p>
+
+<p>二、self和super底层实现原理</p>
+
+<p> 1、当使用 self 调用方法时，会从当前类的方法列表中开始找，如果没有，就从父类中再找；</p>
+
+<p>    当使用 super 时，则从父类的方法列表中开始找，然后调用父类的这个方法。</p>
+
+<p> 2、当使用 self 调用时，会使用 objc_msgSend 函数：id objc_msgSend(id theReceiver,SEL theSelector, &hellip;)。</p>
+
+<p>    第一个参数是消息接收者，</p>
+
+<p>    第二个参数是调用的具体类方法的 selector，</p>
+
+<p>    第三个参数是 selector 方法的可变参数。</p>
+
+<p> 2、2例子:[self setAge:]</p>
+
+<p>    a:编译器会替换成调用 objc_msgSend 的函数调用，</p>
+
+<p>    b:其中 theReceiver 是 self，theSelector 是@selector(setAge:)，这个 selector 是从当前 self 的 class 的方法列表开始找的 setAge，</p>
+
+<p>    c:当找到后把对应的 selector 传递过去。</p>
+
+<p> 3、当使用 super 调用时，会使用 objc_msgSendSuper 函数：id objc_msgSendSuper(struct objc_super *super,SEL op, &hellip;)</p>
+
+<p>    第一个参数是个objc_super的结构体，</p>
+
+<p>    第二个参数还是类似上面的类方法的selector，</p>
+
+<p>    struct objc_super {</p>
+
+<p>           id receiver;</p>
+
+<p>           Class superClass;</p>
+
+<p>    };</p>
+
+<p> 4、当编译器遇到 [super setAge:] 时，执行顺序:</p>
+
+<p>   1）构 建 objc_super 的结构体，此时这个结构体的第一个成员变量 receiver 就是 子类，和self 相同。而第二个成员变量 superClass 就是指父类调用 objc_msgSendSuper 的方法，将这个结构体和 setName 的 sel 传递过去。</p>
+
+<p>   2）函数里面在做的事情类似这样：从 objc_super 结构体指向的 superClass 的方法列表开始找 setAge 的 selector，找到后再以 objc_super-&gt;receiver 去调用这个 selector</p>
+
+  </div>
+
+

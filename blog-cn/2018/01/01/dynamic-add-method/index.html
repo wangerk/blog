@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>Runtime动态添加方法</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>Runtime动态添加方法</h2>
+        
+
+<h3 id="一-概念">一、概念</h3>
+
+<blockquote>
+<p><strong>1.动态添加方法</strong><br />
+  开发使用场景：如果一个类方法非常多，加载类到内存的时候也比较耗费资源，需要给每个方法生成映射表，可以使用动态给某个类，添加方法解决。</p>
+</blockquote>
+
+<p>.</p>
+
+<blockquote>
+<p><strong>2.效果图:</strong></p>
+</blockquote>
+
+<p><img src="../1.png" alt="" /></p>
+
+<h3 id="二-代码实现">二、代码实现</h3>
+
+<blockquote>
+<p>1.控制器代码:</p>
+</blockquote>
+
+<pre><code>#pragma mark -动态添加方法
+ 
+#pragma mark ------------------
+ 
+- (void)addMethods{
+ 
+    SHPerson *person = [[SHPerson alloc] init];
+    //默认person，没有实现eat方法，可以通过performSelector调用，但是会报错。
+    //动态添加方法就不会报错
+    [person performSelector:@selector(eat)];
+}
+ 
+- (void)addMethods2{
+ 
+    SHPerson2 *person = [[SHPerson2 alloc] init];
+    [person performSelector:@selector(writeCode:) withObject:@100]; 
+}
+</code></pre>
+
+<blockquote>
+<p>2.分类代码</p>
+</blockquote>
+
+<pre><code>#import &quot;SHPerson2.h&quot;
+#import &lt;objc/message.h&gt;
+ 
+@implementation SHPerson2
+ 
+void  effect(id self, SEL _cmd, NSNumber *meter) {  
+    NSLog(@&quot; effect ==&gt; %@&quot;, meter);
+}
+ 
++ (BOOL)resolveInstanceMethod:(SEL)sel{
+ 
+    if (sel == NSSelectorFromString(@&quot;writeCode:&quot;)) {
+        // class: 给哪个类添加方法
+        // SEL: 添加哪个方法
+        // IMP: 方法实现 =&gt; 函数 =&gt; 函数入口 =&gt; 函数名
+        // type: 方法类型：void用v来表示，id参数用@来表示，SEL用:来表示
+        //aaa不会生成方法列表
+        class_addMethod(self, sel, (IMP) effect, &quot;v@:@&quot;);
+        return YES;
+    }
+    return [super resolveInstanceMethod:sel];
+}
+@end
+</code></pre>
+
+<blockquote>
+<p>3.调试中效果图:</p>
+</blockquote>
+
+<p><img src="../2.png" alt="" /></p>
+
+  </div>
+
+

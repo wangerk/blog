@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>当然我在扯淡</title>
-    <link>http://wangerk.com/</link>
+    <link>update/</link>
     <description>Recent content on 当然我在扯淡</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 18 Feb 2019 20:55:53 +0800</lastBuildDate>
     
-	<atom:link href="http://wangerk.com/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="update/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>JAVA技术栈</title>
-      <link>http://wangerk.com/blog-cn/java/to-be-top-javaer/</link>
+      <link>update/blog-cn/java/to-be-top-javaer/</link>
       <pubDate>Mon, 18 Feb 2019 20:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/java/to-be-top-javaer/</guid>
+      <guid>update/blog-cn/java/to-be-top-javaer/</guid>
       <description>目录： 《基础篇》JVM——JVM内存结构
 《基础篇》JVM——Java内存模型
 《基础篇》JVM——Java对象模型
@@ -46,19 +46,19 @@
     
     <item>
       <title>Mac OS X常见设置</title>
-      <link>http://wangerk.com/blog-cn/2019/02/16/setting/</link>
+      <link>update/blog-cn/2019/02/16/setting/</link>
       <pubDate>Sat, 16 Feb 2019 08:57:08 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2019/02/16/setting/</guid>
+      <guid>update/blog-cn/2019/02/16/setting/</guid>
       <description>本小节知识点:  【理解】查看本机配置 【理解】系统开/关机 【理解】键盘设置 【理解】鼠标设置 【理解】网络设置  1.查看本机配置  点击屏幕左上角的黑色苹果   点击&amp;rdquo;关于本机&amp;rdquo;  2.系统开/关机  点击屏幕左上角的黑色苹果 选择&amp;rdquo;睡眠&amp;rdquo; or &amp;ldquo;重新启动&amp;rdquo; or &amp;ldquo;关机&amp;rdquo;   关机快捷键  command + option + control + △   3.键盘设置  点击屏幕左上角的黑色苹果 点击&amp;rdquo;系统偏好设置&amp;rdquo;   选择&amp;rdquo;键盘&amp;rdquo;   设置输入法  4.鼠标设置  查找鼠标   注意, 如果找不到需要关闭鼠标后重新打开   找到后点击继续   看到此图代表鼠标连接成功, 鼠标只需要配对一次, 以后系统会自动配对   注意默认情况下Mac系统不会像windows一样开启鼠标右键, 需要我们手动开启  5.网络设置  点击屏幕左上角的黑色苹果 点击&amp;rdquo;系统偏好设置&amp;rdquo;   选择&amp;rdquo;网络&amp;rdquo;   自动获取IP的方式上网   手动设置IP的方式上网  （本文建议零售价 ￥1，如果你觉得这篇文章有启发，可以点击这里付费)</description>
     </item>
     
     <item>
       <title>Java内存模型</title>
-      <link>http://wangerk.com/basics/jvm/java-memory-model/</link>
+      <link>update/basics/jvm/java-memory-model/</link>
       <pubDate>Fri, 15 Feb 2019 20:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/basics/jvm/java-memory-model/</guid>
+      <guid>update/basics/jvm/java-memory-model/</guid>
       <description>本文是《JAVA技术栈系列文章》中的一篇，主要是关于JVM的一些介绍。
 持续更新中
  Java内存模型 JVM内存结构 VS Java内存模型 VS Java对象模型(Hollis原创)
@@ -79,10 +79,10 @@ Java 理论与实践: 修复 Java 内存模型，第 2 部分（拓展阅读）<
     
     <item>
       <title>Java内存模型，Java内存管理，Java堆和栈，垃圾回收</title>
-      <link>http://wangerk.com/basics/jvm/jvm-memory-structure/</link>
+      <link>update/basics/jvm/jvm-memory-structure/</link>
       <pubDate>Fri, 15 Feb 2019 20:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/basics/jvm/jvm-memory-structure/</guid>
+      <guid>update/basics/jvm/jvm-memory-structure/</guid>
       <description>本文是《JAVA技术栈系列文章》中的一篇，主要是关于JVM的一些介绍。
 持续更新中
  参考文章：
@@ -97,10 +97,10 @@ JVM内存结构 VS Java内存模型 VS Java对象模型
     
     <item>
       <title>Java对象模型</title>
-      <link>http://wangerk.com/basics/jvm/java-object-model/</link>
+      <link>update/basics/jvm/java-object-model/</link>
       <pubDate>Fri, 15 Feb 2019 20:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/basics/jvm/java-object-model/</guid>
+      <guid>update/basics/jvm/java-object-model/</guid>
       <description>本文是《JAVA技术栈系列文章》中的一篇，主要是关于JVM的一些介绍。
 持续更新中
  JVM内存结构 VS Java内存模型 VS Java对象模型
@@ -110,29 +110,29 @@ JVM内存结构 VS Java内存模型 VS Java对象模型
     
     <item>
       <title>博文的自愿付费方式</title>
-      <link>http://wangerk.com/reward/pay-blog/</link>
+      <link>update/reward/pay-blog/</link>
       <pubDate>Fri, 15 Feb 2019 20:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/reward/pay-blog/</guid>
+      <guid>update/reward/pay-blog/</guid>
       <description>喜欢我的文章的人，可以自愿付费购买。你可以使用以下方式付款。
  支付宝：  微信：  PayPal：请点击[付款链接]  </description>
     </item>
     
     <item>
       <title>交易支付密码UI</title>
-      <link>http://wangerk.com/blog-cn/2018/11/30/pay-password/</link>
+      <link>update/blog-cn/2018/11/30/pay-password/</link>
       <pubDate>Fri, 30 Nov 2018 21:56:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2018/11/30/pay-password/</guid>
+      <guid>update/blog-cn/2018/11/30/pay-password/</guid>
       <description>概念  一行代码实现  ///MARK:- 实例化一个密码 显示view -(void)addPasswordTextView:(CGRect)frame { _passwordTextView = [[SHPasswordTextView alloc]initWithFrame:frame count:6 margin:20 passwordFont:50 forType:SHPasswordTextTypeRectangle block:^(NSString * _Nonnull passwordStr) { NSLog(@&amp;quot;passwordStr == %@&amp;quot;,passwordStr); }]; //_passwordTextView.passwordSecureEntry = YES;//安全密码 [self.view addSubview:_passwordTextView]; }   选择样式  //提供5种样式展示 typedef NS_ENUM(NSInteger, SHPasswordTextType){ SHPasswordTextTypeNormal = 1 &amp;lt;&amp;lt; 0, /**默认 __*/ SHPasswordTextTypeAnimation_line = 1 &amp;lt;&amp;lt; 1, /**line动画__*/ SHPasswordTextTypeAnimation_font = 1 &amp;lt;&amp;lt; 2, /**字体动画__*/ SHPasswordTextTypeAnimation_lineAndFont = 1 &amp;lt;&amp;lt; 3, /**line和字体动画__*/ SHPasswordTextTypeRectangle = 1 &amp;lt;&amp;lt; 4 /**方块形☐☐*/ };  效果  矩形输入密码图:  安全输入密码图:  带有动画输入支付密码图:   下载demo https://gitee.</description>
     </item>
     
     <item>
       <title>AppStore申请加急审核及Apple联系方式大全</title>
-      <link>http://wangerk.com/blog-cn/2018/11/19/appstore-accelerate/</link>
+      <link>update/blog-cn/2018/11/19/appstore-accelerate/</link>
       <pubDate>Mon, 19 Nov 2018 15:24:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2018/11/19/appstore-accelerate/</guid>
+      <guid>update/blog-cn/2018/11/19/appstore-accelerate/</guid>
       <description> 一、概念  1.直接提交申诉理由 (里面还有一起其他功能 如申请加急审核等.)
 https://developer.apple.com/contact/app-store/?topic=appeal
 2.开发问题, 貌似也可以问一些审核问题
@@ -155,10 +155,10 @@ https://developer.apple.com/contact/phone.php
     
     <item>
       <title>同步锁原理合集</title>
-      <link>http://wangerk.com/blog-cn/2018/11/14/lock/</link>
+      <link>update/blog-cn/2018/11/14/lock/</link>
       <pubDate>Wed, 14 Nov 2018 20:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2018/11/14/lock/</guid>
+      <guid>update/blog-cn/2018/11/14/lock/</guid>
       <description>一、概念  我们在使用多线程的时候多个线程可能会访问同一块资源，这样就很容易引发数据错乱和数据安全等问题，这时候就需要我们保证每次只有一个线程访问这一块资源，锁 应运而生。
  不同锁的效率比较: 二、锁🔐锁 OSSpinLock (自旋锁)  自旋锁的实现原理比较简单，就是死循环。当a线程获得锁以后，b线程想要获取锁就需要等待a线程释放锁。在没有获得锁的期间，b线程会一直处于忙等的状态。如果a线程在临界区的执行时间过长，则b线程会消耗大量的cpu时间，不太划算。所以，自旋锁用在临界区执行时间比较短的环境性能会很高。
  注:苹果爸爸已经在iOS10.0以后废弃了这种锁机制,使用os_unfair_lock 替换, 顾名思义能够保证不同优先级的线程申请锁的时候不会发生优先级反转问题.
@@ -173,10 +173,10 @@ os_unfair_lock(自旋锁)  注:解决不同优先级的线程申请锁的时候�
     
     <item>
       <title>HOOK技术</title>
-      <link>http://wangerk.com/blog-cn/2018/10/29/hook/</link>
+      <link>update/blog-cn/2018/10/29/hook/</link>
       <pubDate>Mon, 29 Oct 2018 19:39:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2018/10/29/hook/</guid>
+      <guid>update/blog-cn/2018/10/29/hook/</guid>
       <description> 一、概念  HOOK，中文译为“挂钩”或“钩子”。在iOS逆向中是指改变程序运行流程的一种技术。通过hook可以让别人的程序执行自己所写的代码。在逆向中经常使用这种技术。所以在学习过程中，我们重点要了解其原理，这样能够对恶意代码进行有效的防护。
  二、iOS中HOOK技术的几种方式  Method Swizzle
 利用OC的Runtime特性，动态改变SEL（方法编号）和IMP（方法实现）的对应关系，达到OC方法调用流程改变的目的。主要用于OC方法。
@@ -190,10 +190,10 @@ os_unfair_lock(自旋锁)  注:解决不同优先级的线程申请锁的时候�
     
     <item>
       <title>Xcode10升级项目报错解决方法</title>
-      <link>http://wangerk.com/blog-cn/2018/10/10/xcode10/</link>
+      <link>update/blog-cn/2018/10/10/xcode10/</link>
       <pubDate>Wed, 10 Oct 2018 20:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2018/10/10/xcode10/</guid>
+      <guid>update/blog-cn/2018/10/10/xcode10/</guid>
       <description>一、概念  Xcode10新特性
  图1: 图2: 二、问题directory not found for option  1.iOS &amp;ldquo;directory not found for option &amp;lsquo;-L/Users/&amp;hellip;/Pods/build/Debug-iphoneos/…“解决方案
  图3:编译错误  2.解决方案:
@@ -207,10 +207,10 @@ os_unfair_lock(自旋锁)  注:解决不同优先级的线程申请锁的时候�
     
     <item>
       <title>AppStore上传项目报隐私政策网址(URL)错误</title>
-      <link>http://wangerk.com/blog-cn/2018/10/09/privacy/</link>
+      <link>update/blog-cn/2018/10/09/privacy/</link>
       <pubDate>Tue, 09 Oct 2018 20:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2018/10/09/privacy/</guid>
+      <guid>update/blog-cn/2018/10/09/privacy/</guid>
       <description> 一、概念  问题：使用权限 [ com.apple.developer.in-app-payments] 的 App 必须为[Simplified Chinese]提供隐私政策网址(URL)。如果您的 App 不使用这些权限，请将它们从您的 App 中移除并上传新的二进制文件。
  二、问题展示 图1:  关键是：隐私政策网址(URL)！！！
 在构建APP版本的时候需要你提供政策网址URL，而这个是非必填的；
@@ -222,10 +222,10 @@ os_unfair_lock(自旋锁)  注:解决不同优先级的线程申请锁的时候�
     
     <item>
       <title>iOS连接外设的几种方式</title>
-      <link>http://wangerk.com/blog-cn/2018/09/21/ios-connection/</link>
+      <link>update/blog-cn/2018/09/21/ios-connection/</link>
       <pubDate>Fri, 21 Sep 2018 20:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2018/09/21/ios-connection/</guid>
+      <guid>update/blog-cn/2018/09/21/ios-connection/</guid>
       <description> 一、概念  一般iOS开发者做APP开发大部分时候都是通过Http(s)请求跟后台服务器打交道，做一些信息展示和用户交互。很少涉及到去跟外部硬件设备连接的开发。随着近年来车联网和物联网的兴起，智能家居和智能硬件的逐步火热，越来越多的app被开发出来，用来跟硬件设备进行来连接，获取硬件相关信息展示或者发送指令控制硬件来提供服务。故本文就针对iOS的app如何跟外部设备进行连接通信这个问题跟大家交流一下。本文原创，欢迎转载，转载请注明出处，如有不正确的地方恳请各位看官指正。
  可以分为三大类：  第一类是通过网络端口，建立Socket使用TCP/IP协议族进行通信，天然支持多通道，想要几个通道就建几个socket就行了。它主要有三种方式，第一种方式是Wi-Fi连接，优点是：简单，不需要集成MFi芯片，只要对应的硬件有无线网卡，然后手机和硬件连接到同一个局域网中就可以使用socket通过网络协议通信了。缺点也很明显：
 （1)无线连接信号容易受到干扰，不太稳定，容易断开；
@@ -251,28 +251,28 @@ os_unfair_lock(自旋锁)  注:解决不同优先级的线程申请锁的时候�
     
     <item>
       <title>监听应用程序被杀死</title>
-      <link>http://wangerk.com/blog-cn/2018/09/16/observe-dead/</link>
+      <link>update/blog-cn/2018/09/16/observe-dead/</link>
       <pubDate>Sun, 16 Sep 2018 20:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2018/09/16/observe-dead/</guid>
+      <guid>update/blog-cn/2018/09/16/observe-dead/</guid>
       <description> 监听应用进入后台 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sh_comeHome:) name:@&amp;quot;UIApplicationDidEnterBackgroundNotification&amp;quot; object:nil];  (void)sh_comeHome:(UIApplication *)application { NSLog(@&amp;quot;进入后台&amp;quot;); }  监听应用程序被杀死 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate:) name:@&amp;quot;UIApplicationWillTerminateNotification&amp;quot; object:nil];  (void)applicationWillTerminate:(UIApplication *)application { NSLog(@&amp;quot;程序被杀死&amp;quot;); }  </description>
     </item>
     
     <item>
       <title>获取手机的IP地址(内网与外网)</title>
-      <link>http://wangerk.com/blog-cn/2018/09/13/get-ip/</link>
+      <link>update/blog-cn/2018/09/13/get-ip/</link>
       <pubDate>Thu, 13 Sep 2018 20:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2018/09/13/get-ip/</guid>
+      <guid>update/blog-cn/2018/09/13/get-ip/</guid>
       <description>获取内网IP #import &amp;lt;ifaddrs.h&amp;gt; #import &amp;lt;arpa/inet.h&amp;gt; #import &amp;lt;net/if.h&amp;gt; #define IOS_CELLULAR @&amp;quot;pdp_ip0&amp;quot; #define IOS_WIFI @&amp;quot;en0&amp;quot; #define IOS_VPN @&amp;quot;utun0&amp;quot; #define IP_ADDR_IPv4 @&amp;quot;ipv4&amp;quot; #define IP_ADDR_IPv6 @&amp;quot;ipv6&amp;quot; #pragma mark - 获取设备当前网络IP地址 + (NSString *)getIPAddress:(BOOL)preferIPv4 { NSArray *searchArray = preferIPv4 ? @[ IOS_VPN @&amp;quot;/&amp;quot; IP_ADDR_IPv4, IOS_VPN @&amp;quot;/&amp;quot; IP_ADDR_IPv6, IOS_WIFI @&amp;quot;/&amp;quot; IP_ADDR_IPv4, IOS_WIFI @&amp;quot;/&amp;quot; IP_ADDR_IPv6, IOS_CELLULAR @&amp;quot;/&amp;quot; IP_ADDR_IPv4, IOS_CELLULAR @&amp;quot;/&amp;quot; IP_ADDR_IPv6 ] : @[ IOS_VPN @&amp;quot;/&amp;quot; IP_ADDR_IPv6, IOS_VPN @&amp;quot;/&amp;quot; IP_ADDR_IPv4, IOS_WIFI @&amp;quot;/&amp;quot; IP_ADDR_IPv6, IOS_WIFI @&amp;quot;/&amp;quot; IP_ADDR_IPv4, IOS_CELLULAR @&amp;quot;/&amp;quot; IP_ADDR_IPv6, IOS_CELLULAR @&amp;quot;/&amp;quot; IP_ADDR_IPv4 ] ; NSDictionary *addresses = [self getIPAddresses]; NSLog(@&amp;quot;addresses: %@&amp;quot;, addresses); __block NSString *address; [searchArray enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop) { address = addresses[key]; //筛选出IP地址格式 if([self isValidatIP:address]) *stop = YES; } ]; return address ?</description>
     </item>
     
     <item>
       <title>项目架构模式(MVC、MVVM、MVCS、VIPER的选择)</title>
-      <link>http://wangerk.com/blog-cn/2018/09/12/architecture/</link>
+      <link>update/blog-cn/2018/09/12/architecture/</link>
       <pubDate>Wed, 12 Sep 2018 20:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2018/09/12/architecture/</guid>
+      <guid>update/blog-cn/2018/09/12/architecture/</guid>
       <description>一、概念 没有最好的架构，只有适合自己的业务的架构才是最好的架构，并且它是逐步地变强变大。
 架构，又名软件架构，是有关软件整体结构与组件的抽象描述，用于指导大型软件系统各个方面的设计。
 二、iOS的系统架构分为四个层次： 核心操作系统层（Core OS layer）、核心服务层（Core Services layer）、媒体层（Media layer）和可触摸层（Cocoa Touch layer）。下面是IOS系统结构图。 1、Core OS是位于iOS系统架构最下面的一层是核心操作系统层，它包括内存管理、文件系统、电源管理以及一些其他的操作系统任务。它可以直接和硬件设备进行交互。作为app开发者不需要与这一层打交道。
@@ -301,28 +301,59 @@ View层的代码结构规范 制定代码规范严格来讲不属于View层架�
     
     <item>
       <title>让UIView和UIButton的左上角和右上角为圆角</title>
-      <link>http://wangerk.com/blog-cn/2018/08/26/border-radius/</link>
+      <link>update/blog-cn/2018/08/26/border-radius/</link>
       <pubDate>Sun, 26 Aug 2018 20:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2018/08/26/border-radius/</guid>
+      <guid>update/blog-cn/2018/08/26/border-radius/</guid>
       <description>UIView 的左上角和右上角为圆角 -(UIView *)platFormRadiusView{ if (!_platFormRadiusView) { _platFormRadiusView = [[UIView alloc] init]; _platFormRadiusView.backgroundColor = [UIColor redColor]; _platFormRadiusView.frame = CGRectMake(0, 100,self.view.frame.size.width , 200); [self.view addSubview:_platFormRadiusView]; // 左上和右上为圆角 UIBezierPath *cornerRadiusPath = [UIBezierPath bezierPathWithRoundedRect:_platFormRadiusView.bounds byRoundingCorners:UIRectCornerTopRight | UIRectCornerTopLeft cornerRadii:CGSizeMake(15, 15)]; CAShapeLayer *cornerRadiusLayer = [ [CAShapeLayer alloc ] init]; cornerRadiusLayer.frame = _platFormRadiusView.bounds; cornerRadiusLayer.path = cornerRadiusPath.CGPath; _platFormRadiusView.layer.mask = cornerRadiusLayer; } return _platFormRadiusView; }  UIButton 的左上角和右上角为圆角 -(void)platFormRadiusButton{ UIButton *shButton = [UIButton buttonWithType:UIButtonTypeCustom]; shButton.frame = CGRectMake(0, 100, self.</description>
     </item>
     
     <item>
       <title>返回到任意界面(控制器)</title>
-      <link>http://wangerk.com/blog-cn/2018/08/25/to-any-controller/</link>
+      <link>update/blog-cn/2018/08/25/to-any-controller/</link>
       <pubDate>Sat, 25 Aug 2018 20:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2018/08/25/to-any-controller/</guid>
+      <guid>update/blog-cn/2018/08/25/to-any-controller/</guid>
       <description>方式一:根据指定的类名返回  for (UIViewController *controller in self.navigationController.viewControllers) { if ([controller isKindOfClass:[要返回的类名 class]]) { [self.navigationController popToViewController:controller animated:YES]; } }  方式二:根据栈的索引返回  NSArray *temArray = self.navigationController.viewControllers; [self.navigationController popToViewController:[temArray objectAtIndex:1] animated:YES]; 打印: Printing description of temArray: &amp;lt;__NSArrayI 0x1054a20c0&amp;gt;( &amp;lt;MeasureVC: 0x10183f800&amp;gt;, &amp;lt;SHAskDoctorViewController: 0x104791c40&amp;gt;, &amp;lt;SHChooseDoctorViewController: 0x1047b8170&amp;gt;, &amp;lt;SHDoctorVisitsViewController: 0x10af7d640&amp;gt;, &amp;lt;SHMicroLetterPayViewController: 0x10bf26430&amp;gt; )  方式三:类似方式一,推荐使用方式一  NSArray *temArray = self.navigationController.viewControllers; SHSpecialHistoryViewController *test = [[SHSpecialHistoryViewController alloc] init]; for(UIViewController *temVC in temArray){ if([temVC isKindOfClass:[test class]]) { [self.navigationController popToViewController:temVC animated:YES]; } }  方式四:修改rootViewController  AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].</description>
     </item>
     
     <item>
+      <title>weakSelf与宏</title>
+      <link>update/blog-cn/2018/02/15/weak-self/</link>
+      <pubDate>Thu, 15 Feb 2018 20:55:53 +0800</pubDate>
+      
+      <guid>update/blog-cn/2018/02/15/weak-self/</guid>
+      <description>1.防止如block的循环引用时，会使用__weak关键字做如下定义：
+__weak typeof(self) weakSelf = self;
+使用: [weakSelf addSubViews];
+2.写成宏的方法:
+#define WeakSelf __weak typeof(self) weakSelf = self;
+使用: [WeakSelf addSubViews];
+3.宏的优化,让部分的变量也可以使用weak
+#define WeakObj(o) __weak typeof(o) o##Weak = o;
+使用: WeakObj(self)
+[selfWeak addSubViews];
+4.利用了@autoreleasepool{}这个系统的关键字来实现,添加了@符号在前面,看起来更原生
+#define WeakObj(o) autoreleasepool{} __weak typeof(o) o##Weak = o;
+使用:
+@WeakObj(self)
+[selfWeak addSubViews];
+5.利用了try{}@finally{}这个系统的关键字来实现,添加了@符号在前面,看起来更原生
+#define WeakObj(o) try{}@finally{} __weak typeof(o) o##Weak = o;
+使用:
+@WeakObj(self)
+[selfWeak addSubViews];
+注意:
+1.这部分空的@try或者空的@autoreleasepool会在编译时被优化掉，不必担心性能问题。
+2.实际开发中常用3条和5条的定义方式</description>
+    </item>
+    
+    <item>
       <title>OC中分类Category实现原理</title>
-      <link>http://wangerk.com/blog-cn/2018/01/31/category/</link>
+      <link>update/blog-cn/2018/01/31/category/</link>
       <pubDate>Wed, 31 Jan 2018 20:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2018/01/31/category/</guid>
+      <guid>update/blog-cn/2018/01/31/category/</guid>
       <description>一、概念 1.前言
 category是Objective-C 2.0之后添加的语言特性，
 category的主要作用是为已经存在的类添加方法。
@@ -349,10 +380,10 @@ struct category_t { const char *name; //类的名字（name） classref_t 
     
     <item>
       <title>组件化</title>
-      <link>http://wangerk.com/blog-cn/2018/01/15/components/</link>
+      <link>update/blog-cn/2018/01/15/components/</link>
       <pubDate>Mon, 15 Jan 2018 20:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2018/01/15/components/</guid>
+      <guid>update/blog-cn/2018/01/15/components/</guid>
       <description>一、概念 1.为什么要组件化？
  * 组件和组件之间没有明确的约束；
  * 组件单独开发、单独测试，不能揉入主项目中开发，测试也可以针对性的测试；
@@ -380,10 +411,10 @@ struct category_t { const char *name; //类的名字（name） classref_t 
     
     <item>
       <title>SEL存储位置、原理</title>
-      <link>http://wangerk.com/blog-cn/2018/01/14/sel/</link>
+      <link>update/blog-cn/2018/01/14/sel/</link>
       <pubDate>Sun, 14 Jan 2018 20:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2018/01/14/sel/</guid>
+      <guid>update/blog-cn/2018/01/14/sel/</guid>
       <description>一、概念 1.SEL类型是OC中用来定义方法的关键字，和其他语言不同的是SEL类型虽然是方法定义，但却不从属于任何类实例，其值是通过@selector进行计算，可以把它当做一个函数指针来使用，当然它实际上并不是一个函数指针，而是const char*。
 2.SEL类型可以在编译时通过@selector()直接创建，也可以用NSSelectorFromString()函数创建，这个函数允许你通过名字调用方法。
  例如：
@@ -402,11 +433,409 @@ struct category_t { const char *name; //类的名字（name） classref_t 
     </item>
     
     <item>
+      <title>self,super底层实现原理</title>
+      <link>update/blog-cn/2018/01/04/self-super/</link>
+      <pubDate>Thu, 04 Jan 2018 20:55:53 +0800</pubDate>
+      
+      <guid>update/blog-cn/2018/01/04/self-super/</guid>
+      <description>一、 self和super区别
+ 1. self是类，super是预编译指令
+ 2. self调用自己方法，super调用父类方法
+ 3.【self class】和【super class】输出是一样的
+二、self和super底层实现原理
+ 1、当使用 self 调用方法时，会从当前类的方法列表中开始找，如果没有，就从父类中再找；
+ 当使用 super 时，则从父类的方法列表中开始找，然后调用父类的这个方法。
+ 2、当使用 self 调用时，会使用 objc_msgSend 函数：id objc_msgSend(id theReceiver,SEL theSelector, &amp;hellip;)。
+ 第一个参数是消息接收者，
+ 第二个参数是调用的具体类方法的 selector，
+ 第三个参数是 selector 方法的可变参数。
+ 2、2例子:[self setAge:]
+ a:编译器会替换成调用 objc_msgSend 的函数调用，
+ b:其中 theReceiver 是 self，theSelector 是@selector(setAge:)，这个 selector 是从当前 self 的 class 的方法列表开始找的 setAge，
+ c:当找到后把对应的 selector 传递过去。
+ 3、当使用 super 调用时，会使用 objc_msgSendSuper 函数：id objc_msgSendSuper(struct objc_super *super,SEL op, &amp;hellip;)</description>
+    </item>
+    
+    <item>
+      <title>Runtime动态添加方法</title>
+      <link>update/blog-cn/2018/01/01/dynamic-add-method/</link>
+      <pubDate>Mon, 01 Jan 2018 20:55:53 +0800</pubDate>
+      
+      <guid>update/blog-cn/2018/01/01/dynamic-add-method/</guid>
+      <description>一、概念  1.动态添加方法
+开发使用场景：如果一个类方法非常多，加载类到内存的时候也比较耗费资源，需要给每个方法生成映射表，可以使用动态给某个类，添加方法解决。
+ .
+ 2.效果图:
+ 二、代码实现  1.控制器代码:
+ #pragma mark -动态添加方法 #pragma mark ------------------ - (void)addMethods{ SHPerson *person = [[SHPerson alloc] init]; //默认person，没有实现eat方法，可以通过performSelector调用，但是会报错。 //动态添加方法就不会报错 [person performSelector:@selector(eat)]; } - (void)addMethods2{ SHPerson2 *person = [[SHPerson2 alloc] init]; [person performSelector:@selector(writeCode:) withObject:@100]; }   2.分类代码
+ #import &amp;quot;SHPerson2.h&amp;quot; #import &amp;lt;objc/message.h&amp;gt; @implementation SHPerson2 void effect(id self, SEL _cmd, NSNumber *meter) { NSLog(@&amp;quot; effect ==&amp;gt; %@&amp;quot;, meter); } + (BOOL)resolveInstanceMethod:(SEL)sel{ if (sel == NSSelectorFromString(@&amp;quot;writeCode:&amp;quot;)) { // class: 给哪个类添加方法 // SEL: 添加哪个方法 // IMP: 方法实现 =&amp;gt; 函数 =&amp;gt; 函数入口 =&amp;gt; 函数名 // type: 方法类型：void用v来表示，id参数用@来表示，SEL用:来表示 //aaa不会生成方法列表 class_addMethod(self, sel, (IMP) effect, &amp;quot;v@:@&amp;quot;); return YES; } return [super resolveInstanceMethod:sel]; } @end   3.</description>
+    </item>
+    
+    <item>
+      <title>Runtime动态添加属性</title>
+      <link>update/blog-cn/2017/12/30/dynamic-add-prop/</link>
+      <pubDate>Sat, 30 Dec 2017 20:55:53 +0800</pubDate>
+      
+      <guid>update/blog-cn/2017/12/30/dynamic-add-prop/</guid>
+      <description>一、概念   1.runtime：动态添加属性:什么时候需要动态添加属性;
+2.开发场景：给系统的类添加属性的时候,可以使用runtime动态添加属性方法;
+3.本质:动态添加属性,就是让某个属性与对象产生关联。runtime一般都是针对系统的类;
+4.在分类中利用runtime动态添加属性;
+ 二、代码实现  1.控制器代码:
+ // Created by on 2017/12/29. // Copyright © 2017年 wangerk. All rights reserved. // #import &amp;quot;SHAddAttributesViewController.h&amp;quot; @interface SHAddAttributesViewController () @end @implementation SHAddAttributesViewController - (void)viewDidLoad { [super viewDidLoad]; self.view.backgroundColor = [UIColor orangeColor]; //给系统NSObject类动态添加属性name NSObject *objc = [[NSObject alloc] init]; objc.name = @&amp;quot;123&amp;quot;; NSLog(@&amp;quot;objc.name = %@&amp;quot;,objc.name); } @end   2.分类代码
+ // Created by on 2017/12/29. // Copyright © 2017年 wangerk.</description>
+    </item>
+    
+    <item>
+      <title>ENABLE_BITCODE报错</title>
+      <link>update/blog-cn/2017/12/29/bitcode-errror/</link>
+      <pubDate>Fri, 29 Dec 2017 20:55:53 +0800</pubDate>
+      
+      <guid>update/blog-cn/2017/12/29/bitcode-errror/</guid>
+      <description>一、概念 报错图显示: 问题分析：
+从上述的错误中应该可以看出，这是因为一个第三方的库不兼容，我的工程中开启了 ENABLE_BITCODE （应该是升级之后自动转换的），而这个第三方的库在编译的时候没有 enable bitcode，所以导致上诉问题。
+二、解决方法： 方法一 :
+一种就是换成 enable bitcode 的第三方库，再有一种就是将工程的 ENABLE_BITCODE 设置为 false 就可以了。
+不太方便换库 ,不建议换库;
+方法二:</description>
+    </item>
+    
+    <item>
+      <title>__nullable和__nonnull区别</title>
+      <link>update/blog-cn/2017/12/27/nullable-nonnull/</link>
+      <pubDate>Wed, 27 Dec 2017 20:55:53 +0800</pubDate>
+      
+      <guid>update/blog-cn/2017/12/27/nullable-nonnull/</guid>
+      <description>一、概念  两个新的类型修饰： __nullable 和 __nonnull 。从字面上我们可知， __nullable 表示对象可以是 NULL 或 nil，而 __nonnull 表示对象不应该为空。
+ 当我们不遵循这一规则时，编译器就会给出警告。在 Xcode 7 中，为了避免与第三方库潜在的冲突，苹果把 __nonnull/__nullable改成 _Nonnull/_Nullable 。再加上苹果同样支持了没有下划线的写法 nonnull/nullable ，于是就造成现在有三种写法这样混乱的局面。
+ 但是这三种写法本质上都是互通的，只是放的位置不同，
+二、声明属性 方法返回值修饰：
+ - (nullable NSString*)method;
+ - (NSString* __nullable)method;
+ - (NSString* _Nullable)method;
+声明属性的修饰：
+ @property(nonatomic,copy,nullable)NSString *aString;
+ @property(nonatomic,copy)NSString* __nullable aString;
+ @property(nonatomic,copy)NSString* _Nullable aString;
+方法参数修饰：
+ - (void)methodWithString:(nullable NSString*)aString;
+ - (void)methodWithString:(NSString* _Nullable)aString;
+ - (void)methodWithString:(NSString* __nullable)aString;
+三、总结 而对于 双指针类型对象 、 Block 的返回值 、 Block 的参数 等，这时候就不能用 nonnull/nullable 修饰，只能用带下划线的 __nonnull/__nullable 或者 _Nonnull/_Nullable ：</description>
+    </item>
+    
+    <item>
+      <title>编译时和运行时</title>
+      <link>update/blog-cn/2017/12/26/compile-runtime/</link>
+      <pubDate>Tue, 26 Dec 2017 20:55:53 +0800</pubDate>
+      
+      <guid>update/blog-cn/2017/12/26/compile-runtime/</guid>
+      <description>一、概念 编译时
+编译时:就是正在编译的时候.其实编译时就是简单的作一些翻译工作,
+编译: 就是编译器帮你把源代码翻译成机器能识别的代码.(当然只是一般意义上这么说,实际上可能只是翻译成某个中间状态的语言.比如Java只有JVM识别的字节码,C#中只有CLR能识别的MSIL.另外还有啥链接器.汇编器.为了了便于理解我们可以统称为编译器)
+运行时
+运行时就是代码跑起来了.被装载到内存中去了.(你的代码保存在磁盘上没装入内存之前是个死家伙.只有跑到内存中才变成活的).而运行时类型检查就与前面讲的编译时类型检查(或者静态类型检查)不一样.不是简单的扫描代码.而是在内存中做些操作,做些判断.
+二、例子说明：  1.string在编译时和运行时分别时什么类型的对象?
+ NSString*string = (NSString *)[[NSData alloc] init];
+ 编译时是NSString的类型;
+ 运行时是NSData类型的对象
+ 2.例子
+ Father fa;
+ Son so;
+ fa = so;
+ fa.Fun(); //在编译时,实际上是把Fun当作Father类中的Fun看待.
+ //但在运行时实际上这里的Fun是调用的Son中的函数Fun.所以不做运行时类型检查是没法确定的啊.</description>
+    </item>
+    
+    <item>
+      <title>copy修饰NSMutableArray的错误</title>
+      <link>update/blog-cn/2017/12/24/copy-nsmutable/</link>
+      <pubDate>Sun, 24 Dec 2017 20:55:53 +0800</pubDate>
+      
+      <guid>update/blog-cn/2017/12/24/copy-nsmutable/</guid>
+      <description>1.错误方法一
+@property (copy) NSMutableArray * arrayCopy;//声明 copy
+NSMutableArray *arrayStrong =[NSMutableArrayarray];//初始化
+ arrayCopy = arrayStrong;
+2.错误方法二
+ @property (strong) NSMutableArray *arrayCopy;/声明 strong
+ NSMutableArray *arrayStrong = [NSMutableArray array];/初始化
+ arrayCopy = [arrayStrong copy];
+ 注意:错误方法一 和 错误方法二是相同的,等价的;
+3.结果
+ 所以你的arrayCopy根本就是一个NSArray，所以报了
+ -[__NSArray0 removeAllObjects]: unrecognized selector sent to instance 0x14e14970
+ 未找到实例方法的错误。因为NSArray没有removeAllObjects方法。
+4.正确的写法应该是不用copy属性
+ @property (strong) NSMutableArray * arrayCopy;
+ NSMutableArray* arrayStrong = [NSMutableArray array];
+ arrayCopy = [arrayStrong mutableCopy];
+ 这里的arrayStrong可以是NSMutableArray也可以是NSArray；</description>
+    </item>
+    
+    <item>
+      <title>避免循环引用</title>
+      <link>update/blog-cn/2017/12/22/avoid-recycle-reference/</link>
+      <pubDate>Fri, 22 Dec 2017 20:55:53 +0800</pubDate>
+      
+      <guid>update/blog-cn/2017/12/22/avoid-recycle-reference/</guid>
+      <description>循环引用:指的是多个对象相互引用时，使得引用形成一个环形，导致外部无法真正是否掉这块环形内存。其实有点类似死锁。
+ 其实循环引用就是说我们的强引用形成了闭环，还会有很多自己写的代码中会出现，平时还是要注意写法。当然xcode的instruments也能帮助到大家排除一些这样类似的内存问题。 例子：A-&amp;gt;B-&amp;gt;C-&amp;gt;&amp;hellip;.-&amp;gt;X-&amp;gt;B -&amp;gt;表示强引用，这样的B的引用计数就是2，假如A被系统释放了，理论上A会自动减小A所引用的资源，就是B，那么这时候B的引用计数就变成了1，所有B无法被释放，然而A已经被释放了，所有B的内存部分就肯定无法再释放再重新利用这部分内存空间了，导致内存泄漏。
+ 1.NSTimer
+ 创建使用NSTimer的时候，NSTimer会默认对当前self有个强引用，所有在self使用完成打算是否的时候，一定要先使用NSTimer的invalidate来停止是否时间控制对self的引用
+ [_timer invalidate];
+ 2.Block
+ Block也是比较常见的循环引用问题，在Block中使用了self容易出现循环引用，因此很多人在使用block的时候，加入里面有用到self的操作都会声明一个__weak来修饰self。其实便不是这样的，不是所有使用了Block都会出现Self循环引用问题，只有self拥有Block的强引用才会出现这种情况。
+ 所以一般在函数中临时使用Block是不会出现循环应用的，因为这时候Block引用是属于栈的。当栈上的block释放后，block中对self的引用计数也会减掉
+ 当然不一定要Self对Block有直接的引用才会出现，假如self的变量B，B中有个Block变量，就容易出现这种情况，好的是在block出现循环引用的，xcode7会出现警告提示（之前版本不确定）。
+ 3.delegate
+ Delegate是ios中开发中最常遇到的循环引用，一般在声明delegate的时候都要使用弱引用weak或者assign
+ @property (nonatomic, weak, nullable) id  delegate;
+ 当然怎么选择使用assign还是weak，MRC的话只能用assign，在ARC的情况下最好使用weak，因为weak修饰的变量在是否后自动为指向nil，防止不安全的野指针存在</description>
+    </item>
+    
+    <item>
+      <title>多线程操作数组</title>
+      <link>update/blog-cn/2017/12/21/multi-thread-op-array/</link>
+      <pubDate>Thu, 21 Dec 2017 20:55:53 +0800</pubDate>
+      
+      <guid>update/blog-cn/2017/12/21/multi-thread-op-array/</guid>
+      <description>一、概念 1.含义:
+@synchronized(self) {
+}
+//这个其实就是 一个加锁。如果self 其他线程访问，则会阻塞。这样做一般是用来对单
+2.重写构造方法  @interface SHSafetyArray : NSObject
+ {
+ @private
+ NSMutableArray *_mutableArray; //声明数组
+ }
+ //遍历加锁
+ - (void) multi:(void (^)(NSObject*)) multipass;
+ @end
+ @implementation SHSafetyArray
+ //初始化
+ - (id)init {  if (self = [super init]) {
+ _mutableArray = [[NSMutableArrayalloc]init];
+ }
+ return self;
+ }
+//遍历加锁
+ - (void)multi:(void (^)(NSObject *)) multipass {</description>
+    </item>
+    
+    <item>
+      <title>OC的运行时特性(动态)</title>
+      <link>update/blog-cn/2017/12/17/runtime-feature/</link>
+      <pubDate>Sun, 17 Dec 2017 20:55:53 +0800</pubDate>
+      
+      <guid>update/blog-cn/2017/12/17/runtime-feature/</guid>
+      <description>一、概念: 因为运行时 runtime 是 必须到运行时(run time)才会做一些事情;
+所以OC的动态特性表现为了三个方面：动态类型、动态绑定、动态加载;
+动态：主要是将数据类型的确定由编译时，推迟到了运行时。之所以叫做动态，
+二、iOS OC动态运行时~动态类型  1.动态类型,就是id类型。
+ 2.动态类型是跟静态类型相对的。像内置的明确的基本类型都属于静态类型(int、NSString等)。
+ 3.静态类型 在编译的时候就能被识别出来。所以，若程序发生了类型不对应，编译器就会发出警告。
+ 4.动态类型 就编译器编译的时候是不能被识别的，要等到运行时(run time)，即程序运行的时候才会根据语境来识别。
+ id obj = someInstance;
+ if ([obj isKindOfClass:someClass]) {
+ someClass *classSpecifiedInstance = (someClass *)obj;
+ }
+ 注意: 静态类型就在编译时;动态类型是在运行时;
+三、iOS OC动态运行时~动态绑定  在OC中，没有函数的概念，我们叫“消息机制”，函数调用就是给对象发送一条消息。这时，动态绑定的特性就来了。OC可以先跳过编译，到运行的时候才动态地添加函数调用，在运行时才决定要调用什么方法，需要传什么参数进去。这就是动态绑定，
+ 1.动态绑定只需记住关键词@selector/SEL即可。静态的，不能改变。要实现他就必须用SEL变量绑定一个方法。最终形成的这个SEL变量就代表一个方法的引用。
+ 2.这里要注意 一点：SEL并不是C里面的函数指针，虽然很像，但真心不是函数指针。SEL变量只是一个整数，他是该方法的ID，@selector()就是取类方法的编号。
+ 3. 以前的函数调用，是根据函数名，也就是 字符串去查找函数体。但现在，我们是根据一个ID整数来查找方法，整数的查找字自然要比字符串的查找快得多！所以，动态绑定的特定不仅方便，而且效率更 高。
+ 4.由于OC的动态特性，在OC中其实很少提及“函数”的概念，传统的函数一般在编译时就已经把参数信息和函数实现打包到编译后的源码中了，而在OC中最常使 用的是消息机制。调用一个实例的方法，所做的是向该实例的指针发送消息，实例在收到消息后，从自身的实现中寻找响应这条消息的方法
+ 5.补充:对于其他一些静态语言，比如 c++,一般在编译的时候就已经将将要调用的函数的函数签名都告诉编译器了。
+四、iOS OC动态运行时~动态加载  根据需求加载所需要的资源，这点很容易理解，对于iOS开发来说，基本就是根据不同的机型做适配。最经典的例子就是在Retina设备上加载@2x的图片，而在老一些的普通屏设备上加载原图。
+ 开发使用场景：如果一个类方法非常多，加载类到内存的时候也比较耗费资源，需要给每个方法生成映射表，可以使用动态给某个类，添加方法解决。</description>
+    </item>
+    
+    <item>
+      <title>@property修饰符</title>
+      <link>update/blog-cn/2017/12/16/property-modifier/</link>
+      <pubDate>Sat, 16 Dec 2017 20:55:53 +0800</pubDate>
+      
+      <guid>update/blog-cn/2017/12/16/property-modifier/</guid>
+      <description>1.strong类似于retain，weak类似于assign
+2.原子性修饰符:atomic | nonatomic atomic:表示是线程安全的。
+nonatomic:表示是非线程安全的，使用此属性性能会提高一些。
+系统默认是atomic
+3.getter和setter修饰符 @property(getter = getMethodName, setter = setMethodName) Object *obj;
+这两个属性修饰符用于设置自定义生成的getter和setter方法名，使用之后将不再使用系统默认的setter和getter方法名。
+4.getter方法。 readonly:表明这个属性只能读不能写，系统只为我们创建一个getter方法，不会创建setter方法
+5.setter相关修饰符：assign | retain | copy setter相关的修饰符表明setter方法应该如何实现
+6.copy:主要用在NSString类型，表示复制内容。 系统默认属性是assign。retain是指针的复制，copy是内容的复制
+7.读写性修饰符：readwrite | readonly readwrite:表明这个属性是可读可写的，系统为我们创建这个属性的setter和getter方法。
+8.readonly:表明这个属性只能读不能写， 系统只为我们创建一个getter方法，不会创建setter方法
+9.assign:表示直接赋值， 用于基本数据类型(NSInteger和CGFloat)和C数据类型(如int, float, double, char等)另外还有id类型，这个修饰符不会牵涉到内存管理。但是如果是对象类型，使用此修饰符则可能会导致内存泄漏或EXC_BAD_ACCESS错误
+assign：用于非指针变量。用于基础数据类型(如NSInteger, CGFloat)和C数据类型(int, float, double, char等), 另外还有id类型。
+记住：前面不需要加＊的就用assign
+10.retain:针对对象类型进行内存管理。 如果对基本数据类型使用，则Xcode会直接报错。当给对象类型使用此修饰符时，setter方法会先将旧的对象属性release掉，再对新的对象进行一次赋值并进行一次retain操作
+retain：用于指针变量。一般用于字符串(NSString, NSMutableString), 数组(NSMutableArray, NSArray),字典对象，视图对象(UIView)，控制器对象(UIViewController)等</description>
+    </item>
+    
+    <item>
+      <title>Xcode 9 Safe Area 报错解决</title>
+      <link>update/blog-cn/2017/12/14/safe-area/</link>
+      <pubDate>Thu, 14 Dec 2017 20:55:53 +0800</pubDate>
+      
+      <guid>update/blog-cn/2017/12/14/safe-area/</guid>
+      <description>1.在XIB开发时会报这样的错误
+Xcode9 Safe Area Layout Guide Before iOS9.0
+苹果在iOS7中引入的Top Layout Guide和Bottom Layout Guide,这些布局指南在iOS 11中被弃用，取而代之的是Safe Area Layout Guide.
+针对新特性，解决方案如下 :
+图1: 图2: 图3: </description>
+    </item>
+    
+    <item>
+      <title>KVC实现原理</title>
+      <link>update/blog-cn/2017/12/13/set-value-for-key/</link>
+      <pubDate>Wed, 13 Dec 2017 20:55:53 +0800</pubDate>
+      
+      <guid>update/blog-cn/2017/12/13/set-value-for-key/</guid>
+      <description>- (void)setValue:(id)value forKey:(NSString *)key方法,实现原理
+ 功能:使用一个字符串标示符给一个对象的属性赋值.它支持普通对象和集合对象
+  这个方法的默认实现如下:
+ (1).首先去接收者(调用方法的那个对象)的类中查找与key相匹配的访问器方法(-set),如果找到了一个方法,就检查它参数的类型,如果它的参数类型不是一个对象指针类型,但是值为nil,就会执行setNilValueForKey:方法,setNilValueForKey:方法的默认实现,是产生一个NSInvalidArgumentException的异常,但是你可以重写这个方法.如果方法参数的类是一个对象指针类型,就会简单的执行这个方法,传入对应的参数.如果方法的参数类型是NSNumber或NSValue的对应的基本类型,先把它转换为基本数据类,再执行方法,传入转换后的数据.
+ (2).如果没有对应的访问器方法(setter方法),如果接受者的类的+accessInstanceVariablesDirectly方法返回YES,那么就查找这个接受者的与key相匹配的实例变量(匹配模式为_,_is,,is):比如:key为age,只要属性存在_age,_isAge,age,isAge中的其中一个就认为匹配上了,如果找到这样的一个实例变量,并且的类型是一个对象指针类型,首先released对象上的旧值,然后把传入的新值retain后的传入的值赋值该成员变量,如果方法的参数类型是NSNumber或NSValue的对应的基本类型,先把它转换为基本数据类,再执行方法,传入转换后的数据.
+ (3).如果访问器方法和实例变量都没有找到,执行setValue:forUndefinedKey:方法,该方法的默认实现是产生一个 NSUndefinedKeyException 类型的异常,但是我们可以重写setValue:forUndefinedKey:方法</description>
+    </item>
+    
+    <item>
+      <title>检测版本更新app</title>
+      <link>update/blog-cn/2017/12/10/update-app/</link>
+      <pubDate>Sun, 10 Dec 2017 20:55:53 +0800</pubDate>
+      
+      <guid>update/blog-cn/2017/12/10/update-app/</guid>
+      <description>一、实现思路 /** 实现思路 1.获取当前项目APP版本号 2.拿到AppStore项目版本号 3.对比版本号,实现更新功能 */  //一定要先配置自己项目在商店的APPID,配置完最好在真机上运行才能看到完全效果哦
+#define STOREAPPID @&amp;ldquo;1234567890&amp;rdquo;
+二、代码实现 //检测app更新 -(void)updateApp { //1.先获取当前工程项目版本号 NSDictionary *infoDic = [[NSBundlemainBundle]infoDictionary]; NSString *currentVersion = infoDic[@&amp;quot;CFBundleShortVersionString&amp;quot;]; //2.从网络获取appStore版本号 NSError *error; NSData *response = [NSURLConnectionsendSynchronousRequest:[NSURLRequestrequestWithURL:[NSURLURLWithString:[NSStringstringWithFormat:@&amp;quot;http://itunes.apple.com/cn/lookup?id=%@&amp;quot;,STOREAPPID]]]returningResponse:nilerror:nil]; //2.1没有内容 if (response == nil) { NSLog(@&amp;quot;你没有连接网络哦&amp;quot;); return; } //3.序列化解析 NSDictionary *appInfoDic = [NSJSONSerializationJSONObjectWithData:responseoptions:NSJSONReadingMutableLeaveserror:&amp;amp;error]; //3.1数据错误 if (error) { NSLog(@&amp;quot;hsUpdateAppError:%@&amp;quot;,error); return; } //3.2字典解析 NSArray *array = appInfoDic[@&amp;quot;results&amp;quot;]; NSDictionary *dic = array[0]; NSString *appStoreVersion = dic[@&amp;quot;version&amp;quot;]; //打印版本号 NSLog(@&amp;quot;当前版本号:%@\n商店版本号:%@&amp;quot;,currentVersion,appStoreVersion); //4.当前版本号小于商店版本号,就更新 if([currentVersion floatValue] &amp;lt; [appStoreVersion floatValue]) { UIAlertView *alert = [[UIAlertViewalloc]initWithTitle:@&amp;quot;版本有更新&amp;quot; message:[NSStringstringWithFormat:@&amp;quot;检测到新版本(%@),是否更新?</description>
+    </item>
+    
+    <item>
+      <title>观察者模式优缺点、使用场景</title>
+      <link>update/blog-cn/2017/12/08/observer-model/</link>
+      <pubDate>Fri, 08 Dec 2017 20:55:53 +0800</pubDate>
+      
+      <guid>update/blog-cn/2017/12/08/observer-model/</guid>
+      <description>一、观察者模式优点：
+1.观察者模式在被观察者和观察者之间建立一个抽象的耦合。被观察者角色所知道的只是一个具体观察者列表，每一个具体观察者都符合一个抽象观察者的接口。被观察者并不认识任何一个具体观察者，它只知道它们都有一个共同的接口。
+由于被观察者和观察者没有紧密地耦合在一起，因此它们可以属于不同的抽象化层次。 如果被观察者和观察者都被扔到一起，那么这个对象必然跨越抽象化和具体化层次。
+ 2.观察者模式支持广播通讯。被观察者会向所有的登记过的观察者发出通知，
+二、观察者模式缺点：
+1.如果一个被观察者对象有很多的直接和间接的观察者的话，将所有的观察者都通知到会花费很多时间。
+2.如果在被观察者之间有循环依赖的话，被观察者会触发它们之间进行循环调用，导致系统崩溃。在使用观察者模式是要特别注意这一点。
+3.如果对观察者的通知是通过另外的线程进行异步投递的话，系统必须保证投递是以自恰的方式进行的。
+4.虽然观察者模式可以随时使观察者知道所观察的对象发生了变化，但是观察者模式没有相应的机制使观察者知道所观察的对象是怎么发生变化的。
+三、观察者模式的应用场景：
+1、对一个对象状态的更新，需要其他对象同步更新，而且其他对象的数量动态可变。
+2、对象仅需要将自己的更新通知给其他对象而不需要知道其他对象的细节。</description>
+    </item>
+    
+    <item>
+      <title>多线程技术之GCD</title>
+      <link>update/blog-cn/2017/12/03/pay-blog/</link>
+      <pubDate>Sun, 03 Dec 2017 20:55:53 +0800</pubDate>
+      
+      <guid>update/blog-cn/2017/12/03/pay-blog/</guid>
+      <description>GCD（Grand Central Dispatch）是 Apple 公司为了提高 OS X 和 iOS 系统在多核处理器上运行并行代码的能力而开发的一系列相关技术，它提供了对线程的高级抽象。GCD 是一整套技术，包含了语言级别的新功能，运行时库，系统级别的优化，这些一起为并发代码的执行提供了系统级别的广泛优化。所以，GCD 也是 Apple 推荐的多线程编程工具。
+GCD 是系统层面的技术，除了可以被系统级应用使用，也可以被更普通的高级应用使用。使用 GCD 之后，应用就可以轻松地在多核系统上高效运行并发代码，而不用考虑繁琐的底层问题。GCD 在系统层面工作，能很好地满足所有应用的并行运行需求，将可用系统资源平衡地分配给它们。
+GCD 提供了一套纯 C API。但是，它提供的 API 简单易用并且有功能强大的任务管理和多线程编程能力。GCD 需要和 blocks（Objective－C 的闭包）配合使用。block 是 GCD 执行单元。GCD 的任务需要被拆解到 block 中。block 被排入 GCD 的分发队列，GCD 会为你排期运行。GCD 创建，重用，销毁线程，基于系统资源以它认为合适的方式运行每个队列。所以，用户需要关心的细节并不多。
+GCD 的使用也很简单，假设抢面包是个耗时操作，前面例子中的 Geroge 和 Totty 的工作都可以实现如下：
+dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+ // 并发队列中做耗时操作
+ while (TRUE) {
+ if(_cake &amp;gt; 0) {
+ // 耗时操作
+ [NSThread sleepForTimeInterval:0.5];
+ _cake&amp;ndash;;
+ _occupied = kSum - _cake;</description>
+    </item>
+    
+    <item>
+      <title>多线程技术之NSOperation</title>
+      <link>update/blog-cn/2017/12/01/nsoperation/</link>
+      <pubDate>Fri, 01 Dec 2017 20:55:53 +0800</pubDate>
+      
+      <guid>update/blog-cn/2017/12/01/nsoperation/</guid>
+      <description>1.NSOperation做的事情比 NSThread 更多一些。通过继承 NSOperation，可以使子类获得一些线程相关的特性，进而可以安全地管理线程生命周期。比如，以线程安全的方式建立状态，取消线程。配合 NSOperationQueue，可以控制线程间的优先级和依赖性。这就给出了一套线程管理的基本方法。
+ NSOperation 代表了一个独立的计算单元。一般，我们会把计算任务封装进 NSOperation 这个对象。NSOperation 是抽象类，但同时也提供了两个可以直接使用的实体子类：NSInvocationOperation 和 NSBlockOperation。NSInvocationOperation 用于将计算任务封装进方法，NSBlockOperation 用于将计算任务封装进 block。
+ 2. NSOperationQueue 则用于执行计算任务，管理计算任务的优先级，处理计算任务之间的依赖性。NSOperation 被添加到 NSOperationQueue 中之后，队列会按优先级和进入顺序调度任务，NSOperation 对象会被自动执行。
+ 仍然使用上一节 NSThread 中的模拟两人抢面包的例子。由于计算任务没有变化，所以 run 方法并不改变。但这里需要使用 NSOperation 和 NSOperationQueue 来代表两个抢面包的人，并给予他们不同的优先级。由于 NSOperation 也不处理线程间同步问题，所以你仍然需要一把在run 方法中会用到的线程锁：
+ _lock = [[NSLock alloc] init];
+  NSInvocationOperation *geroge = [[NSInvocationOperation alloc]initWithTarget:self
+ selector:@selector(run:) object:@&amp;ldquo;Geroge&amp;rdquo;];
+ geroge.queuePriority = NSOperationQueuePriorityHigh;
+  NSInvocationOperation *operationTwo = [[NSInvocationOperation alloc]initWithTarget:self
+ selector:@selector(run:) object:@&amp;ldquo;Totty&amp;rdquo;];
+ totty.queuePriority = NSOperationQueuePriorityLow;</description>
+    </item>
+    
+    <item>
+      <title>plist权限</title>
+      <link>update/blog-cn/2017/11/27/plist-privacy/</link>
+      <pubDate>Mon, 27 Nov 2017 20:55:53 +0800</pubDate>
+      
+      <guid>update/blog-cn/2017/11/27/plist-privacy/</guid>
+      <description>&amp;lt;!-- 相册 --&amp;gt; &amp;lt;key&amp;gt;NSPhotoLibraryUsageDescription&amp;lt;/key&amp;gt; &amp;lt;string&amp;gt;App需要您的同意,才能访问相册&amp;lt;/string&amp;gt; &amp;lt;!-- 相机 --&amp;gt; &amp;lt;key&amp;gt;NSCameraUsageDescription&amp;lt;/key&amp;gt; &amp;lt;string&amp;gt;App需要您的同意,才能访问相机&amp;lt;/string&amp;gt; &amp;lt;!-- 麦克风 --&amp;gt; &amp;lt;key&amp;gt;NSMicrophoneUsageDescription&amp;lt;/key&amp;gt; &amp;lt;string&amp;gt;App需要您的同意,才能访问麦克风&amp;lt;/string&amp;gt; &amp;lt;!-- 位置 --&amp;gt; &amp;lt;key&amp;gt;NSLocationUsageDescription&amp;lt;/key&amp;gt; &amp;lt;string&amp;gt;App需要您的同意,才能访问位置&amp;lt;/string&amp;gt; &amp;lt;!-- 在使用期间访问位置 --&amp;gt; &amp;lt;key&amp;gt;NSLocationWhenInUseUsageDescription&amp;lt;/key&amp;gt; &amp;lt;string&amp;gt;App需要您的同意,才能在使用期间访问位置&amp;lt;/string&amp;gt; &amp;lt;!-- 始终访问位置 --&amp;gt; &amp;lt;key&amp;gt;NSLocationAlwaysUsageDescription&amp;lt;/key&amp;gt; &amp;lt;string&amp;gt;App需要您的同意,才能始终访问位置&amp;lt;/string&amp;gt; &amp;lt;!-- 日历 --&amp;gt; &amp;lt;key&amp;gt;NSCalendarsUsageDescription&amp;lt;/key&amp;gt; &amp;lt;string&amp;gt;App需要您的同意,才能访问日历&amp;lt;/string&amp;gt; &amp;lt;!-- 提醒事项 --&amp;gt; &amp;lt;key&amp;gt;NSRemindersUsageDescription&amp;lt;/key&amp;gt; &amp;lt;string&amp;gt;App需要您的同意,才能访问提醒事项&amp;lt;/string&amp;gt; &amp;lt;!-- 运动与健身 --&amp;gt; &amp;lt;key&amp;gt;NSMotionUsageDescription&amp;lt;/key&amp;gt; &amp;lt;string&amp;gt;App需要您的同意,才能访问运动与健身&amp;lt;/string&amp;gt; &amp;lt;!-- 健康更新 --&amp;gt; &amp;lt;key&amp;gt;NSHealthUpdateUsageDescription&amp;lt;/key&amp;gt; &amp;lt;string&amp;gt;App需要您的同意,才能访问健康更新 &amp;lt;/string&amp;gt; &amp;lt;!-- 健康分享 --&amp;gt; &amp;lt;key&amp;gt;NSHealthShareUsageDescription&amp;lt;/key&amp;gt; &amp;lt;string&amp;gt;App需要您的同意,才能访问健康分享&amp;lt;/string&amp;gt; &amp;lt;!-- 蓝牙 --&amp;gt; &amp;lt;key&amp;gt;NSBluetoothPeripheralUsageDescription&amp;lt;/key&amp;gt; &amp;lt;string&amp;gt;App需要您的同意,才能访问蓝牙&amp;lt;/string&amp;gt; &amp;lt;!-- 媒体资料库 --&amp;gt; &amp;lt;key&amp;gt;NSAppleMusicUsageDescription&amp;lt;/key&amp;gt; &amp;lt;string&amp;gt;App需要您的同意,才能访问媒体资料库&amp;lt;/string&amp;gt;  </description>
+    </item>
+    
+    <item>
+      <title>多线程技术之NSThread</title>
+      <link>update/blog-cn/2017/11/25/nsthread/</link>
+      <pubDate>Sat, 25 Nov 2017 21:55:53 +0800</pubDate>
+      
+      <guid>update/blog-cn/2017/11/25/nsthread/</guid>
+      <description>一、NSThread
+ NSThread 是 OS X 和 iOS 都提供的一个线程对象，它是线程的一个轻量级实现。在执行一些轻量级的简单任务时，NSThread 很有用，但用户仍然需要自己管理线程生命周期，进行线程间同步。比如，线程状态，依赖性，线程间同步等线程相关的主题 NSThread 都没有涉及。比如，涉及到线程间同步仍然需要配合使用 NSLock，NSCondition 或者 @synchronized。所以，遇到复杂任务时，轻量级的 NSThread 可能并不合适。
+  提供一个模拟多线程运作的简单例子：两个人同时一起到烤箱抢面包。我们启动两个线程，来代表两个人。由于烤箱门比较小，同时只能有一个人去拿面包。由于 NSThread 不处理线程同步，所以为了模拟这个过程， 你还需要一把线程锁（即类型为 NSLock 的实例变量 _lock）。在后面的 run 方法中会用到这把线程锁：
+  _lock = [[NSLock alloc] init];
+  NSThread *geroge = [[NSThread alloc] itWithTarget:self selector:
+ @selector(run) object:nil];
+ [geroge setName:@&amp;ldquo;Geroge&amp;rdquo;];
+ [geroge start];
+  NSThread *totty = [[NSThread alloc] nitWithTarget:self selector:
+ @selector(run) object:nil];
+ [totty setName:@&amp;ldquo;Totty&amp;rdquo;];
+ [totty start];</description>
+    </item>
+    
+    <item>
+      <title>多线程技术之performSelectors</title>
+      <link>update/blog-cn/2017/11/25/muti-thread-perform-selectors/</link>
+      <pubDate>Sat, 25 Nov 2017 20:55:53 +0800</pubDate>
+      
+      <guid>update/blog-cn/2017/11/25/muti-thread-perform-selectors/</guid>
+      <description>NSObject 提供了以 performSelector 为前缀的一系列方法。它们可以让用户在指定线程中，或者立即，或者延迟执行某个方法调用。这个方法给了用户实现多线程编程最简单的方法。
+下面有一些例子：
+ 1.在当前线程中执行方法：
+ - (void)performSelector:(SEL)aSelector withObject:(id)anArgument
+ afterDelay:(NSTimeInterval)delay
+ - (void)performSelector:(SEL)aSelector withObject:(id)anArgument afterDelay:
+ (NSTimeInterval)delay inModes:(NSArray *)modes
+ 2.在指定线程中执行方法：
+ - (void)performSelector:(SEL)aSelector onThread:(NSThread *)thread
+ withObject:(id)arg waitUntilDone:(BOOL)wait
+  - (void)performSelector:(SEL)aSelector onThread:(NSThread *)thread withObject:
+ (id)arg waitUntilDone:(BOOL)wait modes:(NSArray *)array
+ 3.在主线程中执行方法：
+ - (void)performSelectorOnMainThread: (SEL)selector withObject:(id)argument
+ waitUntilDone:(BOOL)wait
+ - (void)performSelectorOnMainThread:(SEL)aSelector withObject:(id)arg
+ waitUntilDone:(BOOL)wait modes:(NSArray *)array
+ 4.在后台线程中执行方法：
+ - (void)performSelectorInBackground:(SEL)aSelector withObject:(id)arg
+ 这一系列方法简单易用，但只提供了有限的几个选择：指定执行的方法（但传入方法的参数数量有限制）；指定是在当前线程，还是在主线程，还是在后台线程执行；指定是否需要阻塞当前线程等待结果。
+ 例如，以下代码使得方法 foo: 在一个新的后台线程执行，并传入了 object 参数：</description>
+    </item>
+    
+    <item>
       <title>NSSet和NSMutableSet</title>
-      <link>http://wangerk.com/blog-cn/2017/06/12/nsset-nsmutableset/</link>
+      <link>update/blog-cn/2017/06/12/nsset-nsmutableset/</link>
       <pubDate>Mon, 12 Jun 2017 20:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2017/06/12/nsset-nsmutableset/</guid>
+      <guid>update/blog-cn/2017/06/12/nsset-nsmutableset/</guid>
       <description>NSSet和NSMutableSet是无序的, 但是它保证数据的唯一性。当插入相同的数据时，不会有任何效果。从内部实现来说是hash表，所以可以常数时间内查找一个数据。
  散列表（Hash table，也叫哈希表），是根据关键码值(Key value)而直接进行访问的数据结构。也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做散列函数，存放记录的数组叫做散列表。
  给定表M，存在函数f(key)，对任意给定的关键字值key，代入函数后若能得到包含该关键字的记录在表中的地址，则称表M为哈希(Hash）表，函数f(key)为哈希(Hash) 函数
@@ -431,10 +860,10 @@ NSSet和NSMutableSet是无序的, 但是它保证数据的唯一性。当插入�
     
     <item>
       <title>ARC和MRC混合开发</title>
-      <link>http://wangerk.com/blog-cn/2017/06/10/arc-mrc/</link>
+      <link>update/blog-cn/2017/06/10/arc-mrc/</link>
       <pubDate>Sat, 10 Jun 2017 20:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2017/06/10/arc-mrc/</guid>
+      <guid>update/blog-cn/2017/06/10/arc-mrc/</guid>
       <description>ARC &amp;amp; MRC 混合开发
 在项目开发中，遇到使用MRC开发的第三方库怎么办？
 例如：ASI
@@ -452,10 +881,10 @@ RegexKitLite是对NSString添加的正则表达式分类
     
     <item>
       <title>程序启动的完整过程</title>
-      <link>http://wangerk.com/blog-cn/2017/06/09/program-flow/</link>
+      <link>update/blog-cn/2017/06/09/program-flow/</link>
       <pubDate>Fri, 09 Jun 2017 20:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2017/06/09/program-flow/</guid>
+      <guid>update/blog-cn/2017/06/09/program-flow/</guid>
       <description>1步.main函数
 2步.UIApplicationMain
  创建UIApplication对象
@@ -474,10 +903,10 @@ RegexKitLite是对NSString添加的正则表达式分类
     
     <item>
       <title>客户端HTTP状态码</title>
-      <link>http://wangerk.com/blog-cn/2017/06/07/http-code/</link>
+      <link>update/blog-cn/2017/06/07/http-code/</link>
       <pubDate>Wed, 07 Jun 2017 20:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2017/06/07/http-code/</guid>
+      <guid>update/blog-cn/2017/06/07/http-code/</guid>
       <description>1xx消息
 这一类型的状态码，代表请求已被接受，需要继续处理。这类响应是临时响应，只包含状态行和某些可选的响应头信息，并以空行结束。由于HTTP/1.0协议中没有定义任何1xx状态码，所以除非在某些试验条件下，服务器禁止向此类客户端发送1xx响应。 这些状态码代表的响应都是信息性的，标示客户应该采取的其他行动。
 100 Continue
@@ -514,28 +943,28 @@ RegexKitLite是对NSString添加的正则表达式分类
     
     <item>
       <title>滚动到顶部</title>
-      <link>http://wangerk.com/blog-cn/2017/06/04/tap-scroll/</link>
+      <link>update/blog-cn/2017/06/04/tap-scroll/</link>
       <pubDate>Sun, 04 Jun 2017 20:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2017/06/04/tap-scroll/</guid>
+      <guid>update/blog-cn/2017/06/04/tap-scroll/</guid>
       <description>效果 代码实现 #import &amp;quot;ViewController.h&amp;quot; @interface ViewController ()&amp;lt;UITableViewDelegate,UITableViewDataSource&amp;gt; //全局tableView @property (nonatomic,strong)UITableView *tableView; //全局滚动按钮 @property (nonatomic,strong)UIButton *btnTop; @end @implementation ViewController - (void)viewDidLoad { [superviewDidLoad]; //添加tableView [self.viewaddSubview:self.tableView]; //添加滚动按钮 [selfscrollTopView]; } #pragma mark - 设置tableView - (UITableView *)tableView{ if (!_tableView) { _tableView = [[UITableViewalloc]init]; _tableView.frame =CGRectMake(0,64,self.view.frame.size.width , self.view.frame.size.height); _tableView.backgroundColor = [UIColorlightGrayColor]; _tableView.delegate =self; _tableView.dataSource =self; _tableView.separatorStyle =UITableViewCellSeparatorStyleSingleLine; } return_tableView; } #pragma mark - tableView 数据源- //共多少组 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{ return 1; } //每组有多少行 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{ return 100; } //每行显示的内容 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{ //创建标识符 staticNSString *cellId =@&amp;quot;cellid&amp;quot;; UITableViewCell *cell = [tableViewdequeueReusableCellWithIdentifier:cellId]; //缓存池 if (!</description>
     </item>
     
     <item>
       <title>核心动画 图片抖动</title>
-      <link>http://wangerk.com/blog-cn/2017/06/03/pic-shake-keyanimation/</link>
+      <link>update/blog-cn/2017/06/03/pic-shake-keyanimation/</link>
       <pubDate>Sat, 03 Jun 2017 19:07:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2017/06/03/pic-shake-keyanimation/</guid>
+      <guid>update/blog-cn/2017/06/03/pic-shake-keyanimation/</guid>
       <description>#import &amp;quot;SHViewController.h&amp;quot; #define ANGLE_TO_RADIAN(angle) ((angle)/180.0 * M_PI) @interface SHViewController () //图标 @property (weak,nonatomic)IBOutletUIImageView *iconView; //开点按钮 - (IBAction)start; //结束按钮 - (IBAction)end; @end @implementation CZViewController - (void)viewDidLoad{ [superviewDidLoad]; } //开点按钮功能呢 - (IBAction)start { //实例化 CAKeyframeAnimation *anim = [CAKeyframeAnimationanimation]; //拿到动画 key anim.keyPath =@&amp;quot;transform.rotation&amp;quot;; // 动画时间 anim.duration =.25; // 重复的次数 //anim.repeatCount = 16; //无限次重复 anim.repeatCount =MAXFLOAT; //设置抖动数值 anim.values =@[@(ANGLE_TO_RADIAN(-5)),@(ANGLE_TO_RADIAN(5)),@(ANGLE_TO_RADIAN(-5))]; // 保持最后的状态 anim.removedOnCompletion =NO; //动画的填充模式 anim.fillMode =kCAFillModeForwards; //layer层实现动画 [self.iconView.layeraddAnimation:animforKey:@&amp;quot;shake&amp;quot;]; } //点击结束按钮 - (IBAction)end { //图标 [self.</description>
     </item>
     
     <item>
       <title>UITableView常用方法合集</title>
-      <link>http://wangerk.com/blog-cn/2017/06/02/uitableview/</link>
+      <link>update/blog-cn/2017/06/02/uitableview/</link>
       <pubDate>Fri, 02 Jun 2017 07:57:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2017/06/02/uitableview/</guid>
+      <guid>update/blog-cn/2017/06/02/uitableview/</guid>
       <description>实现代理三部曲:
 一:遵守代理
 二:把 tableView.delegate = self
@@ -545,19 +974,19 @@ RegexKitLite是对NSString添加的正则表达式分类
     
     <item>
       <title>GCD定时器实现获取验证码的倒计时</title>
-      <link>http://wangerk.com/blog-cn/2017/06/01/gcd-timer/</link>
+      <link>update/blog-cn/2017/06/01/gcd-timer/</link>
       <pubDate>Thu, 01 Jun 2017 08:03:04 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2017/06/01/gcd-timer/</guid>
+      <guid>update/blog-cn/2017/06/01/gcd-timer/</guid>
       <description>//倒计时按钮 @property(nonatomic,strong)UIButton *btnCountdown; //用 GCD实现倒计时功能 - (void)btnCountdownClick{ //倒计时默认状体 [_btnCountdown setTitle:@&amp;quot;重发(60s)&amp;quot; forState:UIControlStateNormal]; //倒计时时间 __block int timeout=59; //倒计时全局队列 dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0); //设置一个事件处理器 dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue); //设置时间处理器时间 dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行 dispatch_source_set_event_handler(_timer, ^{ if(timeout&amp;lt;=0){ //倒计时结束，关闭 //取消事件处理器 dispatch_source_cancel(_timer); //回到主线程 dispatch_async(dispatch_get_main_queue(), ^{ //设置界面的按钮显示 根据自己需求设置 _btnCountdown.userInteractionEnabled = YES; //设置倒计时标题 [_btnCountdown setTitle:@&amp;quot;获取验证码&amp;quot; forState:UIControlStateNormal]; }); }else{ //去时间余 int seconds = timeout % 60; //拿到时间文字 NSString *strTime = [NSString stringWithFormat:@&amp;quot;%.2d&amp;quot;, seconds]; //回到主线程 dispatch_async(dispatch_get_main_queue(), ^{ //设置界面的按钮显示 根据自己需求设置 [UIView beginAnimations:nil context:nil]; //设置动画时间为1秒 [UIView setAnimationDuration:1]; //时间倒计时为0的时候显示重发?</description>
     </item>
     
     <item>
       <title>监控联网状态</title>
-      <link>http://wangerk.com/blog-cn/2017/05/31/reachability/</link>
+      <link>update/blog-cn/2017/05/31/reachability/</link>
       <pubDate>Wed, 31 May 2017 23:56:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2017/05/31/reachability/</guid>
+      <guid>update/blog-cn/2017/05/31/reachability/</guid>
       <description>AFN监控联网状态
 AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager]; // 提示：要监控网络连接状态，必须要先调用单例的startMonitoring方法 [manager startMonitoring]; [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) { NSLog(@&amp;quot;%d&amp;quot;, status); }];  Reachability监控联网状态苹果提供,导入这两个类使用
 // 1.检测wifi状态 Reachability *wifi = [Reachability reachabilityForLocalWiFi]; // 2.检测手机是否能上网络(WIFI\3G\2.5G) Reachability *conn = [Reachability reachabilityForInternetConnection]; // 3.判断网络状态 if ([wifi currentReachabilityStatus] != NotReachable) { // 有wifi NSLog(@&amp;quot;有wifi&amp;quot;); } else if ([conn currentReachabilityStatus] != NotReachable) { // 没有使用wifi, 使用手机自带网络进行上网 NSLog(@&amp;quot;使用手机自带网络进行上网&amp;quot;); } else { // 没有网络 NSLog(@&amp;quot;没有网络&amp;quot;); }  ①判断联网状态
@@ -566,10 +995,10 @@ AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedMana
     
     <item>
       <title>GCD信号量线程同步</title>
-      <link>http://wangerk.com/blog-cn/2017/05/31/dispatch_semaphore/</link>
+      <link>update/blog-cn/2017/05/31/dispatch_semaphore/</link>
       <pubDate>Wed, 31 May 2017 23:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2017/05/31/dispatch_semaphore/</guid>
+      <guid>update/blog-cn/2017/05/31/dispatch_semaphore/</guid>
       <description>dispatch_semaphore是GCD用来同步的一种方式，与他相关的共有三个函数，分别是  dispatch_semaphore_create， dispatch_semaphore_signal， dispatch_semaphore_wait。  下面我们逐一介绍三个函数：  dispatch_semaphore_create函数的声明为：
 dispatch_samaphore_t dispatch_semaphore_create(long value); 传入的参数为long，输出一个dispatch_semaphore_t类型且值为value的信号量。 值得注意的是，这里的传入的参数value必须大于或等于0，否则dispatch_semaphore_create会返回NULL。  （关于信号量，我就不在这里累述了，网上很多介绍这个的。我们这里主要讲一下dispatch_semaphore这三个函数的用法）。
  dispatch_semaphore_signal的声明为：
@@ -586,28 +1015,28 @@ DISPATCH_TIME_NOW　表示当前； DISPATCH_TIME_FOREVER　表示遥远的未�
     
     <item>
       <title>多线程(GCD)合成图片~demo</title>
-      <link>http://wangerk.com/blog-cn/2017/05/31/gcd-join-images/</link>
+      <link>update/blog-cn/2017/05/31/gcd-join-images/</link>
       <pubDate>Wed, 31 May 2017 20:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2017/05/31/gcd-join-images/</guid>
+      <guid>update/blog-cn/2017/05/31/gcd-join-images/</guid>
       <description> 图片合成效果 //创建队列组 dispatch_group_tgroup =dispatch_group_create(); //1.开子线程下载图片 //创建队列(并发) dispatch_queue_tqueue =dispatch_get_global_queue(0,0); //异步执行并发队列 dispatch_group_async(group, queue, ^{ //1.获取url地址 NSURL*url = [NSURL URLWithString:@&amp;quot;https://imgsa.baidu.com/baike/c0=baike180,5,5,180,60/sign=b531c24482025aafc73f76999a84c001/b21c8701a18b87d6435d2f9b070828381f30fd13.jpg&amp;quot;]; //2.下载图片 NSData *data = [NSData dataWithContentsOfURL:url]; //3.把二进制数据转换成图片 self.image1= [UIImage imageWithData:data]; }); //下载图片2 dispatch_group_async(group, queue, ^{ //1.获取url地址 NSURL*url = [NSURL URLWithString:@&amp;quot;https://imgsa.baidu.com/baike/c0=baike220,5,5,220,73/sign=62c273b38a13632701e0ca61f0e6cb89/8644ebf81a4c510faae40d756059252dd42aa5b9.jpg&amp;quot;]; //2.下载图片 NSData*data = [NSData dataWithContentsOfURL:url]; //3.把二进制数据转换成图片 self.image2= [UIImage imageWithData:data]; }); //合成 dispatch_group_notify(group, queue, ^{ //开启图形上下文 UIGraphicsBeginImageContext(CGSizeMake(200,200)); //画1 [self.image1 drawInRect:CGRectMake(0,0,200,100)]; //画2 [self.image2 drawInRect:CGRectMake(0,100,200,100)]; //根据图形上下文拿到图片 UIImage*image =UIGraphicsGetImageFromCurrentImageContext(); //关闭上下文 UIGraphicsEndImageContext(); dispatch_async(dispatch_get_main_queue(), ^{ self.imageView.image= image; }); });  </description>
     </item>
     
     <item>
       <title>自动适应UILabel的宽度~demo</title>
-      <link>http://wangerk.com/blog-cn/2017/05/30/uilable-adjust-width/</link>
+      <link>update/blog-cn/2017/05/30/uilable-adjust-width/</link>
       <pubDate>Mon, 30 May 2016 20:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2017/05/30/uilable-adjust-width/</guid>
+      <guid>update/blog-cn/2017/05/30/uilable-adjust-width/</guid>
       <description>#import &amp;quot;UILabel+Extension.h&amp;quot; - (void)viewDidLoad { [super viewDidLoad]; //直接引用分类功能 [UILabel createLabelWithContent:@&amp;quot;10011111111110&amp;quot; addView:self.view lableX:10 lableY:111 lableH:30 fontSize:16 backgroundColor:[UIColor redColor] textColor:[UIColor blueColor] borderColor:[UIColor yellowColor]]; } + (instancetype)createLabelWithContent:(NSString *)content addView:(UIView *)view lableX:(CGFloat)lableX lableY:(CGFloat)lableY lableH:(CGFloat)lableH fontSize:(CGFloat)fontSize backgroundColor:(UIColor *)backgroundColor textColor:(UIColor*)textColor borderColor:(UIColor *)borderColor{ NSString *string = [NSString stringWithFormat:@&amp;quot;%@&amp;quot;,content]; CGRect textRect = [self boundingString:string size:CGSizeMake([UIScreenmainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height *2) fontSize:fontSize]; CGFloat rowWidth = 0.0; if (string.length == 1) { rowWidth = textRect.size.width + 35; }else{ rowWidth = textRect.size.width + 25; } UILabel *lable = [[UILabel alloc]initWithFrame:CGRectMake(lableX, lableY, rowWidth, lableH)]; lable.</description>
     </item>
     
     <item>
       <title>点击view退出键盘</title>
-      <link>http://wangerk.com/blog-cn/2016/04/15/resign-keyboard/</link>
+      <link>update/blog-cn/2016/04/15/resign-keyboard/</link>
       <pubDate>Fri, 15 Apr 2016 20:55:53 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2016/04/15/resign-keyboard/</guid>
+      <guid>update/blog-cn/2016/04/15/resign-keyboard/</guid>
       <description>//创建 UITapGestureRecognizer *tapGest = [[UITapGestureRecognizer alloc]init]; //监听 [tapGest addTarget:self action:@selector(tapAction)]; [self.view addGestureRecognizer:tapGest]; //退出键盘 - (void)tapAction { //放弃第一响应者resignFirstResponder [self.text resignFirstResponder]; }  </description>
     </item>
     

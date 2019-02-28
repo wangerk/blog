@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>copy修饰NSMutableArray的错误</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>copy修饰NSMutableArray的错误</h2>
+        <p>1.错误方法一<br />
+  @property (copy) NSMutableArray * arrayCopy;//声明 copy<br />
+  NSMutableArray  *arrayStrong  =[NSMutableArrayarray];//初始化</p>
+
+<p>  arrayCopy = arrayStrong;</p>
+
+<p>2.错误方法二</p>
+
+<p>  @property (strong) NSMutableArray *arrayCopy;/声明 strong</p>
+
+<p>  NSMutableArray *arrayStrong = [NSMutableArray  array];/初始化</p>
+
+<p>  arrayCopy = [arrayStrong  copy];</p>
+
+<p>  注意:错误方法一 和 错误方法二是相同的,等价的;</p>
+
+<p>3.结果</p>
+
+<p>  所以你的arrayCopy根本就是一个NSArray，所以报了</p>
+
+<p>  -[__NSArray0 removeAllObjects]: unrecognized selector sent to instance 0x14e14970</p>
+
+<p>  未找到实例方法的错误。因为NSArray没有removeAllObjects方法。</p>
+
+<p>4.正确的写法应该是不用copy属性</p>
+
+<p>     @property (strong) NSMutableArray * arrayCopy;</p>
+
+<p>  NSMutableArray* arrayStrong = [NSMutableArray array];</p>
+
+<p>  arrayCopy =  [arrayStrong mutableCopy];</p>
+
+<p>  这里的arrayStrong可以是NSMutableArray也可以是NSArray；</p>
+
+  </div>
+
+

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>检测版本更新app</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>检测版本更新app</h2>
+        
+
+<h3 id="一-实现思路">一、实现思路</h3>
+
+<pre><code>/** 实现思路
+  1.获取当前项目APP版本号
+  2.拿到AppStore项目版本号
+  3.对比版本号,实现更新功能
+ */
+</code></pre>
+
+<p>//一定要先配置自己项目在商店的APPID,配置完最好在真机上运行才能看到完全效果哦</p>
+
+<p>#define STOREAPPID @&ldquo;1234567890&rdquo;</p>
+
+<h3 id="二-代码实现">二、代码实现</h3>
+
+<pre><code>//检测app更新
+ 
+-(void)updateApp
+ 
+{
+ 
+    //1.先获取当前工程项目版本号
+ 
+    NSDictionary *infoDic = [[NSBundlemainBundle]infoDictionary];
+ 
+    NSString *currentVersion = infoDic[@&quot;CFBundleShortVersionString&quot;];
+ 
+    
+ 
+    //2.从网络获取appStore版本号
+ 
+    NSError *error;
+ 
+    NSData *response = [NSURLConnectionsendSynchronousRequest:[NSURLRequestrequestWithURL:[NSURLURLWithString:[NSStringstringWithFormat:@&quot;http://itunes.apple.com/cn/lookup?id=%@&quot;,STOREAPPID]]]returningResponse:nilerror:nil];
+ 
+    //2.1没有内容
+ 
+    if (response == nil) {
+ 
+        NSLog(@&quot;你没有连接网络哦&quot;);
+ 
+        return;
+ 
+    }
+ 
+    //3.序列化解析
+ 
+    NSDictionary *appInfoDic = [NSJSONSerializationJSONObjectWithData:responseoptions:NSJSONReadingMutableLeaveserror:&amp;error];
+ 
+    //3.1数据错误
+ 
+    if (error) {
+ 
+        NSLog(@&quot;hsUpdateAppError:%@&quot;,error);
+ 
+        return;
+ 
+    }
+ 
+    //3.2字典解析
+ 
+    NSArray *array = appInfoDic[@&quot;results&quot;];
+ 
+    NSDictionary *dic = array[0];
+ 
+    NSString *appStoreVersion = dic[@&quot;version&quot;];
+ 
+    
+ 
+    //打印版本号
+ 
+    NSLog(@&quot;当前版本号:%@\n商店版本号:%@&quot;,currentVersion,appStoreVersion);
+ 
+    
+ 
+    //4.当前版本号小于商店版本号,就更新
+ 
+    if([currentVersion floatValue] &lt; [appStoreVersion floatValue])
+ 
+    {
+ 
+        UIAlertView *alert = [[UIAlertViewalloc]initWithTitle:@&quot;版本有更新&quot;  message:[NSStringstringWithFormat:@&quot;检测到新版本(%@),是否更新?&quot;,appStoreVersion] delegate:selfcancelButtonTitle:@&quot;取消&quot;otherButtonTitles:@&quot;更新&quot;,nil];
+ 
+        [alert show];
+ 
+    }else{
+ 
+        NSLog(@&quot;检测到不需要更新&quot;);
+ 
+    }
+ 
+}
+</code></pre>
+
+  </div>
+
+

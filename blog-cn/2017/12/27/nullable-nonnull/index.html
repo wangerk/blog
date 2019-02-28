@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>__nullable和__nonnull区别</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>__nullable和__nonnull区别</h2>
+        
+
+<h3 id="一-概念">一、概念</h3>
+
+<p>  两个新的类型修饰： __nullable 和 __nonnull 。从字面上我们可知， __nullable 表示对象可以是 NULL 或 nil，而 __nonnull 表示对象不应该为空。</p>
+
+<p>  当我们不遵循这一规则时，编译器就会给出警告。在 Xcode 7 中，为了避免与第三方库潜在的冲突，苹果把 __nonnull/__nullable改成 _Nonnull/_Nullable 。再加上苹果同样支持了没有下划线的写法 nonnull/nullable ，于是就造成现在有三种写法这样混乱的局面。</p>
+
+<p>  但是这三种写法本质上都是互通的，只是放的位置不同，</p>
+
+<h3 id="二-声明属性">二、声明属性</h3>
+
+<p>方法返回值修饰：</p>
+
+<p>  - (nullable NSString*)method;</p>
+
+<p>  - (NSString* __nullable)method;</p>
+
+<p>  - (NSString* _Nullable)method;</p>
+
+<p>声明属性的修饰：</p>
+
+<p>  @property(nonatomic,copy,nullable)NSString *aString;</p>
+
+<p>  @property(nonatomic,copy)NSString* __nullable aString;</p>
+
+<p>  @property(nonatomic,copy)NSString* _Nullable aString;</p>
+
+<p>方法参数修饰：</p>
+
+<p>  - (void)methodWithString:(nullable NSString*)aString;</p>
+
+<p>  - (void)methodWithString:(NSString* _Nullable)aString;</p>
+
+<p>  - (void)methodWithString:(NSString* __nullable)aString;</p>
+
+<h3 id="三-总结">三、总结</h3>
+
+<p>而对于 双指针类型对象 、 Block 的返回值 、 Block 的参数 等，这时候就不能用 nonnull/nullable 修饰，只能用带下划线的 __nonnull/__nullable 或者 _Nonnull/_Nullable ：</p>
+
+<p>aString 属性默认是 nonnull 的， methodWithString:方法的返回值也是 nonnull ，而方法的参数 str 被显式指定为 nullable 。</p>
+
+<p>苹果还制定了以下几条规则：</p>
+
+<p>通过 typedef 定义的类型的 nullability 特性通常依赖于上下文，即使是在 Audited Regions 中，也不能假定它为 nonnull ；</p>
+
+<p>对于复杂的指针类型（如 id * )必须显式去指定是 nonnull 还是 nullable。例如，指定一个指向 nullable 对象的 nonnull 指针，可以使用 __nullable id * __nonnull ；</p>
+
+<p>我们经常使用的 NSError ** 通常是被假定为一个指向 nullable NSError 对象的 nullable 指针。</p>
+
+  </div>
+
+

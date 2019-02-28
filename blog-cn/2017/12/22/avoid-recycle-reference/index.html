@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>避免循环引用</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>避免循环引用</h2>
+        <p>循环引用:指的是多个对象相互引用时，使得引用形成一个环形，导致外部无法真正是否掉这块环形内存。其实有点类似死锁。</p>
+
+<p>    其实循环引用就是说我们的强引用形成了闭环，还会有很多自己写的代码中会出现，平时还是要注意写法。当然xcode的instruments也能帮助到大家排除一些这样类似的内存问题。
+  例子：A-&gt;B-&gt;C-&gt;&hellip;.-&gt;X-&gt;B   -&gt;表示强引用，这样的B的引用计数就是2，假如A被系统释放了，理论上A会自动减小A所引用的资源，就是B，那么这时候B的引用计数就变成了1，所有B无法被释放，然而A已经被释放了，所有B的内存部分就肯定无法再释放再重新利用这部分内存空间了，导致内存泄漏。</p>
+
+<p>    1.NSTimer</p>
+
+<p>    创建使用NSTimer的时候，NSTimer会默认对当前self有个强引用，所有在self使用完成打算是否的时候，一定要先使用NSTimer的invalidate来停止是否时间控制对self的引用</p>
+
+<p>    [_timer invalidate];</p>
+
+<p>    2.Block</p>
+
+<p>    Block也是比较常见的循环引用问题，在Block中使用了self容易出现循环引用，因此很多人在使用block的时候，加入里面有用到self的操作都会声明一个__weak来修饰self。其实便不是这样的，不是所有使用了Block都会出现Self循环引用问题，只有self拥有Block的强引用才会出现这种情况。</p>
+
+<p>    所以一般在函数中临时使用Block是不会出现循环应用的，因为这时候Block引用是属于栈的。当栈上的block释放后，block中对self的引用计数也会减掉</p>
+
+<p>    当然不一定要Self对Block有直接的引用才会出现，假如self的变量B，B中有个Block变量，就容易出现这种情况，好的是在block出现循环引用的，xcode7会出现警告提示（之前版本不确定）。</p>
+
+<p>    3.delegate</p>
+
+<p>    Delegate是ios中开发中最常遇到的循环引用，一般在声明delegate的时候都要使用弱引用weak或者assign</p>
+
+<p>    @property (nonatomic, weak, nullable) id <UITableViewDelegate> delegate;</p>
+
+<p>    当然怎么选择使用assign还是weak，MRC的话只能用assign，在ARC的情况下最好使用weak，因为weak修饰的变量在是否后自动为指向nil，防止不安全的野指针存在</p>
+
+  </div>
+
+

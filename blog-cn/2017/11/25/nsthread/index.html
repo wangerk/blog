@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>多线程技术之NSThread</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>多线程技术之NSThread</h2>
+        <p>一、NSThread</p>
+
+<p>    NSThread 是 OS X 和 iOS 都提供的一个线程对象，它是线程的一个轻量级实现。在执行一些轻量级的简单任务时，NSThread 很有用，但用户仍然需要自己管理线程生命周期，进行线程间同步。比如，线程状态，依赖性，线程间同步等线程相关的主题 NSThread 都没有涉及。比如，涉及到线程间同步仍然需要配合使用 NSLock，NSCondition 或者 @synchronized。所以，遇到复杂任务时，轻量级的 NSThread 可能并不合适。</p>
+
+<p> </p>
+
+<p>   提供一个模拟多线程运作的简单例子：两个人同时一起到烤箱抢面包。我们启动两个线程，来代表两个人。由于烤箱门比较小，同时只能有一个人去拿面包。由于 NSThread 不处理线程同步，所以为了模拟这个过程， 你还需要一把线程锁（即类型为 NSLock 的实例变量 _lock）。在后面的 run 方法中会用到这把线程锁：</p>
+
+<p> </p>
+
+<p> _lock = [[NSLock alloc] init];</p>
+
+<p> </p>
+
+<p> NSThread *geroge = [[NSThread alloc] itWithTarget:self selector:</p>
+
+<p> @selector(run) object:nil];</p>
+
+<p> [geroge setName:@&ldquo;Geroge&rdquo;];</p>
+
+<p> [geroge start];</p>
+
+<p> </p>
+
+<p> NSThread *totty = [[NSThread alloc] nitWithTarget:self selector:</p>
+
+<p> @selector(run)  object:nil];</p>
+
+<p> [totty setName:@&ldquo;Totty&rdquo;];</p>
+
+<p> [totty start];</p>
+
+<p>二、代码实现</p>
+
+<p> 受到线程锁保护的拿面包过程可以用下面的 run 方法表示：</p>
+
+<p> </p>
+
+<p> - (void)run {</p>
+
+<p> while (TRUE) {</p>
+
+<p> </p>
+
+<p> [_lock lock];</p>
+
+<p> if(_cake &gt; 0){</p>
+
+<p> [NSThread sleepForTimeInterval:0.5];</p>
+
+<p> _cake&ndash;;</p>
+
+<p> _occupied = kSum - _cake;</p>
+
+<p> NSLog(@&ldquo;Taken by %@\nCurrent free:%ld, occupied:</p>
+
+<p> %ld&rdquo;, [[NSThread currentThread] name], _cake, _occupied);</p>
+
+<p> </p>
+
+<p> }</p>
+
+<p> [_lock unlock];</p>
+
+<p> }</p>
+
+<p> }</p>
+
+  </div>
+
+

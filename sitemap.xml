@@ -3,205 +3,310 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://wangerk.com/blog-cn/java/to-be-top-javaer/</loc>
+    <loc>update/blog-cn/java/to-be-top-javaer/</loc>
     <lastmod>2019-02-18T20:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2019/02/16/setting/</loc>
+    <loc>update/blog-cn/2019/02/16/setting/</loc>
     <lastmod>2019-02-16T08:57:08+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/basics/jvm/java-memory-model/</loc>
+    <loc>update/basics/jvm/java-memory-model/</loc>
     <lastmod>2019-02-15T20:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/basics/jvm/jvm-memory-structure/</loc>
+    <loc>update/basics/jvm/jvm-memory-structure/</loc>
     <lastmod>2019-02-15T20:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/basics/jvm/java-object-model/</loc>
+    <loc>update/basics/jvm/java-object-model/</loc>
     <lastmod>2019-02-15T20:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/reward/pay-blog/</loc>
+    <loc>update/reward/pay-blog/</loc>
     <lastmod>2019-02-15T20:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2018/11/30/pay-password/</loc>
+    <loc>update/blog-cn/2018/11/30/pay-password/</loc>
     <lastmod>2018-11-30T21:56:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2018/11/19/appstore-accelerate/</loc>
+    <loc>update/blog-cn/2018/11/19/appstore-accelerate/</loc>
     <lastmod>2018-11-19T15:24:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2018/11/14/lock/</loc>
+    <loc>update/blog-cn/2018/11/14/lock/</loc>
     <lastmod>2018-11-14T20:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2018/10/29/hook/</loc>
+    <loc>update/blog-cn/2018/10/29/hook/</loc>
     <lastmod>2018-10-29T19:39:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2018/10/10/xcode10/</loc>
+    <loc>update/blog-cn/2018/10/10/xcode10/</loc>
     <lastmod>2018-10-10T20:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2018/10/09/privacy/</loc>
+    <loc>update/blog-cn/2018/10/09/privacy/</loc>
     <lastmod>2018-10-09T20:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2018/09/21/ios-connection/</loc>
+    <loc>update/blog-cn/2018/09/21/ios-connection/</loc>
     <lastmod>2018-09-21T20:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2018/09/16/observe-dead/</loc>
+    <loc>update/blog-cn/2018/09/16/observe-dead/</loc>
     <lastmod>2018-09-16T20:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2018/09/13/get-ip/</loc>
+    <loc>update/blog-cn/2018/09/13/get-ip/</loc>
     <lastmod>2018-09-13T20:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2018/09/12/architecture/</loc>
+    <loc>update/blog-cn/2018/09/12/architecture/</loc>
     <lastmod>2018-09-12T20:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2018/08/26/border-radius/</loc>
+    <loc>update/blog-cn/2018/08/26/border-radius/</loc>
     <lastmod>2018-08-26T20:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2018/08/25/to-any-controller/</loc>
+    <loc>update/blog-cn/2018/08/25/to-any-controller/</loc>
     <lastmod>2018-08-25T20:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2018/01/31/category/</loc>
+    <loc>update/blog-cn/2018/02/15/weak-self/</loc>
+    <lastmod>2018-02-15T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>update/blog-cn/2018/01/31/category/</loc>
     <lastmod>2018-01-31T20:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2018/01/15/components/</loc>
+    <loc>update/blog-cn/2018/01/15/components/</loc>
     <lastmod>2018-01-15T20:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2018/01/14/sel/</loc>
+    <loc>update/blog-cn/2018/01/14/sel/</loc>
     <lastmod>2018-01-14T20:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2017/06/12/nsset-nsmutableset/</loc>
+    <loc>update/blog-cn/2018/01/04/self-super/</loc>
+    <lastmod>2018-01-04T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>update/blog-cn/2018/01/01/dynamic-add-method/</loc>
+    <lastmod>2018-01-01T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>update/blog-cn/2017/12/30/dynamic-add-prop/</loc>
+    <lastmod>2017-12-30T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>update/blog-cn/2017/12/29/bitcode-errror/</loc>
+    <lastmod>2017-12-29T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>update/blog-cn/2017/12/27/nullable-nonnull/</loc>
+    <lastmod>2017-12-27T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>update/blog-cn/2017/12/26/compile-runtime/</loc>
+    <lastmod>2017-12-26T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>update/blog-cn/2017/12/24/copy-nsmutable/</loc>
+    <lastmod>2017-12-24T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>update/blog-cn/2017/12/22/avoid-recycle-reference/</loc>
+    <lastmod>2017-12-22T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>update/blog-cn/2017/12/21/multi-thread-op-array/</loc>
+    <lastmod>2017-12-21T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>update/blog-cn/2017/12/17/runtime-feature/</loc>
+    <lastmod>2017-12-17T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>update/blog-cn/2017/12/16/property-modifier/</loc>
+    <lastmod>2017-12-16T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>update/blog-cn/2017/12/14/safe-area/</loc>
+    <lastmod>2017-12-14T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>update/blog-cn/2017/12/13/set-value-for-key/</loc>
+    <lastmod>2017-12-13T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>update/blog-cn/2017/12/10/update-app/</loc>
+    <lastmod>2017-12-10T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>update/blog-cn/2017/12/08/observer-model/</loc>
+    <lastmod>2017-12-08T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>update/blog-cn/2017/12/03/pay-blog/</loc>
+    <lastmod>2017-12-03T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>update/blog-cn/2017/12/01/nsoperation/</loc>
+    <lastmod>2017-12-01T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>update/blog-cn/2017/11/27/plist-privacy/</loc>
+    <lastmod>2017-11-27T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>update/blog-cn/2017/11/25/nsthread/</loc>
+    <lastmod>2017-11-25T21:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>update/blog-cn/2017/11/25/muti-thread-perform-selectors/</loc>
+    <lastmod>2017-11-25T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>update/blog-cn/2017/06/12/nsset-nsmutableset/</loc>
     <lastmod>2017-06-12T20:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2017/06/10/arc-mrc/</loc>
+    <loc>update/blog-cn/2017/06/10/arc-mrc/</loc>
     <lastmod>2017-06-10T20:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2017/06/09/program-flow/</loc>
+    <loc>update/blog-cn/2017/06/09/program-flow/</loc>
     <lastmod>2017-06-09T20:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2017/06/07/http-code/</loc>
+    <loc>update/blog-cn/2017/06/07/http-code/</loc>
     <lastmod>2017-06-07T20:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2017/06/04/tap-scroll/</loc>
+    <loc>update/blog-cn/2017/06/04/tap-scroll/</loc>
     <lastmod>2017-06-04T20:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2017/06/03/pic-shake-keyanimation/</loc>
+    <loc>update/blog-cn/2017/06/03/pic-shake-keyanimation/</loc>
     <lastmod>2017-06-03T19:07:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2017/06/02/uitableview/</loc>
+    <loc>update/blog-cn/2017/06/02/uitableview/</loc>
     <lastmod>2017-06-02T07:57:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2017/06/01/gcd-timer/</loc>
+    <loc>update/blog-cn/2017/06/01/gcd-timer/</loc>
     <lastmod>2017-06-01T08:03:04+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2017/05/31/reachability/</loc>
+    <loc>update/blog-cn/2017/05/31/reachability/</loc>
     <lastmod>2017-05-31T23:56:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2017/05/31/dispatch_semaphore/</loc>
+    <loc>update/blog-cn/2017/05/31/dispatch_semaphore/</loc>
     <lastmod>2017-05-31T23:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2017/05/31/gcd-join-images/</loc>
+    <loc>update/blog-cn/2017/05/31/gcd-join-images/</loc>
     <lastmod>2017-05-31T20:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2017/05/30/uilable-adjust-width/</loc>
+    <loc>update/blog-cn/2017/05/30/uilable-adjust-width/</loc>
     <lastmod>2016-05-30T20:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2016/04/15/resign-keyboard/</loc>
+    <loc>update/blog-cn/2016/04/15/resign-keyboard/</loc>
     <lastmod>2016-04-15T20:55:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wangerk.com/basics/</loc>
+    <loc>update/basics/</loc>
     <lastmod>2019-02-15T20:55:53+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/</loc>
+    <loc>update/blog-cn/</loc>
     <lastmod>2019-02-18T20:55:53+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://wangerk.com/categories/</loc>
+    <loc>update/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://wangerk.com/reward/</loc>
+    <loc>update/reward/</loc>
     <lastmod>2019-02-15T20:55:53+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://wangerk.com/tags/</loc>
+    <loc>update/tags/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://wangerk.com/</loc>
+    <loc>update/</loc>
     <lastmod>2019-02-18T20:55:53+08:00</lastmod>
     <priority>0</priority>
   </url>
