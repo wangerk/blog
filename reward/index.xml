@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Rewards on 当然我在扯淡</title>
-    <link>update/reward/</link>
+    <link>http://wangerk.com/reward/</link>
     <description>Recent content in Rewards on 当然我在扯淡</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 15 Feb 2019 20:55:53 +0800</lastBuildDate>
     
-	<atom:link href="update/reward/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://wangerk.com/reward/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>博文的自愿付费方式</title>
-      <link>update/reward/pay-blog/</link>
+      <link>http://wangerk.com/reward/pay-blog/</link>
       <pubDate>Fri, 15 Feb 2019 20:55:53 +0800</pubDate>
       
-      <guid>update/reward/pay-blog/</guid>
+      <guid>http://wangerk.com/reward/pay-blog/</guid>
       <description>喜欢我的文章的人，可以自愿付费购买。你可以使用以下方式付款。
  支付宝：  微信：  PayPal：请点击[付款链接]  </description>
     </item>
