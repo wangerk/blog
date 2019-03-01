@@ -766,6 +766,345 @@ dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     </item>
     
     <item>
+      <title>ReactiveCocoa方法介绍</title>
+      <link>http://wangerk.com/blog-cn/2017/11/19/rac/</link>
+      <pubDate>Sun, 19 Nov 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/11/19/rac/</guid>
+      <description>一、RAC内存管理
+RAC会维护一个全局的信号集合，一个或多于一个订阅者就可用，所有订阅者都被移除了，信号就被释放了。
+RAC的API手册
+常见类
+RACSiganl 信号类。
+  RACEmptySignal ：空信号，用来实现 RACSignal 的 +empty 方法；
+  RACReturnSignal ：一元信号，用来实现 RACSignal 的 +return: 方法；
+  RACDynamicSignal ：动态信号，使用一个 block - 来实现订阅行为，我们在使用 RACSignal 的 +createSignal: 方法时创建的就是该类的实例；
+  RACErrorSignal ：错误信号，用来实现 RACSignal 的 +error: 方法；
+  RACChannelTerminal ：通道终端，代表 RACChannel 的一个终端，用来实现双向绑定。
+  RACSubscriber 订阅者
+RACDisposable 用于取消订阅或者清理资源，当信号发送完成或者发送错误的时候，就会自动触发它。
+  RACSerialDisposable ：作为 disposable 的容器使用，可以包含一个 disposable 对象，并且允许将这个 disposable 对象通过原子操作交换出来；
+  RACKVOTrampoline ：代表一次 KVO 观察，并且可以用来停止观察；
+  RACCompoundDisposable ：它可以包含多个 disposable 对象，并且支持手动添加和移除 disposable 对象</description>
+    </item>
+    
+    <item>
+      <title>友盟统计界面次数</title>
+      <link>http://wangerk.com/blog-cn/2017/11/10/umeng-touch-statistic/</link>
+      <pubDate>Fri, 10 Nov 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/11/10/umeng-touch-statistic/</guid>
+      <description> 一、初始化 #import &amp;quot;AppDelegate.h&amp;quot; #import &amp;quot;MobClick.h&amp;quot; #import &amp;quot;ViewController.h&amp;quot; @interface AppDelegate () @end @implementation AppDelegate - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions { //1.初始化友盟统计模块 [MobClick startWithAppkey:@&amp;quot;是申请的 Key 名例如是 abcvxsdhufh&amp;quot; reportPolicy:BATCH channelId:nil]; //配置 NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@&amp;quot;CFBundleShortVersionString&amp;quot;]; [MobClick setAppVersion:version]; //设置ViewController添加到导航栏上 ViewController *vc = [[ViewController alloc]init]; UINavigationController * nvc = [[UINavigationController alloc]initWithRootViewController:vc]; //ViewController为主控制器 self.window.rootViewController = nvc; self.window.backgroundColor = [UIColor whiteColor]; return YES; }  二、页面代码 //视图将要显示的时候 - (void)viewWillAppear:(BOOL)animated { [super viewWillAppear:animated]; //开始视图里面的日志页面: [MobClick beginLogPageView:@&amp;quot;PageOne&amp;quot;]; } //视图将要消失的时候 - (void)viewWillDisappear:(BOOL)animated { [super viewWillDisappear:animated]; [MobClick endLogPageView:@&amp;quot;PageOne&amp;quot;]; }  </description>
+    </item>
+    
+    <item>
+      <title>NSDictionary实现原理</title>
+      <link>http://wangerk.com/blog-cn/2017/11/06/nsdictionary/</link>
+      <pubDate>Mon, 06 Nov 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/11/06/nsdictionary/</guid>
+      <description> NSDictionary使用原理  1.NSDictionary（字典）是使用 hash表来实现key和value之间的映射和存储的， hash函数设计的好坏影响着数据的查找访问效率。
+ - (void)setObject:(id)anObject forKey:(id )aKey;
+ 2.Objective-C 中的字典 NSDictionary 底层其实是一个哈希表，实际上绝大多数语言中字典都通过哈希表实现
+ 二、哈希的原理  哈希概念:哈希表的本质是一个数组，数组中每一个元素称为一个箱子(bin)，箱子中存放的是键值对。
+ 三、哈希表的存储过程:  1.根据 key 计算出它的哈希值 h。
+2.假设箱子的个数为 n，那么这个键值对应该放在第 (h % n) 个箱子中。
+3.如果该箱子中已经有了键值对，就使用开放寻址法或者拉链法解决冲突。
+ .
+ 在使用拉链法解决哈希冲突时，每个箱子其实是一个链表，属于同一个箱子的所有键值对都会排列在链表中。
+哈希表还有一个重要的属性: 负载因子(load factor)，它用来衡量哈希表的 空/满 程度，一定程度上也可以体现查询的效率，计算公式为:
+负载因子 = 总键值对数 / 箱子个数
+负载因子越大，意味着哈希表越满，越容易导致冲突，性能也就越低。因此，一般来说，当负载因子大于某个常数(可能是 1，或者 0.75 等)时，哈希表将自动扩容。
+ .
+ 重哈希概念: 哈希表在自动扩容时，一般会创建两倍于原来个数的箱子，因此即使 key 的哈希值不变，对箱子个数取余的结果也会发生改变，因此所有键值对的存放位置都有可能发生改变，这个过程也称为重哈希(rehash)。
+哈希表的扩容并不总是能够有效解决负载因子过大的问题。假设所有 key 的哈希值都一样，那么即使扩容以后他们的位置也不会变化。虽然负载因子会降低，但实际存储在每个箱子中的链表长度并不发生改变，因此也就不能提高哈希表的查询性能。
+ 四、总结  细心的读者可能会发现哈希表的两个问题:
+1.如果哈希表中本来箱子就比较多，扩容时需要重新哈希并移动数据，性能影响较大。
+2.如果哈希函数设计不合理，哈希表在极端情况下会变成线性表，性能极低。
+ </description>
+    </item>
+    
+    <item>
+      <title>Runloop相关</title>
+      <link>http://wangerk.com/blog-cn/2017/11/01/runloop/</link>
+      <pubDate>Wed, 01 Nov 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/11/01/runloop/</guid>
+      <description>一、RunLoop和线程的关系:
+1.RunLoop 的作用就是来管理线程的，当线程的 RunLoop开启后，线程就会在执行完任务后，处于休眠状态，随时等待接受新的任务，而不是退出。
+2.只有主线程的RunLoop是默认开启的，所以程序在开启后，会一直运行，不会退出。其他线程的RunLoop如果需要开启，就手动开启，
+二、runloop内部是如何实现的:
+1、有一个判断循环的条件，满足条件，就一直循环
+2、线程得到唤醒事件被唤醒，事件处理完毕以后，回到睡眠状态，等待下次唤醒
+二、runloop的mode作用是什么?:
+1.model 主要是用来指定事件在运行循环中的优先级的，分为：
+ NSDefaultRunLoopMode（kCFRunLoopDefaultMode）：默认，空闲状态
+ UITrackingRunLoopMode ：ScrollView滑动时
+ UIInitializationRunLoopMode ：启动时
+ NSRunLoopCommonModes（kCFRunLoopCommonModes）：Mode集合
+  2.苹果公开提供的 Mode有两个：
+ NSDefaultRunLoopMode（kCFRunLoopDefaultMode）
+ NSRunLoopCommonModes（kCFRunLoopCommonModes）
+  </description>
+    </item>
+    
+    <item>
+      <title>类方法load和initialize的区别</title>
+      <link>http://wangerk.com/blog-cn/2017/10/31/load-initialize/</link>
+      <pubDate>Tue, 31 Oct 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/10/31/load-initialize/</guid>
+      <description>一、+load:
+1/方法当类或分类添加到object-c runtime时被调用
+2/子类的+load方法会在它所有父类的+load方法之后执行，
+3/而分类的+load方法会在它的主类的+load方法之后执行,
+4.+load方法，它不遵循那套继承规则。
+5.+load方法调用顺序是：SuperClass &amp;ndash;&amp;gt;SubClass &amp;ndash;&amp;gt; CategaryClass。
+6.load，是加载类的时候，这里是Constants类，就会调用。也就是说，ios应用启动的时候，就会加载所有的类，就会调用这个方法。
+注意:这样有个缺点，当加载类需要很昂贵的资源，或者比较耗时的时候，可能造成不良的用户体验，或者系统的抖动（dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{});用GCD可能会好点）。
+二、+initialize
+1/是在类或者它的子类接受第一条消息前被调用;
+2/是以懒加载的方式被调用的;
+3/一定会在“线程安全的环境”中执行;
+4/调用顺序是SuperClass &amp;ndash;&amp;gt;SubClass 。
+5/initialize 会在运行时仅被触发一次，如果没有向类发送消息的话，这个方法将不会被调用。这个方法的调用是线程安全的。父类会比子类先收到此消息。</description>
+    </item>
+    
+    <item>
+      <title>Charles抓包</title>
+      <link>http://wangerk.com/blog-cn/2017/10/09/charles/</link>
+      <pubDate>Mon, 09 Oct 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/10/09/charles/</guid>
+      <description>（1）查看电脑IP地址 （2）设置手机HTTP代理
+手机连上电脑，点击“设置-&amp;gt;无线局域网-&amp;gt;连接的WiFi”，设置HTTP代理：
+服务器为电脑IP地址：如192.168.1.169
+端口：8888 设置代理后，需要在电脑上打开Charles才能上网
+（3）电脑上打开Charles进行HTTP抓包
+手机上打开某个App或者浏览器什么的，如果不能上网，检查前面步骤是否正确 点击“Allow”允许，出现手机的HTTP请求列表 </description>
+    </item>
+    
+    <item>
+      <title>delegate和NSNotification比较</title>
+      <link>http://wangerk.com/blog-cn/2017/10/03/delegate-nsnotification/</link>
+      <pubDate>Tue, 03 Oct 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/10/03/delegate-nsnotification/</guid>
+      <description>delegate方法比notification更加直接，最典型的特征是，delegate方法往往需要关注返回值，也就是delegate方法的结果。
+比如-windowShouldClose: 需要关心返回的是yes还是no。所以delegate方法往往包含 should这个很传神的词。也就是好比你做我的delegate，我会问你我想关闭窗口你愿意吗？你需要给我一个答案，我根据你的答案来决定如何做下一步。相反的，notification最大的特色就是不关心接受者的态度，我只管把通告放出来，你接受不接受就是你的事情，同时我也不关心结果。
+所以notification往往用did这个词汇，比如NSWindowDidResizeNotification，那么NSWindow对象放出这个notification后就什么都不管了也不会等待接受者的反应。</description>
+    </item>
+    
+    <item>
+      <title>log宏</title>
+      <link>http://wangerk.com/blog-cn/2017/09/15/log/</link>
+      <pubDate>Fri, 15 Sep 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/09/15/log/</guid>
+      <description>// 直接替换
+#ifdef DEBUG
+#define NSLog(&amp;hellip;) NSLog(VA_ARGS)
+#define debugMethod() NSLog(@&amp;ldquo;%s&amp;rdquo;, func)
+#else
+#define NSLog(&amp;hellip;)
+#define debugMethod()
+#endif</description>
+    </item>
+    
+    <item>
+      <title>block为什么要用copy</title>
+      <link>http://wangerk.com/blog-cn/2017/09/10/block-cpy/</link>
+      <pubDate>Sun, 10 Sep 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/09/10/block-cpy/</guid>
+      <description>一、栈区和堆区概念
+内存的栈区 : 由编译器自动分配释放, 存放函数的参数值, 局部变量的值等. 其操作方式类似于数据结构中的栈.
+内存的堆区 : 一般由程序员分配释放, 若程序员不释放, 程序结束时可能由OS回收. 注意它与数据结构中的堆是两回事, 分配方式倒是类似于链表.
+二、block用copy作用域
+首先, block是一个对象, 所以block理论上是可以retain/release的. 但是block在创建的时候它的内存是默认是分配在栈(stack)上, 而不是堆(heap)上的. 所以它的作用域仅限创建时候的当前上下文(函数, 方法&amp;hellip;), 当你在该作用域外调用该block时, 程序就会崩溃.
+官方文档: 注意:
+1.一般情况下你不需要自行调用copy或者retain一个block. 只有当你需要在block定义域以外的地方使用时才需要copy. Copy将block从内存栈区移到堆区.
+2.其实block使用copy是MRC留下来的也算是一个传统吧, 在MRC下, 如上述, 在方法中的block创建在栈区, 使用copy就能把他放到堆区, 这样在作用域外调用该block程序就不会崩溃. 3.但在ARC下, 使用copy与strong其实都一样, 因为block的retain就是用copy来实现的, 所以block使用copy还能装装逼, 说明自己是从MRC下走过来的</description>
+    </item>
+    
+    <item>
+      <title>深拷贝</title>
+      <link>http://wangerk.com/blog-cn/2017/09/09/deep-copy/</link>
+      <pubDate>Sat, 09 Sep 2017 21:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/09/09/deep-copy/</guid>
+      <description>一、深拷贝概念
+1.深拷贝:是直接拷贝整个对象的内存到另一块内存中。
+2.在Objective-C中，通过两个方法 copy和mutableCopy可以执行拷贝操作，其中copy是获得一个不可变对象，而mutableCopy是获得一个可变对象。
+3.并且两个方法分别调用copyWithZone和mutableCopyWithZone两个方法来进行拷贝操作，一个类必须实现copyWithZone或者mutableCopyWithZone，才能进行copy或者mutableCopy
+二、集合的深拷贝代码实现
+有两种方法:
+第一个方法是
+可以用initWithArray:copyItems:将第二个参数设置为YES即可深拷贝，如：
+NSDictionary shallowCopyDict = [[NSDictionary alloc]initWithDictionary:someDictionary copyItems:YES];
+如果你用这种方法深拷贝，集合里的每个对象都会收到copyWithZone:消息。如果集合里的对象都遵循NSCopying协议，那么对象就会被深拷贝到新的集合。如果对象没有遵循 NSCopying协议，而尝试用这种方法进行深拷贝，会在运行时出错。copyWithZone:这种拷贝方式只能够提供单层内存拷贝(one-level-deep copy)，而非真正的深拷贝。
+第二个方法是将集合进行归档(archive)，然后解档(unarchive)，
+如：
+NSArray *trueDeepCopyArray = [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:oldArray]];
+注意：
+ 第一种方式copyWithZone:这种拷贝方式只能够提供单层内存拷贝(one-level-deep copy)，而非真正的深拷贝。
+ 第二种方式归档和解档才是实现真正的深拷贝。
+  one-level-deep copy 集合的单层深拷贝
+这里需要区分一个概念性的问题：
+如果在多层数组中，对第一层进行内容拷贝，其它层进行指针拷贝，这种情况是属于深拷贝，还是浅拷贝？对此，苹果官网文档有这样一句话描述：
+/**
+This kind of copy is only capable of producing a one-level-deep copy.
+If you only need a one-level-deep copy, you can explicitly call for one as in Listing
+*/
+1.苹果认为这种拷贝不是真正的深拷贝，而是将其称为单层深拷贝(one-level-deep copy)。 2.</description>
+    </item>
+    
+    <item>
+      <title>浅拷贝</title>
+      <link>http://wangerk.com/blog-cn/2017/09/09/shallow-copy/</link>
+      <pubDate>Sat, 09 Sep 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/09/09/shallow-copy/</guid>
+      <description>一、浅拷贝概念
+1.浅拷贝:只是拷贝了对象的指针，而不是拷贝对象本身。
+2.在Objective-C中，通过两个方法 copy和mutableCopy可以执行拷贝操作，其中copy是获得一个不可变对象，而mutableCopy是获得一个可变对象。
+3.并且两个方法分别调用copyWithZone和mutableCopyWithZone两个方法来进行拷贝操作，一个类必须实现copyWithZone或者mutableCopyWithZone，才能进行copy或者mutableCopy 二、浅拷贝代码实现
+浅拷贝有很多中方法，当你进行浅拷贝时,会向原始的集合发送retain消息，这时引用计数就会 +1 ，同时指针就被拷贝到新的集合中去。
+NSArray *shallowCopyArray = [someArray copyWithZone:nil];
+NSDictionary *shallowCopyDict = [[NSDictionary alloc] initWithDictionary:someDictionary copyItems:NO];
+注意:如果集合里的对象都遵循NSCopying 协议，那么对象就会被深拷贝到新的集合。如果对象没有遵循 NSCopying 协议，而尝试用这种方法进行深拷贝，会在运行时出错。
+三、浅拷贝、深拷贝、完全拷贝区别:
+ 浅拷贝(shallow copy)： 在浅拷贝操作时，对于被拷贝对象的每一层都是指针拷贝。
+ 深拷贝(one-level-deep copy)：在深拷贝操作时，对于被拷贝对象，至少有一层是深拷贝。
+ 完全拷贝(real-deep copy)： 在完全拷贝操作时，对于被拷贝对象的每一层都是对象拷贝
+  四、系统对象的拷贝
+不管是集合类对象，还是非集合类对象，当接收到copy和mutableCopy消息时，都遵循以下准则：
+copy返回不可变对象(immutable)；所以，如果对copy返回值使用mutable对象接口就会crash； mutableCopy返回可变对象(mutable);</description>
+    </item>
+    
+    <item>
+      <title>多媒体</title>
+      <link>http://wangerk.com/blog-cn/2017/08/29/media/</link>
+      <pubDate>Tue, 29 Aug 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/08/29/media/</guid>
+      <description>一、AVPlayer介绍
+1.能播放本地、远程的音频、视频文件
+2.基于Layer显示，得自己去编写控制面板
+3.AVPlayer(远程⾳音乐/播放视频)—&amp;gt;添加layer
+4.可以播放远程视频(需要通过添加layer来显示视频)
+代码实现
+#pragma mark - 懒加载代码 - (AVPlayer *)player { if (_player == nil) { // 1.获取URL(远程/本地) // NSURL *url = [[NSBundle mainBundle] URLForResource:@&amp;quot;01-知识回顾.mp4&amp;quot; withExtension:nil]; NSURL *url = [NSURL URLWithString:@&amp;quot;http://v1.mukewang.com/a45016f4-08d6-4277-abe6-bcfd5244c201/L.mp4&amp;quot;]; // 2.创建AVPlayerItem AVPlayerItem *item = [AVPlayerItem playerItemWithURL:url]; // 3.创建AVPlayer _player = [AVPlayer playerWithPlayerItem:item]; // 4.添加AVPlayerLayer AVPlayerLayer *layer = [AVPlayerLayer playerLayerWithPlayer:self.player]; layer.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.width * 9 / 16); [self.view.layer addSublayer:layer]; } return _player; }  二、MPMoviePlayerController介绍</description>
+    </item>
+    
+    <item>
+      <title>VR AR MR简介</title>
+      <link>http://wangerk.com/blog-cn/2017/08/28/vr-ar-mr/</link>
+      <pubDate>Mon, 28 Aug 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/08/28/vr-ar-mr/</guid>
+      <description>一、VR(虚拟现实)概念
+VR：
+ 1.是虚拟现实Virtual Reality的英语缩写(简称VR,又译作灵境、幻真,是近年来出现的高新技术，也称灵境技术或人工环境)。
+ 2.虚拟现实技术是一种可以创建和体验虚拟世界的计算机仿真系统它利用计算机生成一种模拟环境是一种多源信息融合的交互式的三维动态视景和实体行为的系统仿真使用户沉浸到该环境中。
+ 3.虚拟现实是利用电脑模拟产生一个三维空间的虚拟世界，提供使用者关于视觉、听觉、触觉等感官的模拟，让使用者如同身历其境一般，可以及时、没有限制地观察三度空间内的事物。
+二、AR(增强现实)概念
+AR：
+ 1.是增强现实Augmented Reality的英文缩写(简称AR，也被称之为混合现实)。
+ 2.增强现实通过电脑技术，将虚拟的信息应用到真实世界，真实的环境和虚拟的物体实时地叠加到了同一个画面或空间同时存在
+ 3.增强现实是一种实时地计算摄影机影像的位置及角度并加上相应图像的技术，这种技术的目标是在屏幕上把虚拟世界套在现实世界并进行互动。这种技术最早于1990年提出。随着随身电子产品运算能力的提升，增强现实的用途越来越广。
+三、MR(混合现实)概念
+MR：
+ 1.是混合现实Mixed Reality的英文缩写(简称MR)。
+ 2.混合现实包括增强现实和增强虚拟，指的是合并现实和虚拟世界而产生的新的可视化环境。在新的可视化环境里物理和数字对象共存，并实时互动。系统通常采用三个主要特点：A. 它结合了虚拟和现实；B. 在虚拟的三维（3D注册）； C. 实时运行。
+ 3.混合现实技术是虚拟现实技术的进一步发展，该技术通过在虚拟环境中引入现实场景信息，在虚拟世界、现实世界和用户之间搭起一个交互反馈的信息回路，以增强用户体验的真实感。
+四、VR和AR的区别：
+　简单来说，虚拟现实（VR），看到的场景和人物全是假的，是把你的意识代入一个虚拟的世界。增强现实（AR），看到的场景和人物一部分是真一部分是假，是把虚拟的信息带入到现实世界中。
+五、VR和AR交互区别：　　VR设备：因为VR是纯虚拟场景，所以VR装备更多的是用于用户与虚拟场景的互动交互，更多的使用是：位置跟踪器、数据手套（5DT之类的）、动捕系统、数据头盔等等。
+　AR设备：由于AR是现实场景和虚拟场景的结合，所以基本都需要摄像头，在摄像头拍摄的画面基础上，结合虚拟画面进行展示和互动，比如GOOGLE GLASS这些（其实严格的来说，IPAD，手机这些带摄像头的只能产品，都可以用于AR，只要安装AR的软件就可以。）
+六、 VR 和 AR技术区别
+　类似于游戏制作，创作出一个虚拟场景供人体验，其核心是graphics的各项技术的发挥。和我们接触最多的就是应用在游戏上，可以说是传统游戏娱乐设备的一个升级版，主要关注虚拟场景是否有良好的体验。而与真实场景是否相关，他们并不关心。VR设备往往是浸入式的，典型的设备就是oculus rift。
+　AR应用了很多computer vision的技术。AR设备强调复原人类的视觉的功能，比如自动去识别跟踪物体，而不是我手动去指出；自主跟踪并且对周围真实场景进行3D建模，而不是我打开Maya照着场景做一个极为相似的。典型的AR设备就是普通移动端手机，升级版如Google Project Tango</description>
+    </item>
+    
+    <item>
+      <title>block原理</title>
+      <link>http://wangerk.com/blog-cn/2017/08/27/block/</link>
+      <pubDate>Sun, 27 Aug 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/08/27/block/</guid>
+      <description>一、blcok概念
+block：可以理解为匿名的函数，就是预先准备好的一段代码，在需要的时候调用。
+二、底层实现
+1.block是一个指针结构体，在终端下通过clang -rewrite-objc 指令看看C++代码。
+ 利用终端编译生成C++代码： clang -rewrite-objc main.m
+2.几个重要的结构体和函数简介：
+__block_impl：这是一个结构体，也是C面向对象的体现，可以理解为block的基类;
+__main_block_impl_0: 可以理解为block变量;
+__main_block_func_0: 可以理解为匿名函数；
+__main_block_desc_0:block的描述, Block_size;
+3.注意事项：block容易造成循环引用，在block里面如果使用了self，然后形成强引用时，需要打断循环引用；在MRC下用_block，在ARC下使用__weak;
+三、 block 实现原理 Objective-C是对C语言的扩展，block的实现是基于指针和函数指针。 从计算语言的发展，最早的goto，高级语言的指针，到面向对象语言的block，从机器的思维，一步步接近人的思维，以方便开发人员更为高效、直接的描述出现实的逻辑
+四、block 储存位置
+block快的存储位置（block入口的地址）可能存放在3个地方：代码区（全局区）、堆区、栈区（ARC情况下回自动拷贝到堆区、因此ARC下只有两个地方：代码区和堆区）。
+代码区：不访问栈区的变量（如局部变量），且不访问堆区的变量（如用alloc创建的对象）时，此时block存放在代码区； 堆区：如果访问了堆区的变量（如局部变量），或堆区的变量（如用alloc创建的对象），此时block存方在堆区； &amp;ndash;需要注意 实际是放在栈区，在ARC情况下自动拷贝到堆区，如果不是ARC则存放在栈区，所在函数执行完毕就回释放，想再外面调用需要用copy指向它，这样就拷贝到了堆区，strong属性不会拷贝、会造成野指针错区。（需要理解ARC是一种编译器特性，即编译器在编译时在核实的地方插入retain、release、autorelease，而不是iOS的运行时特性）。
+此外代码存在堆区时,需要注意，因为堆区不像代码区不变化，堆区是动态的（不断的创建销毁），当没有强指针指向的时候就会被销毁，如果再去访问这段代码时，程序就会崩溃！所以此种情况在定义block属性时需要指定为strong or copy。block是一段代码，即不可变，所以使用copy也不会深拷贝。
+ Block如果没有引用外部变量
+保存在全局区（MRC/ARC一样）
+Block如果引用外部变量
+ARC保存在 堆区； MRC保存在 栈区必须用copy修饰block；
+ </description>
+    </item>
+    
+    <item>
+      <title>内存分析优化</title>
+      <link>http://wangerk.com/blog-cn/2017/08/25/oc-memory/</link>
+      <pubDate>Fri, 25 Aug 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/08/25/oc-memory/</guid>
+      <description>一.内存分析
+1.静态分析(Analyze)
+不运行程序, 直接检测代码中是否有潜在的内存问题(不一定百分百准确,仅仅是提供建议)
+结合实际情况来分析,是否真的有内存问题
+2.动态分析(Profile == Instruments)
+1&amp;gt; 运行程序,通过使用app,查看内存的分配情况(Allocations)
+ 可以查看做出了某个操作后(比如点击了某个按钮\显示了某个控制器),内存是否有暴增的情况(突然变化)  2&amp;gt; 运行程序,通过使用app,查看是否有内存泄漏(Leaks)
+ 红色区域代表内存泄漏出现的地方  二.内存使用注意
+1.加载小图片\使用频率比较高的图片
+1&amp;gt;利用imageNamed:方法加载过的图片,永远有缓存,这个缓存是由系统管理的,无法通过代码销毁缓存
+2.加载大图片\使用频率比较低的图片(一次性的图片,比如版本新特性的图片)
+1&amp;gt; 利用initWithContentsOfFile:\imageWithContentsOfFile:\imageWithData:等方法加载过的图片,没有缓存,只要用完了,就会自动销毁
+2&amp;gt;基本上,除imageNamed:方法以外,其他加载图片的方式,都没有缓存
+三.2个专业术语
+1.内存泄漏
+1&amp;gt;该释放的对象,没有被释放(已经不再使用的对象,没有被释放)
+2.内存溢出(Out Of Memory)
+1&amp;gt;内存不够用了
+2&amp;gt;数据长度比较小的数据类型存储了数据长度比较大的数据
+四.图片在沙盒中的存在形式
+1.如果项目的Deployment Target &amp;lt;=6.x (不支持图片压缩)
+1&amp;gt; 所有图片直接暴露在沙盒的资源包(main Bundle),不会压缩到Assets.car文件
+2.如果项目的Deployment Target &amp;gt;=7.x (支持图片压缩)
+1&amp;gt; 放在Images.xcassets里面的所有图片会压缩到Assets.car文件,不会直接暴露在沙盒的资源包(main Bundle)
+2&amp;gt; 没有放在Images.xcassets里面的所有图片会直接暴露在沙盒的资源包(main Bundle), 不会压缩到Assets.car文件
+3.总结
+1&amp;gt; 会压缩到Assets.car文件,没有直接暴露在沙盒的资源包(main Bundle)
+ 条件 :&amp;ldquo;Deployment Target &amp;gt;= 7.x&amp;rdquo;并且是&amp;rdquo;放在Images.xcassets里面的所有图片&amp;rdquo;
+ 影响 :无法得到图片的全路径,只能通过图片名(imageNamed:方法)来加载图片,永远会有缓存
+  2&amp;gt; 不会压缩到Assets.car文件,直接暴露在沙盒的资源包(main Bundle)</description>
+    </item>
+    
+    <item>
+      <title>路径图</title>
+      <link>http://wangerk.com/blog-cn/2017/08/15/path-drawing/</link>
+      <pubDate>Tue, 15 Aug 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/08/15/path-drawing/</guid>
+      <description>一、GIF 效果图: 二、连线视图的效果图: 三、实现代码:
+控制器1: SHContext.h // // SHContext.h // PathDrawing(路径图)~demo // // Created by . on 2017/8/15. // Copyright © 2017年 shihu. All rights reserved. // #ifndef SHContext_h #define SHContext_h /* 该方法负责绘制圆角矩形 x1、y2：是圆角矩形左上角的座标。 width、height：控制圆角举行的宽、高 radius：控制圆角矩形的四个圆角的半径 */ void CGContextAddRoundRect(CGContextRef c, CGFloat x1 , CGFloat y1 , CGFloat width , CGFloat height , CGFloat radius) { // 移动到左上角 CGContextMoveToPoint (c, x1 + radius , y1); // 添加一条连接到右上角的线段 CGContextAddLineToPoint(c , x1 + width - radius, y1); // 添加一段圆弧 CGContextAddArcToPoint(c , x1 + width , y1, x1 + width , y1 + radius, radius); // 添加一条连接到右下角的线段 CGContextAddLineToPoint(c , x1 + width, y1 + height - radius); // 添加一段圆弧 CGContextAddArcToPoint(c , x1 + width, y1 + height , x1 + width - radius , y1 + height , radius); // 添加一条连接到左下角的线段 CGContextAddLineToPoint(c , x1 + radius, y1 + height); // 添加一段圆弧 CGContextAddArcToPoint(c , x1, y1 + height , x1 , y1 + height - radius , radius); // 添加一条连接到左上角的线段 CGContextAddLineToPoint(c , x1 , y1 + radius); // 添加一段圆弧 CGContextAddArcToPoint(c , x1 , y1 , x1 + radius , y1 , radius); } /* 该方法负责绘制多角星。 n：该参数通常应设为奇数，控制绘制N角星。 dx、dy：控制N角星的中心。 size：控制N角星的大小 */ void CGContextAddStar(CGContextRef c , NSInteger n , CGFloat dx , CGFloat dy , NSInteger size) { CGFloat dig = 4 * M_PI / n ; // 移动到指定点 CGContextMoveToPoint(c , dx , dy + size); for(int i = 1 ; i &amp;lt;= n ; i++) { CGFloat x = sin(i * dig); CGFloat y = cos(i * dig); // 绘制从当前点连接到指定点的线条 CGContextAddLineToPoint(c , x * size + dx ,y * size + dy); } } #endif /* SHContext_h */ ========================= =================================================== 控制器2: SHPathDrawingView.</description>
+    </item>
+    
+    <item>
       <title>NSSet和NSMutableSet</title>
       <link>http://wangerk.com/blog-cn/2017/06/12/nsset-nsmutableset/</link>
       <pubDate>Mon, 12 Jun 2017 20:55:53 +0800</pubDate>

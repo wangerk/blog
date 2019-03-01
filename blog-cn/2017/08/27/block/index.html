@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>block原理</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>block原理</h2>
+        <p>一、blcok概念<br />
+block：可以理解为匿名的函数，就是预先准备好的一段代码，在需要的时候调用。</p>
+
+<p>二、底层实现<br />
+1.block是一个指针结构体，在终端下通过clang -rewrite-objc 指令看看C++代码。</p>
+
+<p>    利用终端编译生成C++代码：
+   clang -rewrite-objc main.m</p>
+
+<p>2.几个重要的结构体和函数简介：</p>
+
+<p>__block_impl：这是一个结构体，也是C面向对象的体现，可以理解为block的基类;<br />
+__main_block_impl_0: 可以理解为block变量;<br />
+__main_block_func_0: 可以理解为匿名函数；<br />
+__main_block_desc_0:block的描述, Block_size;</p>
+
+<p>3.注意事项：block容易造成循环引用，在block里面如果使用了self，然后形成强引用时，需要打断循环引用；在MRC下用_block，在ARC下使用__weak;</p>
+
+<p>三、 block 实现原理
+Objective-C是对C语言的扩展，block的实现是基于指针和函数指针。
+从计算语言的发展，最早的goto，高级语言的指针，到面向对象语言的block，从机器的思维，一步步接近人的思维，以方便开发人员更为高效、直接的描述出现实的逻辑</p>
+
+<p>四、block 储存位置</p>
+
+<p>block快的存储位置（block入口的地址）可能存放在3个地方：代码区（全局区）、堆区、栈区（ARC情况下回自动拷贝到堆区、因此ARC下只有两个地方：代码区和堆区）。</p>
+
+<p>代码区：不访问栈区的变量（如局部变量），且不访问堆区的变量（如用alloc创建的对象）时，此时block存放在代码区；
+堆区：如果访问了堆区的变量（如局部变量），或堆区的变量（如用alloc创建的对象），此时block存方在堆区；
+&ndash;需要注意
+实际是放在栈区，在ARC情况下自动拷贝到堆区，如果不是ARC则存放在栈区，所在函数执行完毕就回释放，想再外面调用需要用copy指向它，这样就拷贝到了堆区，strong属性不会拷贝、会造成野指针错区。（需要理解ARC是一种编译器特性，即编译器在编译时在核实的地方插入retain、release、autorelease，而不是iOS的运行时特性）。</p>
+
+<p>此外代码存在堆区时,需要注意，因为堆区不像代码区不变化，堆区是动态的（不断的创建销毁），当没有强指针指向的时候就会被销毁，如果再去访问这段代码时，程序就会崩溃！所以此种情况在定义block属性时需要指定为strong or copy。block是一段代码，即不可变，所以使用copy也不会深拷贝。</p>
+
+<blockquote>
+<p>Block如果没有引用外部变量<br />
+保存在全局区（MRC/ARC一样）<br />
+Block如果引用外部变量<br />
+ARC保存在 堆区； MRC保存在 栈区必须用copy修饰block；</p>
+</blockquote>
+
+  </div>
+
+

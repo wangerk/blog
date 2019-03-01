@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>Runloop相关</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>Runloop相关</h2>
+        <p>一、RunLoop和线程的关系:</p>
+
+<p>1.RunLoop 的作用就是来管理线程的，当线程的 RunLoop开启后，线程就会在执行完任务后，处于休眠状态，随时等待接受新的任务，而不是退出。</p>
+
+<p>2.只有主线程的RunLoop是默认开启的，所以程序在开启后，会一直运行，不会退出。其他线程的RunLoop如果需要开启，就手动开启，</p>
+
+<p>二、runloop内部是如何实现的:</p>
+
+<p>1、有一个判断循环的条件，满足条件，就一直循环</p>
+
+<p>2、线程得到唤醒事件被唤醒，事件处理完毕以后，回到睡眠状态，等待下次唤醒</p>
+
+<p>二、runloop的mode作用是什么?:</p>
+
+<p>1.model 主要是用来指定事件在运行循环中的优先级的，分为：</p>
+
+<ul>
+<li><p>NSDefaultRunLoopMode（kCFRunLoopDefaultMode）：默认，空闲状态</p></li>
+
+<li><p>UITrackingRunLoopMode                       ：ScrollView滑动时</p></li>
+
+<li><p>UIInitializationRunLoopMode                 ：启动时</p></li>
+
+<li><p>NSRunLoopCommonModes（kCFRunLoopCommonModes）：Mode集合</p></li>
+</ul>
+
+<p>2.苹果公开提供的 Mode有两个：</p>
+
+<ol>
+<li><p>NSDefaultRunLoopMode（kCFRunLoopDefaultMode）</p></li>
+
+<li><p>NSRunLoopCommonModes（kCFRunLoopCommonModes）</p></li>
+</ol>
+
+  </div>
+
+

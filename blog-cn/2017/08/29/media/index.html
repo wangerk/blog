@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>多媒体</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>多媒体</h2>
+        <p>一、AVPlayer介绍</p>
+
+<p>1.能播放本地、远程的音频、视频文件</p>
+
+<p>2.基于Layer显示，得自己去编写控制面板</p>
+
+<p>3.AVPlayer(远程⾳音乐/播放视频)—&gt;添加layer</p>
+
+<p>4.可以播放远程视频(需要通过添加layer来显示视频)</p>
+
+<p>代码实现</p>
+
+<pre><code>#pragma mark - 懒加载代码
+
+- (AVPlayer *)player
+
+{
+
+    if (_player == nil) {
+
+        // 1.获取URL(远程/本地)
+
+        // NSURL *url = [[NSBundle mainBundle] URLForResource:@&quot;01-知识回顾.mp4&quot; withExtension:nil];
+
+        NSURL *url = [NSURL URLWithString:@&quot;http://v1.mukewang.com/a45016f4-08d6-4277-abe6-bcfd5244c201/L.mp4&quot;];
+
+        
+
+        // 2.创建AVPlayerItem
+
+        AVPlayerItem *item = [AVPlayerItem playerItemWithURL:url];
+
+        
+
+        // 3.创建AVPlayer
+
+        _player = [AVPlayer playerWithPlayerItem:item];
+
+        
+
+        // 4.添加AVPlayerLayer
+
+        AVPlayerLayer *layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+
+        layer.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.width * 9 / 16);
+
+        [self.view.layer addSublayer:layer];
+
+    }
+
+    return _player;
+
+}
+</code></pre>
+
+<p>二、MPMoviePlayerController介绍<br />
+ 1.能播放本地、远程的音频、视频文件<br />
+ 2.自带播放控制面板（暂停、播放、播放进度、是否要全屏）</p>
+
+<p>3.MPMoviePlayerController—&gt;给.view设置frame,将这个view 添加到某⼀一个View</p>
+
+<p>代码实现</p>
+
+<pre><code>#import &lt;MediaPlayer/MediaPlayer.h&gt;
+
+
+
+#pragma mark - 懒加载代码
+
+- (MPMoviePlayerController *)playerController
+
+{
+
+    if (_playerController == nil) {
+
+        // 1.获取视频的URL
+
+        NSURL *url = [NSURL URLWithString:@&quot;http://v1.mukewang.com/19954d8f-e2c2-4c0a-b8c1-a4c826b5ca8b/L.mp4&quot;];
+
+        
+
+        // 2.创建控制器
+
+        _playerController = [[MPMoviePlayerController alloc] initWithContentURL:url];
+
+        
+
+        // 3.设置控制器的View的位置
+
+        _playerController.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.width * 9 / 16);
+
+        
+
+        // 4.将View添加到控制器上
+
+        [self.view addSubview:_playerController.view];
+
+        
+
+        // 5.设置属性
+
+        _playerController.controlStyle = MPMovieControlStyleNone;
+
+    }
+
+    return _playerController;
+
+}
+</code></pre>
+
+<p>三、MPMoviePlayerViewController介绍 </p>
+
+<p> 1.能播放本地、远程的音频、视频文件<br />
+ 2.内部是封装了MPMoviePlayerController<br />
+ 3.播放界面默认就是全屏的<br />
+ 4.如果播放功能比较简单，仅仅是简单地播放远程、本地的视频文件，建议用这个
+ 5.MPMoviePlayerViewController(modal出来,⾃自动播放,⼀一定全 屏播放)</p>
+
+<p>代码实现</p>
+
+<pre><code>#import &lt;MediaPlayer/MediaPlayer.h&gt;
+
+
+
+#pragma mark - 懒加载
+
+- (MPMoviePlayerViewController *)playerVc
+
+{
+
+    if (_playerVc == nil) {
+
+        NSURL *url = [NSURL URLWithString:@&quot;http://v1.mukewang.com/a45016f4-08d6-4277-abe6-bcfd5244c201/L.mp4&quot;];
+
+        
+
+        _playerVc = [[MPMoviePlayerViewController alloc] initWithContentURL:url];;
+
+    }
+
+    return _playerVc;
+
+}
+
+
+
+- (IBAction)play {
+
+    [self presentMoviePlayerViewControllerAnimated:self.playerVc];
+
+}
+</code></pre>
+
+  </div>
+
+

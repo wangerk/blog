@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>友盟统计界面次数</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>友盟统计界面次数</h2>
+        
+
+<h3 id="一-初始化">一、初始化</h3>
+
+<pre><code>#import &quot;AppDelegate.h&quot;
+
+#import &quot;MobClick.h&quot;
+
+#import &quot;ViewController.h&quot;
+
+@interface AppDelegate ()
+
+@end
+
+    
+
+@implementation AppDelegate
+
+
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+        
+
+        //1.初始化友盟统计模块
+
+        [MobClick startWithAppkey:@&quot;是申请的 Key 名例如是 abcvxsdhufh&quot; reportPolicy:BATCH   channelId:nil];
+
+        
+
+        //配置
+
+        NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@&quot;CFBundleShortVersionString&quot;];
+
+        [MobClick setAppVersion:version];
+
+        
+
+        //设置ViewController添加到导航栏上
+
+        ViewController *vc = [[ViewController alloc]init];
+
+        UINavigationController * nvc = [[UINavigationController alloc]initWithRootViewController:vc];
+
+        //ViewController为主控制器
+
+        self.window.rootViewController = nvc;
+
+        self.window.backgroundColor = [UIColor whiteColor];
+
+        
+
+        return YES;
+
+    }
+</code></pre>
+
+<h3 id="二-页面代码">二、页面代码</h3>
+
+<pre><code>//视图将要显示的时候
+
+- (void)viewWillAppear:(BOOL)animated
+
+{
+
+      [super viewWillAppear:animated];
+
+        
+
+      //开始视图里面的日志页面:
+
+      [MobClick beginLogPageView:@&quot;PageOne&quot;];
+
+}
+
+//视图将要消失的时候
+
+- (void)viewWillDisappear:(BOOL)animated
+
+{
+
+      [super viewWillDisappear:animated];
+
+        
+
+      [MobClick endLogPageView:@&quot;PageOne&quot;];
+
+}
+</code></pre>
+
+  </div>
+
+

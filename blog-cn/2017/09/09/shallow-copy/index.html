@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>浅拷贝</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>浅拷贝</h2>
+        <p>一、浅拷贝概念<br />
+1.浅拷贝:只是拷贝了对象的指针，而不是拷贝对象本身。</p>
+
+<p>2.在Objective-C中，通过两个方法  copy和mutableCopy可以执行拷贝操作，其中copy是获得一个不可变对象，而mutableCopy是获得一个可变对象。</p>
+
+<p>3.并且两个方法分别调用copyWithZone和mutableCopyWithZone两个方法来进行拷贝操作，一个类必须实现copyWithZone或者mutableCopyWithZone，才能进行copy或者mutableCopy
+<img src="../1.png" alt="" /></p>
+
+<p>二、浅拷贝代码实现</p>
+
+<p>浅拷贝有很多中方法，当你进行浅拷贝时,会向原始的集合发送retain消息，这时引用计数就会 +1 ，同时指针就被拷贝到新的集合中去。</p>
+
+<p>NSArray *shallowCopyArray = [someArray copyWithZone:nil];</p>
+
+<p>NSDictionary *shallowCopyDict = [[NSDictionary alloc] initWithDictionary:someDictionary copyItems:NO];</p>
+
+<p>注意:如果集合里的对象都遵循NSCopying 协议，那么对象就会被深拷贝到新的集合。如果对象没有遵循 NSCopying 协议，而尝试用这种方法进行深拷贝，会在运行时出错。</p>
+
+<p>三、浅拷贝、深拷贝、完全拷贝区别:</p>
+
+<ul>
+<li><p>浅拷贝(shallow copy)：               在浅拷贝操作时，对于被拷贝对象的每一层都是指针拷贝。</p></li>
+
+<li><p>深拷贝(one-level-deep copy)：在深拷贝操作时，对于被拷贝对象，至少有一层是深拷贝。</p></li>
+
+<li><p>完全拷贝(real-deep copy)：       在完全拷贝操作时，对于被拷贝对象的每一层都是对象拷贝</p></li>
+</ul>
+
+<p>四、系统对象的拷贝</p>
+
+<p>不管是集合类对象，还是非集合类对象，当接收到copy和mutableCopy消息时，都遵循以下准则：</p>
+
+<p>copy返回不可变对象(immutable)；所以，如果对copy返回值使用mutable对象接口就会crash；
+mutableCopy返回可变对象(mutable);</p>
+
+  </div>
+
+

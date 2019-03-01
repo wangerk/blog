@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>内存分析优化</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>内存分析优化</h2>
+        <p>一.内存分析</p>
+
+<p>1.静态分析(Analyze)</p>
+
+<p>不运行程序, 直接检测代码中是否有潜在的内存问题(不一定百分百准确,仅仅是提供建议)</p>
+
+<p>结合实际情况来分析,是否真的有内存问题</p>
+
+<p>2.动态分析(Profile == Instruments)</p>
+
+<p>1&gt; 运行程序,通过使用app,查看内存的分配情况(Allocations)</p>
+
+<ul>
+<li>可以查看做出了某个操作后(比如点击了某个按钮\显示了某个控制器),内存是否有暴增的情况(突然变化)</li>
+</ul>
+
+<p>2&gt; 运行程序,通过使用app,查看是否有内存泄漏(Leaks)</p>
+
+<ul>
+<li>红色区域代表内存泄漏出现的地方</li>
+</ul>
+
+<p>二.内存使用注意</p>
+
+<p>1.加载小图片\使用频率比较高的图片</p>
+
+<p>1&gt;利用imageNamed:方法加载过的图片,永远有缓存,这个缓存是由系统管理的,无法通过代码销毁缓存</p>
+
+<p>2.加载大图片\使用频率比较低的图片(一次性的图片,比如版本新特性的图片)</p>
+
+<p>1&gt; 利用initWithContentsOfFile:\imageWithContentsOfFile:\imageWithData:等方法加载过的图片,没有缓存,只要用完了,就会自动销毁</p>
+
+<p>2&gt;基本上,除imageNamed:方法以外,其他加载图片的方式,都没有缓存</p>
+
+<p>三.2个专业术语</p>
+
+<p>1.内存泄漏</p>
+
+<p>1&gt;该释放的对象,没有被释放(已经不再使用的对象,没有被释放)</p>
+
+<p>2.内存溢出(Out Of Memory)</p>
+
+<p>1&gt;内存不够用了</p>
+
+<p>2&gt;数据长度比较小的数据类型存储了数据长度比较大的数据</p>
+
+<p>四.图片在沙盒中的存在形式</p>
+
+<p>1.如果项目的Deployment Target &lt;=6.x (不支持图片压缩)</p>
+
+<p>1&gt; 所有图片直接暴露在沙盒的资源包(main Bundle),不会压缩到Assets.car文件</p>
+
+<p>2.如果项目的Deployment Target &gt;=7.x (支持图片压缩)</p>
+
+<p>1&gt; 放在Images.xcassets里面的所有图片会压缩到Assets.car文件,不会直接暴露在沙盒的资源包(main Bundle)</p>
+
+<p>2&gt; 没有放在Images.xcassets里面的所有图片会直接暴露在沙盒的资源包(main Bundle), 不会压缩到Assets.car文件</p>
+
+<p>3.总结</p>
+
+<p>1&gt; 会压缩到Assets.car文件,没有直接暴露在沙盒的资源包(main Bundle)</p>
+
+<ul>
+<li><p>条件 :&ldquo;Deployment Target &gt;= 7.x&rdquo;并且是&rdquo;放在Images.xcassets里面的所有图片&rdquo;</p></li>
+
+<li><p>影响 :无法得到图片的全路径,只能通过图片名(imageNamed:方法)来加载图片,永远会有缓存</p></li>
+</ul>
+
+<p>2&gt; 不会压缩到Assets.car文件,直接暴露在沙盒的资源包(main Bundle)</p>
+
+<ul>
+<li><p>条件 :除1&gt;以外的所有情况</p></li>
+
+<li><p>影响 :可以得到图片的全路径,可以通过全路径(imageWithContentsOfFile:方法)来加载图片,不会有缓存</p></li>
+</ul>
+
+<p>4.结论</p>
+
+<p>1&gt;小图片\使用频率比较高的图片</p>
+
+<ul>
+<li>放在Images.xcassets里面</li>
+</ul>
+
+<p>2&gt;大图片\使用频率比较低的图片(一次性的图片,比如版本新特性的图片)</p>
+
+<ul>
+<li>不要放在Images.xcassets里面</li>
+</ul>
+
+<p>五.苹果审核app,审核点</p>
+
+<p>1&gt;不会看app占用的内存是否很大</p>
+
+<p>2&gt;不会看app是否存在很多的内存泄漏</p>
+
+<p>3&gt;用户体验好不好 (是否有很多的BUG :比如点5下崩4下)</p>
+
+<p>4&gt;是否包含了色情\暴力的内容 (图片或者文字)</p>
+
+<p>5&gt;是否有实用价值 (app上的功能至少要对部分用户人群有意义)</p>
+
+<p>6&gt; app中使用了私有API(使用的第三方库中可能会有私有API,比如曾经某个版本的百度地图)</p>
+
+<p>7&gt; &hellip;&hellip;</p>
+
+<p>8&gt; 参考文章: <a href="http://blog.csdn.net/kafeidev/article/details/9081531">http://blog.csdn.net/kafeidev/article/details/9081531</a></p>
+
+<p>六.私有API</p>
+
+<p>1.苹果官方未公开的API</p>
+
+<p>2.一般是不稳定或者比较底层的API(比如获得用户的短信内容 \获得用户设备的UDID唯一标识)</p>
+
+<p>3.一般在越狱开发中,才会大量使用私有API(比较少接触越狱开发)</p>
+
+<p>4.如何判断某个功能是否可以实现(是否为私有API) : 可以先参考AppStore是否有类似功能的软件</p>
+
+<p>5.底层API !=私有API</p>
+
+<p>七.设备信息相关的开发(非私有API,底层API)</p>
+
+<p>1.设备的型号</p>
+
+<p>2.设备的CPU型号\使用情况</p>
+
+<p>3.设备的内存容量\使用情况</p>
+
+<p>4.设备的硬盘容量\使用情况</p>
+
+<p>5&hellip;&hellip;.</p>
+
+<p>6.推荐的第三方库</p>
+
+<p>1&gt; iOS-System-Services</p>
+
+<ul>
+<li><p>地址 : <a href="https://github.com/Shmoopi/iOS-System-Services">https://github.com/Shmoopi/iOS-System-Services</a></p></li>
+
+<li><p>实现思路 :封装了很多模型(硬件模型\内存模型\进程模型,每一个模型对应着具体的功能)</p></li>
+
+<li><p>使用难易度 :简单</p></li>
+</ul>
+
+<p>2&gt; uidevice-extension</p>
+
+<ul>
+<li><p>地址 : <a href="https://github.com/erica/uidevice-extension">https://github.com/erica/uidevice-extension</a></p></li>
+
+<li><p>实现思路 :利用分类给UIDevice进行了扩展</p></li>
+
+<li><p>使用难易度 :非常简单</p></li>
+</ul>
+
+<p>八.如何让程序尽量减少内存泄漏</p>
+
+<p>1.非ARC</p>
+
+<ul>
+<li><p>Foundation对象(OC对象) :只要方法中包含了alloc\new\copy\mutableCopy\retain等关键字,那么这些方法产生的对象,就必须在不再使用的时候调用1次release或者1次autorelease</p></li>
+
+<li><p>CoreFoundation对象(C对象) :只要函数中包含了create\new\copy\retain等关键字,那么这些方法产生的对象,就必须在不再使用的时候调用1次CFRelease或者其他release函数</p></li>
+</ul>
+
+<p>2.ARC(只自动管理OC对象,不会自动管理C语言对象)</p>
+
+<ul>
+<li>CoreFoundation对象(C对象) :只要函数中包含了create\new\copy\retain等关键字,那么这些方法产生的对象,就必须在不再使用的时候调用1次CFRelease或者其他release函数</li>
+</ul>
+
+<p>3.block的注意</p>
+
+<p>// block的内存默认在栈里面(系统自动管理)</p>
+
+<p>void (^test)() = ^{</p>
+
+<p>    </p>
+
+<p>};</p>
+
+<p>// 如果对block进行了Copy操作, block的内存会迁移到堆里面(需要通过代码管理内存)</p>
+
+<p>Block_copy(test);</p>
+
+<p>// 在不需要使用block的时候,应该做1次release操作</p>
+
+<p>Block_release(test);</p>
+
+<p>[test release];</p>
+
+  </div>
+
+
