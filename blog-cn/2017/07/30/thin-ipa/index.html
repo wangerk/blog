@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>ipa如何瘦身</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>ipa如何瘦身</h2>
+        <p>一、概念</p>
+
+<p>项目里有一个h5页面需要原生化，这个页面有大量的本地图片，而这些图又用了2x、3x两套图，其中有些图片大到一张能达到好几M，最终的结果是ipa的包体积巨大无比。于是试了好些方法，终于把ipa的体积减小了很多。</p>
+
+<p>二、减小ipa包大小解决方法<br />
+1、 从图片资源进行瘦身。<br />
+（1） 对图片本身进行压缩。<br />
+设计师在设计大的图片时对图片进行压缩一下，然后客户端使用压缩后的图片，这样能大大减少ipa包的体积。我项目中用到的那些很大的图片设计师没有对其进行压缩，所以让设计师帮把所有的大图片都压缩了一遍，这样之前以M为单位的图片能压缩到以k为单位的图片。大大减小了ipa的体积。</p>
+
+<p>（2） 客户端在工程中使用Assets.xcassets的方式管理图片，尽量避免使用文件夹的方式进行管理。
+因为采用Assets.xcassets的方式，编译时，Images.xcassets中的所有文件会被打包为Assets.car的文件，这样也能一定程度上减小app体积</p>
+
+<p>（3） 清除无用的图片。
+在版本更新的时候，有些之前用到的图片在新版本中未必会用得到，所以那些无用的图片要记得及时清除。</p>
+
+<p>（4） 尽量使用矢量图。
+有人说这个方法对减小ipa体积没啥大作用，不过不管有没有用，我觉得这都是一个很值得提倡的方法。因为矢量图可以自己定义大小以及颜色，所以对于一张图片，只需要一套图即可。比如我们项目中的图标，能用iconfont解决的我们都不会去才用切图的方式。一个iconfont.ttf的包，里面装了几十张的图片也不过是十几k的大小。</p>
+
+<p>2、 整理项目中用到的第三方库。<br />
+（1） 项目中没有用到的第三方库也记得要及时删除。<br />
+（2） 引入第三方库要慎重，学会评估引入这个库是否值得。<br />
+有时候为了一个功能引入了一个很大的第三库，造成ipa体积的显著增加，但是可能我们只用到了其中一小部分功能，那这个时候可以考虑自己实现这个功能，而不是引入该库。</p>
+
+<p>（3） 删除三方库中无用的图片资源。
+有些第三方库会带有图片资源，对于没用到的图片可以直接删除。</p>
+
+<p>3、 代码层面的优化<br />
+（1） 未使用的代码及时清理<br />
+（2） 整理重复的代码</p>
+
+<p>4、 编译选项的设置（均在Build Settings里面设置）<br />
+对于这一块，不是特别的懂，所以根据网上提供的一些方法，我试了一下，感觉以下方法确实能起到一定的作用，大家可以参考一下。<br />
+（1） 将Deployment Postprocessing和Strip Linked Product选项 设置为YES。<br />
+（2） 将Generate Debug Symbols 默认为YES,设置为NO。<br />
+（3） Symbols hidden by default设置为YES<br />
+（4） Strip debug symbols during copy 设置为YES</p>
+
+  </div>
+
+

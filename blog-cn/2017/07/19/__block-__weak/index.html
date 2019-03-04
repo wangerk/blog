@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>__block和__weak的区别</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>__block和__weak的区别</h2>
+        <p>API Reference对__block变量修饰符有如下几处解释：</p>
+
+<pre><code>//A powerful feature of blocks is that they can modify 
+variables in the same lexical scope. You signal that a block 
+can modify a variable using the __block storage type 
+modifier. 
+//At function level are __block variables. These are mutable
+ within the block (and the enclosing scope) and are preserved
+ if any referencing block is copied to the heap.
+</code></pre>
+
+<p>大概意思归结出来就是两点：</p>
+
+<p>1.__block对象在block中是可以被修改、重新赋值的。<br />
+2.__block对象在block中不会被block强引用一次，从而不会出现循环引用问题。</p>
+
+<p>API Reference对__weak变量修饰符有如下几处解释：</p>
+
+<pre><code>__weak specifies a reference that does not keep the 
+referenced object alive. A weak reference is set to nil when
+there are no strong references to the object.
+</code></pre>
+
+<p>使用了__weak修饰符的对象，作用等同于定义为weak的property。自然不会导致循环引用问题，因为苹果文档已经说的很清楚，当原对象没有任何强引用的时候，弱引用指针也会被设置为nil。</p>
+
+<p>因此，__block和__weak修饰符的区别其实是挺明显的： </p>
+
+<p>1.__block不管是ARC还是MRC模式下都可以使用，可以修饰对象，还可以修饰基本数据类型。 <br />
+2.__weak只能在ARC模式下使用，也只能修饰对象（NSString），不能修饰基本数据类型（int）。 <br />
+3.__block对象可以在block中被重新赋值，__weak不可以。</p>
+
+<p>PS：__unsafe_unretained修饰符可以被视为iOS SDK 4.3以前版本的__weak的替代品，不过不会被自动置空为nil。所以尽可能不要使用这个修饰符</p>
+
+  </div>
+
+

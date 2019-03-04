@@ -789,6 +789,41 @@ RACDisposable 用于取消订阅或者清理资源，当信号发送完成或者
     </item>
     
     <item>
+      <title>iPhone X/XS/XR/XS Max适配</title>
+      <link>http://wangerk.com/blog-cn/2017/11/15/screen-adapt/</link>
+      <pubDate>Wed, 15 Nov 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/11/15/screen-adapt/</guid>
+      <description>判断XS Max,XS,XR
+常见的屏幕尺寸 转化为像素尺寸 而本次上新的全面屏手机iPhone X无论是在屏幕尺寸、分辨率、甚至是形状上都发生了较大的改变，下面以iPhone 8作为参照物，看看到底iPhone X的适配我们要怎么考虑？ 相比较而言，可以发现X和8的宽度一致都是375 pt，但是高度却多了145 pt，这就意味着首屏上可以展示更多的内容，多出了20%的垂直空间，对于京东淘宝而言这就一位置更高的商品曝光率或者是更高的运营价值。 上面谈的是开发尺寸，那设计尺寸上，iPhone 8的像素尺寸是750*1334 px（@2X），而iPhone X的像素尺寸是1125*2436 px（@3X），同样的宽度一个用@2X图，一个用@3X图，表现出了更高的清晰度。
+设计师和移动端开发工程师要考虑的布局：
+1.保证你的设计布局能够填充整个屏幕；
+2.注意你的核心内容不要被设备的大圆角、传感器（齐刘海）、以及独步访问主屏幕的指示灯遮挡；
+iPhone X 的设计应当填充整个屏幕
+注意X的大圆角和传感器
+设计布局要填充整个屏幕，这里有两块区域需要额外考虑：
+1、屏幕顶部，即StatusBar部分，这条状态栏本来并没有可发挥的空间，但是iphone的StatusBar与NavigationBar背景是可以通栏的，以达到一种完全沉浸式体验的设计。高度为44pt。
+大部分的App应该也是没有影响的，主流NavgationBar都采用纯色背景，StatusBar背景沿用NavgationBar的背景，但是对于那些做了NavigationBar视觉效果的设计师就要考虑了，你的渐变色背景、或者带底纹的北背景、还包括电商平台商品图是通栏展示的商品图，多少会对实际效果产生一些影响。
+比如，NavigationBar是渐变色背景的，由于X的Status+Nav高度增加，我们1242*192(@3X)的背景图会被等比例拉伸至这两块区域并且剪辑多余部分。如图：
+2、屏幕底部
+访问主屏幕的指示灯区域如图
+屏幕底部的虚拟区，替代了home键，高度为34pt。
+指示灯区域是一个带着系统功能的内容显示区域，这就意味着它可以展示你内容；同时如果你的底部是TabBar，那么指示灯区域背景会来自于TabBar背景的延伸；如果我们是一个feed流的页面，底部则会展示次屏feed流的局部。
+鉴于圆角、传感器、指示灯区域的影响，iPhone X给出了设计布局的安全区意见：
+iPhone X的安全区如下图所示
+再考虑必要的NavgationBar、TabBar，主题内容显示的安全区需要根据设计需求进行考虑。根据实际需要，我们添加的所有空间都应当在安全区内，如各类型的Button、EditMenu、Pickers、Sliders等等。
+所有的控件都应放置在安全区域内。
+在适配过程中我们需要注意以下几点：
+1、注意你的内容不要被圆角货传感器遮挡或裁切
+2、注意StatusBar的高度
+3、如果你的App是隐藏StatusBar的，建议重新考虑
+总结 iPhone X的适配其实就是讲NavigationBar和TabBar的高度调整一下，将控件放入安全区内，总体来讲是比较简单的，希望这篇文章能够帮助到大家。
+参考文章:iPhone X适配没那么复杂，但也不是看上去这么简单
+附主流App对iPhone X的适配以供大家参考
+1.微信 2.支付宝 3.淘宝和天猫 淘宝的TabBar做的不如天猫好 4.ofo和摩拜 </description>
+    </item>
+    
+    <item>
       <title>友盟统计界面次数</title>
       <link>http://wangerk.com/blog-cn/2017/11/10/umeng-touch-statistic/</link>
       <pubDate>Fri, 10 Nov 2017 20:55:53 +0800</pubDate>
@@ -1102,6 +1137,65 @@ ARC保存在 堆区； MRC保存在 栈区必须用copy修饰block；
       <guid>http://wangerk.com/blog-cn/2017/08/15/path-drawing/</guid>
       <description>一、GIF 效果图: 二、连线视图的效果图: 三、实现代码:
 控制器1: SHContext.h // // SHContext.h // PathDrawing(路径图)~demo // // Created by . on 2017/8/15. // Copyright © 2017年 shihu. All rights reserved. // #ifndef SHContext_h #define SHContext_h /* 该方法负责绘制圆角矩形 x1、y2：是圆角矩形左上角的座标。 width、height：控制圆角举行的宽、高 radius：控制圆角矩形的四个圆角的半径 */ void CGContextAddRoundRect(CGContextRef c, CGFloat x1 , CGFloat y1 , CGFloat width , CGFloat height , CGFloat radius) { // 移动到左上角 CGContextMoveToPoint (c, x1 + radius , y1); // 添加一条连接到右上角的线段 CGContextAddLineToPoint(c , x1 + width - radius, y1); // 添加一段圆弧 CGContextAddArcToPoint(c , x1 + width , y1, x1 + width , y1 + radius, radius); // 添加一条连接到右下角的线段 CGContextAddLineToPoint(c , x1 + width, y1 + height - radius); // 添加一段圆弧 CGContextAddArcToPoint(c , x1 + width, y1 + height , x1 + width - radius , y1 + height , radius); // 添加一条连接到左下角的线段 CGContextAddLineToPoint(c , x1 + radius, y1 + height); // 添加一段圆弧 CGContextAddArcToPoint(c , x1, y1 + height , x1 , y1 + height - radius , radius); // 添加一条连接到左上角的线段 CGContextAddLineToPoint(c , x1 , y1 + radius); // 添加一段圆弧 CGContextAddArcToPoint(c , x1 , y1 , x1 + radius , y1 , radius); } /* 该方法负责绘制多角星。 n：该参数通常应设为奇数，控制绘制N角星。 dx、dy：控制N角星的中心。 size：控制N角星的大小 */ void CGContextAddStar(CGContextRef c , NSInteger n , CGFloat dx , CGFloat dy , NSInteger size) { CGFloat dig = 4 * M_PI / n ; // 移动到指定点 CGContextMoveToPoint(c , dx , dy + size); for(int i = 1 ; i &amp;lt;= n ; i++) { CGFloat x = sin(i * dig); CGFloat y = cos(i * dig); // 绘制从当前点连接到指定点的线条 CGContextAddLineToPoint(c , x * size + dx ,y * size + dy); } } #endif /* SHContext_h */ ========================= =================================================== 控制器2: SHPathDrawingView.</description>
+    </item>
+    
+    <item>
+      <title>ipa如何瘦身</title>
+      <link>http://wangerk.com/blog-cn/2017/07/30/thin-ipa/</link>
+      <pubDate>Sun, 30 Jul 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/07/30/thin-ipa/</guid>
+      <description>一、概念
+项目里有一个h5页面需要原生化，这个页面有大量的本地图片，而这些图又用了2x、3x两套图，其中有些图片大到一张能达到好几M，最终的结果是ipa的包体积巨大无比。于是试了好些方法，终于把ipa的体积减小了很多。
+二、减小ipa包大小解决方法
+1、 从图片资源进行瘦身。
+（1） 对图片本身进行压缩。
+设计师在设计大的图片时对图片进行压缩一下，然后客户端使用压缩后的图片，这样能大大减少ipa包的体积。我项目中用到的那些很大的图片设计师没有对其进行压缩，所以让设计师帮把所有的大图片都压缩了一遍，这样之前以M为单位的图片能压缩到以k为单位的图片。大大减小了ipa的体积。
+（2） 客户端在工程中使用Assets.xcassets的方式管理图片，尽量避免使用文件夹的方式进行管理。 因为采用Assets.xcassets的方式，编译时，Images.xcassets中的所有文件会被打包为Assets.car的文件，这样也能一定程度上减小app体积
+（3） 清除无用的图片。 在版本更新的时候，有些之前用到的图片在新版本中未必会用得到，所以那些无用的图片要记得及时清除。
+（4） 尽量使用矢量图。 有人说这个方法对减小ipa体积没啥大作用，不过不管有没有用，我觉得这都是一个很值得提倡的方法。因为矢量图可以自己定义大小以及颜色，所以对于一张图片，只需要一套图即可。比如我们项目中的图标，能用iconfont解决的我们都不会去才用切图的方式。一个iconfont.ttf的包，里面装了几十张的图片也不过是十几k的大小。
+2、 整理项目中用到的第三方库。
+（1） 项目中没有用到的第三方库也记得要及时删除。
+（2） 引入第三方库要慎重，学会评估引入这个库是否值得。
+有时候为了一个功能引入了一个很大的第三库，造成ipa体积的显著增加，但是可能我们只用到了其中一小部分功能，那这个时候可以考虑自己实现这个功能，而不是引入该库。
+（3） 删除三方库中无用的图片资源。 有些第三方库会带有图片资源，对于没用到的图片可以直接删除。
+3、 代码层面的优化
+（1） 未使用的代码及时清理
+（2） 整理重复的代码
+4、 编译选项的设置（均在Build Settings里面设置）
+对于这一块，不是特别的懂，所以根据网上提供的一些方法，我试了一下，感觉以下方法确实能起到一定的作用，大家可以参考一下。
+（1） 将Deployment Postprocessing和Strip Linked Product选项 设置为YES。
+（2） 将Generate Debug Symbols 默认为YES,设置为NO。
+（3） Symbols hidden by default设置为YES
+（4） Strip debug symbols during copy 设置为YES</description>
+    </item>
+    
+    <item>
+      <title>__block和__weak的区别</title>
+      <link>http://wangerk.com/blog-cn/2017/07/19/__block-__weak/</link>
+      <pubDate>Wed, 19 Jul 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/07/19/__block-__weak/</guid>
+      <description>API Reference对__block变量修饰符有如下几处解释：
+//A powerful feature of blocks is that they can modify variables in the same lexical scope. You signal that a block can modify a variable using the __block storage type modifier. //At function level are __block variables. These are mutable within the block (and the enclosing scope) and are preserved if any referencing block is copied to the heap.  大概意思归结出来就是两点：
+1.__block对象在block中是可以被修改、重新赋值的。
+2.__block对象在block中不会被block强引用一次，从而不会出现循环引用问题。
+API Reference对__weak变量修饰符有如下几处解释：
+__weak specifies a reference that does not keep the referenced object alive.</description>
+    </item>
+    
+    <item>
+      <title>QQ中未读气泡拖拽消失的实现分析</title>
+      <link>http://wangerk.com/blog-cn/2017/07/17/bubble/</link>
+      <pubDate>Mon, 17 Jul 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/07/17/bubble/</guid>
+      <description>QQ中针对强迫症有个很棒的交互，对于那些暂时不想理会的未读信息气泡，可以直接手指拖拽去掉。 今天我们就来重现一下这个功能。最终用到一个项目中的效果类似这样。 说到实时的形变，我立马想到的还是 CADisplayLink + UIBezierPath 的神奇组合！具体细节可以参考一下我之前的一篇博文。 【2015.6.14更新】由于屏幕刷新频率和手指拖动的速度无法保持一致，故会出现看到尖角的bug。最终我在panGesture 中的UIPanGestureStateChanged中去实时重绘贝塞尔曲线，完美解决！
+这个交互中，难点在于如何绘制贝塞尔曲线。而线又是由点组成的。所以最终归根结底我们还是要找个关键点的坐标。一图胜千言。下面，我绘制了一幅分析图，这样一来问题就转化成了一个高中数学求点坐标的题目了。  Tips: OA ⊥ AB, PB ⊥ AB ,且 OA=PB=d/2.
+ 现在我们已经有了数学表达式，接下来就是要把数学表达式转化成代码了。
+我们需要创建一系列变量：
+ CGFloat r1; // backView CGFloat r2; // frontView CGFloat x1; CGFloat y1; CGFloat x2; CGFloat y2; CGFloat centerDistance; CGFloat cosDigree; CGFloat sinDigree; CGPoint pointA; //A CGPoint pointB; //B CGPoint pointD; //D CGPoint pointC; //C CGPoint pointO; //O CGPoint pointP; //P  接下来我们需要一个毫秒级定时器 CADisplayLink。
+displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(displayLinkAction:)];  根据数学公式，在 displayLink 绑定的方法 displayLinkAction 中把每个坐标点用代码表达出来：</description>
     </item>
     
     <item>
