@@ -1205,6 +1205,18 @@ ARC保存在 堆区； MRC保存在 栈区必须用copy修饰block；
     </item>
     
     <item>
+      <title>喜马拉雅FM</title>
+      <link>http://wangerk.com/blog-cn/2017/07/31/xmlyfm/</link>
+      <pubDate>Mon, 31 Jul 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/07/31/xmlyfm/</guid>
+      <description>项目地址 https://gitee.com/CoderWEK/XMLYFM.git
+ 多音频下载、本地播放功能演示 网络音频播放效果演示 推荐页面效果 分类页面效果 广播页面效果 榜单页面效果 主播页面效果 订阅听页面效果 下载听页面效果 我的页面效果 分析
+发现tab中有五个小分类，分别对应五个页面，所有在“发现”的控制器中使用了UIPageViewController来控制五个子控制器。 +从Charles抓出来的接口来看，“推荐”页面一共调用了三个接口，分别请求了推荐、热门、直播的内容，所以在这里选择了Reactivecocoa来实现接口的并发访问
+- (void)refreshDataSource { @weakify(self); RACSignal *signalRecommend = [RACSignal createSignal:^RACDisposable *(id&amp;lt;RACSubscriber&amp;gt; subscriber) { @strongify(self); [self requestRecommendList:^{ [subscriber sendNext:nil]; }]; return nil; }]; RACSignal *signalHotAndGuess = [RACSignal createSignal:^RACDisposable *(id&amp;lt;RACSubscriber&amp;gt; subscriber) { @strongify(self); [self requestHotAndGuessList:^{ [subscriber sendNext:nil]; }]; return nil; }]; RACSignal *signalLiving = [RACSignal createSignal:^RACDisposable *(id&amp;lt;RACSubscriber&amp;gt; subscriber) { @strongify(self); [self requestLiving:^{ [subscriber sendNext:nil]; }]; return nil; }]; [[RACSignal combineLatest:@[signalRecommend,signalHotAndGuess,signalLiving]] subscribeNext:^(id x) { @strongify(self); [(RACSubject *)self.</description>
+    </item>
+    
+    <item>
       <title>ipa如何瘦身</title>
       <link>http://wangerk.com/blog-cn/2017/07/30/thin-ipa/</link>
       <pubDate>Sun, 30 Jul 2017 20:55:53 +0800</pubDate>
@@ -1250,6 +1262,22 @@ __weak specifies a reference that does not keep the referenced object alive.</de
     </item>
     
     <item>
+      <title>高性能圆角</title>
+      <link>http://wangerk.com/blog-cn/2017/07/18/round-corner/</link>
+      <pubDate>Tue, 18 Jul 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/07/18/round-corner/</guid>
+      <description>圆角（RounderCorner）是一种很常见的视图效果，相比于直角，它更加柔和优美，易于接受。但很多人并不清楚如何设置圆角的正确方式和原理。设置圆角会带来一定的性能损耗，如何提高性能是另一个需要重点讨论的话题。我查阅了一些现有的资料，收获良多的同时也发现了一些误导人错误。本文总结整理了一些知识点，概括如下：
+ 设置圆角的正确姿势及其原理 设置圆角的性能损耗 其他设置圆角的方法，以及最优选择  正确姿势
+首先，我想要声明的一点是：
+ 设置圆角很简单，它不会带来任何性能损耗
+ 因为这件事本来就很简单，它只需要一行代码：
+view.layer.cornerRadius = 5  不过查看一下代码可以发现，有一个 UILabel 也设置了圆角，但是没有表现出任何变化。关于这一点，你可以查看 cornerRadius 属性的注释：
+ By default, the corner radius does not apply to the image in the layer’s contents property; it applies only to the background color and border of the layer. However, setting the masksToBounds property to true causes the content to be clipped to the rounded corners.
+ 也就是说在默认情况下，这个属性只会影响视图的背景颜色和 border。对于 UILabel 这样内部还有子视图的控件就无能为力了。所以很多情况下我们会看到这样的代码：</description>
+    </item>
+    
+    <item>
       <title>QQ中未读气泡拖拽消失的实现分析</title>
       <link>http://wangerk.com/blog-cn/2017/07/17/bubble/</link>
       <pubDate>Mon, 17 Jul 2017 20:55:53 +0800</pubDate>
@@ -1261,6 +1289,75 @@ __weak specifies a reference that does not keep the referenced object alive.</de
 我们需要创建一系列变量：
  CGFloat r1; // backView CGFloat r2; // frontView CGFloat x1; CGFloat y1; CGFloat x2; CGFloat y2; CGFloat centerDistance; CGFloat cosDigree; CGFloat sinDigree; CGPoint pointA; //A CGPoint pointB; //B CGPoint pointD; //D CGPoint pointC; //C CGPoint pointO; //O CGPoint pointP; //P  接下来我们需要一个毫秒级定时器 CADisplayLink。
 displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(displayLinkAction:)];  根据数学公式，在 displayLink 绑定的方法 displayLinkAction 中把每个坐标点用代码表达出来：</description>
+    </item>
+    
+    <item>
+      <title>drawRect内存优化</title>
+      <link>http://wangerk.com/blog-cn/2017/07/16/draw-rect/</link>
+      <pubDate>Sun, 16 Jul 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/07/16/draw-rect/</guid>
+      <description>在平日的开发中，随意覆盖drawRect方法，稍有不慎就会让你的程序内存暴增。下面我们来看一个例子。 如图我们看到左侧内存的状况随着手指的绘制逐渐恶化。另外细心的同学可以观察到，点击图中蓝色矩形按钮之后，便会弹出画板，而这时并没有进行任何的手指绘制，内存就突变为 114 MB ，然后每当手指绘制开始时，内存立即增加到 300 MB 左右稳定下来。对于正常的 iOS App 来讲，这么大的内存消耗是不能容忍的。
+下面分析一下原因：
+可能的原因有两个，一是在手指绘制的过程中创建的大量点对象没有及时释放或者其他资源没有及时释放。
+二是系统在绘制的过程中开始大量消耗内存。
+第一个原因，手指绘制的过程中创建的大量点对象没有及时释放或者其他资源没有及时释放。这一点我们暂时排除以节省时间，因为这个画板功能工程是用ARC写的，并且我们已经做过代码检查和使用Instruments工具来检测内存使用情况，这里并没有所谓的对象没有及时释放的问题存在。
+第二个原因，系统在绘制的过程中开始大量消耗内存。首先我们曾经注意到一个诡异并且不寻常的事情就是，当黄色的画板刚刚弹出的时候内存就瞬间从 18MB 暴增至 114MB 。这一点更加说明第一个原因不是问题所在，因为这时手指还没有进行任何绘制，也就是说不存在任何点与线的对象，那么内存怎么会暴增呢？
+这时我们要考虑这个画板功能是如何实现的，画板分为两步，第一步记录用户手指的轨迹，这一步会生成大量点的对象（已排除嫌疑）。第二步绘制到视图或者图层上，我们平常使用频繁的绘图方式基本上是 Quarz2D 的那套 C 语言框架，而绘制代码所在的地点在哪呢？我们今天的主角终于上场了－－drawRect。
+下面我们来看一段画板功能绘制的代码：
+- (void)drawRect:(CGRect)rect { if (!self.paths.count) return; CGContextRef ctx = UIGraphicsGetCurrentContext(); for (BHBPaintPath *path in self.paths) { CGContextSaveGState(ctx); [[UIColor blackColor] set]; [path stroke]; // 关键的一步绘制 CGContextRestoreGState(ctx); } }  去掉绘图上下文栈和其余判断边界的代码，我们只是在当前view上绘制了n条黑色的线。看起来普普通通的绘图方式，怎么会导致内存的剧增呢？我们现在说罪魁祸首是drawRect证据并不充分。我们回想画板刚弹出时的内存状况，接下来我们注释掉drawRect所有的代码。运行的效果图如下：
+效果立竿见影， 注释掉drawRect之后，内存立刻恢复正常，我们终于抓到了消耗内存的恶鬼，问题就出在对drawRect方法的覆盖。 那么抓到了犯人，本文是否应该完结了？非也非也，我们虽说知道了内存暴增的原因，但是我们并没有深入的去分析drawRect为什么对内存的影响这么大，而且我们也没有给出问题的解决方案。请接着往下看。
+那么现在我们分析一下drawRect导致内存暴增的真正原因：
+重写drawRect为何会导致内存大量上涨？
+要想搞明白这个问题，我们需要撸一撸在 iOS 程序上图形显示的原理。在 iOS 系统中所有显示的视图都是从基类UIView继承而来的，同时UIView负责接收用户交互。 但是实际上你所看到的视图内容，包括图形等，都是由UIView的一个实例图层属性来绘制和渲染的，那就是CALayer。
+CALayer类的概念与UIView非常类似，它也具有树形的层级关系，并且可以包含图片文本、背景色等。它与UIView最大的不同在于它不能响应用户交互，可以说它根本就不知道响应链的存在，它的 API 虽然提供了 “某点是否在图层范围内的方法”，但是它并不具有响应的能力。</description>
+    </item>
+    
+    <item>
+      <title>Masonry</title>
+      <link>http://wangerk.com/blog-cn/2017/07/15/masonry/</link>
+      <pubDate>Sat, 15 Jul 2017 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2017/07/15/masonry/</guid>
+      <description>一、概念
+目前iOS开发中大多数页面都已经开始使用Interface Builder的方式进行UI开发了，但是在一些变化比较复杂的页面，还是需要通过代码来进行UI开发的。而且有很多比较老的项目，本身就还在采用纯代码的方式进行开发。
+而现在iPhone和iPad屏幕尺寸越来越多，虽然开发者只需要根据屏幕点进行开发，而不需要基于像素点进行UI开发。但如果在项目中根据不同屏幕尺寸进行各种判断，写死坐标的话，这样开发起来是很吃力的。
+所以一般用纯代码开发UI的话，一般都是配合一些自动化布局的框架进行屏幕适配。苹果为我们提供的适配框架有：VFL、UIViewAutoresizing、Auto Layout、Size Classes等。
+其中Auto Layout是使用频率最高的布局框架，但是其也有弊端。就是在使用UILayoutConstraint的时候，会发现代码量很多，而且大多都是重复性的代码，以至于好多人都不想用这个框架。
+后来Github上的出现了基于UILayoutConstraint封装的第三方布局框架Masonry，Masonry使用起来非常方便，本篇文章就详细讲一下Masonry的使用。
+二、Masonry介绍
+这篇文章只是简单介绍Masonry，以及Masonry的使用，并且会举一些例子出来。但并不会涉及到Masonry的内部实现，以后会专门写篇文章来介绍其内部实现原理，包括顺便讲一下链式语法。
+什么是Masonry
+Masonry是一个对系统NSLayoutConstraint进行封装的第三方自动布局框架，采用链式编程的方式提供给开发者API。系统AutoLayout支持的操作，Masonry都支持，相比系统API功能来说，Masonry是有过之而无不及。
+Masonry采取了链式编程的方式，代码理解起来非常清晰易懂，而且写完之后代码量看起来非常少。之前用NSLayoutConstraint写很多代码才能实现的布局，用Masonry最少一行代码就可以搞定。下面看到Masonry的代码就会发现，太简单易懂了。
+Masonry是同时支持Mac和iOS两个平台的，在这两个平台上都可以使用Masonry进行自动布局。我们可以从MASUtilities.h文件中，看到下面的定义，这就是Masonry通过宏定义的方式，区分两个平台独有的一些关键字。
+ #if TARGET_OS_IPHONE
+#import
+#define MAS_VIEW UIView
+#define MASEdgeInsets UIEdgeInsets
+#elif TARGET_OS_MAC
+#import
+#define MAS_VIEW NSView
+#define MASEdgeInsets NSEdgeInsets
+#endif
+ Github地址：
+https://github.com/SnapKit/Masonry
+集成方式
+Masonry支持CocoaPods，可以直接通过podfile文件进行集成，需要在CocoaPods中添加下面代码：
+ pod &amp;lsquo;Masonry&amp;rsquo;
+ Masonry学习建议
+在UI开发中，纯代码和Interface Builder我都是用过的，在开发过程中也积累了一些经验。对于初学者学习纯代码AutoLayout，我建议还是先学会Interface Builder方式的AutoLayout，领悟苹果对自动布局的规则和思想，然后再把这套思想嵌套在纯代码上。这样学习起来更好入手，也可以避免踩好多坑。
+在项目中设置的AutoLayout约束，起到对视图布局的标记作用。设置好约束之后，程序运行过程中创建视图时，会根据设置好的约束计算frame，并渲染到视图上。
+所以在纯代码情况下，视图设置的约束是否正确，要以运行之后显示的结果和打印的log为准。
+Masonry中的坑
+在使用Masonry进行约束时，有一些是需要注意的。
+ 在使用Masonry添加约束之前，需要在addSubview之后才能使用，否则会导致崩溃。
+ 在添加约束时初学者经常会出现一些错误，约束出现问题的原因一般就是两种：约束冲突和缺少约束。对于这两种问题，可以通过调试和log排查。
+ 之前使用Interface Builder添加约束，如果约束有错误直接就可以看出来，并且会以红色或者黄色警告体现出来。而Masonry则不会直观的体现出来，而是以运行过程中崩溃或者打印异常log体现，所以这也是手写代码进行AutoLayout的一个缺点。
+  这个问题只能通过多敲代码，积攒纯代码进行AutoLayout的经验，慢慢就用起来越来越得心应手了。
+Masonry基础使用
+Masonry基础API
+mas_makeConstraints() 添加约束 mas_remakeConstraints() 移除之前的约束，重新添加新的约束 mas_updateConstraints() 更新约束 equalTo() 参数是对象类型，一般是视图对象或者mas_width这样的坐标系对象 mas_equalTo() 和上面功能相同，参数可以传递基础数据类型对象，可以理解为比上面的API更强大 width() 用来表示宽度，例如代表view的宽度 mas_width() 用来获取宽度的值。和上面的区别在于，一个代表某个坐标系对象，一个用来获取坐标系对象的值  Auto Boxing</description>
     </item>
     
     <item>
