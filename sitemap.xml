@@ -8,7 +8,7 @@
   </url>
   
   <url>
-    <loc>http://wangerk.com/blog-cn/2019/02/16/setting/</loc>
+    <loc>http://wangerk.com/16/setting/</loc>
     <lastmod>2019-02-16T08:57:08+08:00</lastmod>
   </url>
   
@@ -30,6 +30,21 @@
   <url>
     <loc>http://wangerk.com/reward/pay-blog/</loc>
     <lastmod>2019-02-15T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wangerk.com/blog-cn/2019/02/15/audio/</loc>
+    <lastmod>2019-02-15T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wangerk.com/blog-cn/2019/02/14/aac-pcm/</loc>
+    <lastmod>2019-02-14T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wangerk.com/blog-cn/2019/02/13/audio-toolbox-aac/</loc>
+    <lastmod>2019-02-13T20:55:53+08:00</lastmod>
   </url>
   
   <url>
@@ -395,6 +410,12 @@
   <url>
     <loc>http://wangerk.com/blog-cn/2016/04/15/resign-keyboard/</loc>
     <lastmod>2016-04-15T20:55:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wangerk.com/16/</loc>
+    <lastmod>2019-02-16T08:57:08+08:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>

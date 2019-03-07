@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>使用AudioToolbox播放AAC</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>使用AudioToolbox播放AAC</h2>
+        
+
+<h3 id="前言">前言</h3>
+
+<p>使用VideoToolbox硬编码H.264
+使用VideoToolbox硬解码H.264
+使用AudioToolbox编码AAC
+在上一篇中，介绍了如何从麦克风采集声音并用AudioToolbox编码成AAC码流，这次是使用AudioToolbox来播放之前录制的AAC码流。</p>
+
+<h3 id="介绍">介绍</h3>
+
+<p>在iOS设备上播放音频，可以使用AVAudioPlayer（AVFoundation框架内），但是不支持流式播放。</p>
+
+<blockquote>
+<p>Apple recommends that you use this class for audio playback unless you are playing audio captured from a network stream or require very low I/O latency.</p>
+</blockquote>
+
+<p>本文尝试两种播放方式：</p>
+
+<ul>
+<li>使用<code>AudioServicesPlaySystemSound</code>（音频小于等于30s）；</li>
+<li>使用Audio Queue Services音频队列；<br />
+<a href="https://link.jianshu.com/?t=https://developer.apple.com/library/content/documentation/MusicAudio/Conceptual/AudioQueueProgrammingGuide/AQPlayback/PlayingAudio.html#//apple_ref/doc/uid/TP40005343-CH3-SW1">Guide</a></li>
+</ul>
+
+<h3 id="aac码流结构图">AAC码流结构图</h3>
+
+<p>AAC原始码流（又称为“裸流”）是由一个一个的ADTS frame组成的。他们的结构如下图所示。
+<img src="../1.png" alt="" /></p>
+
+<blockquote>
+<p>了解AAC的码流结构，对Audio Queue Services的参数设置更清晰。</p>
+</blockquote>
+
+<h3 id="具体实现">具体实现</h3>
+
+<h4 id="使用-audioservicesplaysystemsound">使用<code>AudioServicesPlaySystemSound</code></h4>
+
+<p><code>AudioServicesCreateSystemSoundID</code>创建系统声音<br />
+<code>AudioServicesAddSystemSoundCompletion</code>设置回调<br />
+<code>AudioServicesPlaySystemSound</code>开始播放</p>
+
+<pre><code>- (void)onClick:(UIButton *)button {
+    [self.mButton setHidden:YES];
+    NSURL *audioURL=[[NSBundle mainBundle] URLForResource:@&quot;abc&quot; withExtension:@&quot;aac&quot;];
+    SystemSoundID soundID;
+    //Creates a system sound object.
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)(audioURL), &amp;soundID);
+    //Registers a callback function that is invoked when a specified system sound finishes playing.
+    AudioServicesAddSystemSoundCompletion(soundID, NULL, NULL, &amp;playCallback, (__bridge void * _Nullable)(self));
+    //    AudioServicesPlayAlertSound(soundID);
+    AudioServicesPlaySystemSound(soundID);
+}
+- (void)onPlayCallback {
+    [self.mButton setHidden:NO];
+}
+</code></pre>
+
+<blockquote>
+<p>以下是API的限制</p>
+</blockquote>
+
+<ul>
+<li>No longer than 30 seconds in duration</li>
+<li>In linear PCM or IMA4 (IMA/ADPCM) format</li>
+<li>Packaged in a .caf, .aif, or .wav file</li>
+</ul>
+
+<blockquote>
+<p>虽然AAC音频不在支持列表里面，但是经过测试，播放是可以的。</p>
+</blockquote>
+
+<h4 id="使用audio-queue-services音频队列">使用Audio Queue Services音频队列</h4>
+
+<p>Audio Queue Services的播放步骤如下：</p>
+
+<ol>
+<li>给buffer填充数据，并把buffer放入就绪的buffer queue；</li>
+<li>应用通知队列开始播放；</li>
+<li>队列播放第一个填充的buffer；</li>
+<li>队列返回已经播放完毕的buffer，并开始播放下面一个填充好的buffer；</li>
+<li>队列调用之前设置的回调函数，填充播放完毕的buffer；</li>
+<li>回调函数中把buffer填充完毕，并放入buffer queue中。</li>
+</ol>
+
+<p><img src="../2.png" alt="" /></p>
+
+<p><a href="https://link.jianshu.com/?t=https://developer.apple.com/library/content/documentation/MusicAudio/Conceptual/AudioQueueProgrammingGuide/AboutAudioQueues/AboutAudioQueues.html#//apple_ref/doc/uid/TP40005343-CH5-SW1">在这里有Guide</a></p>
+
+<h3 id="遇到的问题">遇到的问题</h3>
+
+<h4 id="问题1-malloc错误">问题1：malloc错误</h4>
+
+<blockquote>
+<p>malloc: *** error for object 0x154e58498: incorrect checksum for freed object - object was probably modified after being freed.
+Set a breakpoint in malloc_error_break to debug.</p>
+</blockquote>
+
+<h4 id="问题2-selector调用错误">问题2：selector调用错误</h4>
+
+<blockquote>
+<p>Method cache corrupted. This may be a message to an invalid object, or a memory error somewhere else.
+objc[12730]: receiver 0x13fe1d4f0, SEL 0x10004e2d8, isa 0x100051828, cache 0x100051838, buckets 0x13fd86650, mask 0x7, occupied 0x1
+objc[12730]: receiver 112 bytes, buckets 128 bytes
+objc[12730]: selector &lsquo;fillBuffer:&rsquo;
+objc[12730]: isa &lsquo;AACPlayer&rsquo;
+objc[12730]: Method cache corrupted.</p>
+</blockquote>
+
+<p>这两个问题是出现在AudioQueueAllocateBuffer方法和fillBuffer的调用，而且是时而正常，时而崩溃。
+先查看参数是否正确，通过xcode的debug工具，我们可以看到以下的数据：</p>
+
+<pre><code>(AudioStreamBasicDescription) $0 = {
+  mSampleRate = 44100
+  mFormatID = 1633772320
+  mFormatFlags = 0
+  mBytesPerPacket = 0
+  mFramesPerPacket = 1024
+  mBytesPerFrame = 0
+  mChannelsPerFrame = 1
+  mBitsPerChannel = 0
+  mReserved = 0
+}
+maxSize = 768
+packetNums = 85
+(mStartOffset = 0, mVariableFramesInPacket = 0, mDataByteSize = 23)
+</code></pre>
+
+<p>AudioStreamBasicDescription的参数很熟悉，因为就是我们上一篇的编码所设置的参数。<br />
+AudioQueueAllocateBuffer的参数audioQueue、buffer_size、audioBuffers都很正常，暂时排除存在问题的可能性。<br />
+fillBuffer方法中，有AudioFileReadPackets和AudioQueueEnqueueBuffer两个方法。AudioQueueEnqueueBuffer是把buffer放入到AudioQueue，参数检查没有问题。初步判断是AudioFileReadPackets存在问题。<br />
+通过多次调试，发现AudioFileReadPackets在偶然情况下回返回-60的情况，这时会导致崩溃。<br />
+通过google查到-60对应的是kAudioFilePositionError，回来检查AudioFileReadPackets的参数，发现参数没有初始化，每次调用的参数都不同。<br />
+查API文档知道AudioFileReadPackets的参数除了audioFileID和cache、packet长度，均为传入参数，参数是否初始化并不会影响。至此，fillBuffer方法的线索断了。<br />
+回顾了一下整体的流程，决定从malloc错误入手，在so上找到以下解释。</p>
+
+<ul>
+<li>you are freeing an object twice,</li>
+<li>you are freeing a pointer that was never allocated</li>
+<li>you are writing through an invalid pointer which previously pointed to an object which was already freed</li>
+</ul>
+
+<p>内存访问越界，怎么会和selector调用错误扯上关系？百思不得其解。</p>
+
+<p>最后，几经波折终于找到罪魁祸首。就是以下这行代码：</p>
+
+<pre><code>audioStreamPacketDescrption = malloc(sizeof(audioStreamPacketDescrption) * packetNums);
+</code></pre>
+
+<p>当我打过一次audioStreamPacketDescrption，再打AudioStreamPacketDescrption的时候，Xcode会自动索引为audioStreamPacketDescrption，导致sizeof会计算出不同的大小。</p>
+
+<blockquote>
+<p>PS：按理说对一个结构体的类和结构体的实例进行sizeof，应该是一样的大小（不算动态分配）。
+这个并没有错，可是为了方便我把audioStreamPacketDescrption定义成指针了！</p>
+</blockquote>
+
+<p>两个教训：<br />
+1、不要起和类名一样的变量；<br />
+2、指针和实例的区别要从名字即可分清；</p>
+
+<h3 id="总结">总结</h3>
+
+<p>本篇因为一个小失误，导致demo整整弄了6个多小时才完工。<br />
+播放比解码容易多，Audio Queue Services的使用就参照demo和上图的6个步骤，可以很清晰看懂，就不赘述。</p>
+
+<p>顺便提一下，之前录制的aac音频和h264可以很方便的打包成mp4！看下图：
+<img src="../3.png" alt="" /></p>
+
+<p>只需简单的一行指令：</p>
+
+<blockquote>
+<p>ffmpeg -i abc.h264 -i abc.aac -vcodec copy -f mp4 abc.mp4</p>
+</blockquote>
+
+  </div>
+
+

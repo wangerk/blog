@@ -46,10 +46,10 @@
     
     <item>
       <title>Mac OS X常见设置</title>
-      <link>http://wangerk.com/blog-cn/2019/02/16/setting/</link>
+      <link>http://wangerk.com/16/setting/</link>
       <pubDate>Sat, 16 Feb 2019 08:57:08 +0800</pubDate>
       
-      <guid>http://wangerk.com/blog-cn/2019/02/16/setting/</guid>
+      <guid>http://wangerk.com/16/setting/</guid>
       <description>本小节知识点:  【理解】查看本机配置 【理解】系统开/关机 【理解】键盘设置 【理解】鼠标设置 【理解】网络设置  1.查看本机配置  点击屏幕左上角的黑色苹果   点击&amp;rdquo;关于本机&amp;rdquo;  2.系统开/关机  点击屏幕左上角的黑色苹果 选择&amp;rdquo;睡眠&amp;rdquo; or &amp;ldquo;重新启动&amp;rdquo; or &amp;ldquo;关机&amp;rdquo;   关机快捷键  command + option + control + △   3.键盘设置  点击屏幕左上角的黑色苹果 点击&amp;rdquo;系统偏好设置&amp;rdquo;   选择&amp;rdquo;键盘&amp;rdquo;   设置输入法  4.鼠标设置  查找鼠标   注意, 如果找不到需要关闭鼠标后重新打开   找到后点击继续   看到此图代表鼠标连接成功, 鼠标只需要配对一次, 以后系统会自动配对   注意默认情况下Mac系统不会像windows一样开启鼠标右键, 需要我们手动开启  5.网络设置  点击屏幕左上角的黑色苹果 点击&amp;rdquo;系统偏好设置&amp;rdquo;   选择&amp;rdquo;网络&amp;rdquo;   自动获取IP的方式上网   手动设置IP的方式上网  （本文建议零售价 ￥1，如果你觉得这篇文章有启发，可以点击这里付费)</description>
     </item>
     
@@ -116,6 +116,60 @@ JVM内存结构 VS Java内存模型 VS Java对象模型
       <guid>http://wangerk.com/reward/pay-blog/</guid>
       <description>喜欢我的文章的人，可以自愿付费购买。你可以使用以下方式付款。
  支付宝：  微信：  PayPal：请点击[付款链接]  </description>
+    </item>
+    
+    <item>
+      <title>音频相关基础及参考文章</title>
+      <link>http://wangerk.com/blog-cn/2019/02/15/audio/</link>
+      <pubDate>Fri, 15 Feb 2019 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2019/02/15/audio/</guid>
+      <description>基础知识 现实生活中，我们听到的声音都是时间连续的，我们称为这种信号叫模拟信号。模拟信号需要进行数字化以后才能在计算机中使用。目前我们在计算机上进行音频播放都需要依赖于音频文件。
+音频文件的生成过程是将声音信息采样、量化和编码产生的数字信号的过程。人耳所能听到的声音，最低的频率是从20Hz起一直到最高频率20KHZ，因此音频文件格式的最大带宽是20KHZ。根据奈奎斯特的理论，只有采样频率高于声音信号最高频率的两倍时，才能把数字信号表示的声音还原成为原来的声音，所以音频文件的采样率一般在40~50KHZ，比如最常见的CD音质采样率44.1KHZ。
+对声音进行采样、量化过程被称为脉冲编码调制（Pulse Code Modulation），简称PCM。PCM数据是最原始的音频数据完全无损，所以PCM数据虽然音质优秀但体积庞大，为了解决这个问题先后诞生了一系列的音频格式，这些音频格式运用不同的方法对音频数据进行压缩，其中有无损压缩（ALAC、APE、FLAC）和有损压缩（MP3、AAC、OGG、WMA）两种。
+位速/比特率/码率描述的都是一个东西，是指在一个数据流中每秒钟能通过的信息量，代表了压缩质量，比如MP3常用码率有128kbit/s、160kbit/s、320kbit/s等等，越高代表着声音音质越好。MP3中的数据有ID3和音频数据组成，ID3用于存储歌名、演唱者、专辑、音轨等我们可以常见的信息。
+简化声音处理流程 模拟信号 -&amp;gt; 输入设备（传递电压值）-&amp;gt; 声卡(经过采样跟量化（即设置声音大小等各种值）) -&amp;gt; 磁盘（文件） -&amp;gt; 声卡 -&amp;gt; 输出设备 -&amp;gt; 模拟信号
+我们声音在物理上用波形表示，那么我们将这些波形称作为模拟信号。而我们计算机磁盘只能存储（01010101）的格式。我们将模拟信号转换成能够被磁盘存储的格式（010101）称之为数字信号。这个转换的过程我们叫模数转换。
+我们发出来的声音（模拟信号）是连续的，我们如果要一直的对模拟信号进行转化，产生的数字信号会很大。那么我们就要采样，而采样精度就是每秒计算机对模拟信号进行采样的次数。最常见的采样精度就是上面提到的44.1khz/s,这个是经过大师们多年研究得出的数据，低于这个数据，效果就会很差，而高于这个数据，效果的差距不是很明显。
+采样后会后是变成了（0101010110100101&amp;hellip;），那声音的音量是有大小的，那这串数据，怎样表示声音的大小呢？ 这就涉及到了比特率，它是指在一个数据流中每秒钟能通过的信息量。 比特率就是将声音的大小划分为多少等级。举例下：8比特，在二进制中，表示有8位，表示的十进制的值就是0（00000000）～256（11111111），那每个数值就代表着一个声音大小。
+ 过程可以简化为：波形在经过输入设备的时候，会产生电压值。声卡通过计算采样率、比特率，以每秒几次的频率去获取这些电压值，然后将这些电压值以几bit的形式转换成数字信号。计算机将数据格式存储为文件。
+ 文件是用来装数字信号的，文件包括了比特率、采样率、声道、编码方式、以及被编码过后的数字信号。
+文件格式就是制造者自己规定的一种名称，在每个文件格式都会特定支持几种编码格式。打个比方就是文件就是一个容器，里面可以装不同的水，有的可以装一种，有的可以装好几种。
+经过采样后的数字信号很大，有时候我们不需要这么大的，所以我们就要进行编码压缩，当然压缩技术都是有损的。在不大影响音频的效果的情况下，舍弃掉一些高频或者低频的数据。
+采样频率(采样精度) 采样频率是指单位时间内对声音模拟信号的采样次数。采样率类似于视频的帧数，比如电影的采样率是24Hz。当我们把采样到的一个个静止画面再以采样率同样的速度回放时，看到的就是连续的画面。同样的道理，把以44.1kHZ采样率记录的CD以同样的速率播放时，就能听到连续的声音。显然，这个采样率越高，听到的声音和看到的图像就越连贯。
+采样位数 采样位数可以理解为采集卡处理声音的解析度。电脑中的声音文件是用数字0和1来表示的。连续的模拟信号按一定的采样频率经数码脉冲取样后，每一个离散的脉冲信号被以一定的量化精度量化成一串二进制编码流，这串编码流的位数即为采样位数，也称为量化精度。
+编码格式 可以理解为每种音频格式不同的编解码方式，而iOS下这些编码方式被集中到一个枚举中.
+CF_ENUM(AudioFormatID) { kAudioFormatLinearPCM = &#39;lpcm&#39;, kAudioFormatAC3 = &#39;ac-3&#39;, kAudioFormat60958AC3 = &#39;cac3&#39;, kAudioFormatAppleIMA4 = &#39;ima4&#39;, kAudioFormatMPEG4AAC = &#39;aac &#39;, kAudioFormatMPEG4CELP = &#39;celp&#39;, kAudioFormatMPEG4HVXC = &#39;hvxc&#39;, kAudioFormatMPEG4TwinVQ = &#39;twvq&#39;, kAudioFormatMACE3 = &#39;MAC3&#39;, kAudioFormatMACE6 = &#39;MAC6&#39;, kAudioFormatULaw = &#39;ulaw&#39;, kAudioFormatALaw = &#39;alaw&#39;, kAudioFormatQDesign = &#39;QDMC&#39;, kAudioFormatQDesign2 = &#39;QDM2&#39;, kAudioFormatQUALCOMM = &#39;Qclp&#39;, kAudioFormatMPEGLayer1 = &#39;.</description>
+    </item>
+    
+    <item>
+      <title>AAC到PCM音频解码</title>
+      <link>http://wangerk.com/blog-cn/2019/02/14/aac-pcm/</link>
+      <pubDate>Thu, 14 Feb 2019 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2019/02/14/aac-pcm/</guid>
+      <description>最近遇到在 iOS 平台上实时播放 AAC 音频数据流, 一开始尝试用 AudioQueue 直接解 AAC 未果, 转而将 AAC 解码为 PCM, 最终实现了 AAC 实时流在 iOS 平台下的播放问题.
+ AAC 转 PCM 需要借助解码库来实现, 目前了解到有两个库能干这个事 : faad 和 ffmpeg.
+ faad 算是轻量级的解码库, 编译出来全平台静态库文件大小 2M 左右, API 也比较简单, 缺点是功能单一只处理 AAC , 它还有一个对应的编码库叫 faac. ffmpeg 体积庞大, 功能丰富, API 略显复杂.  下面分别梳理使用这两个库完成解码的过程.
+faad  下载源码  #下载 wget http://downloads.sourceforge.net/faac/faad2-2.7.tar.gz #解压缩 tar xvzf faad2-2.7.tar.gz #重命名 mv faad2-2.7 faad   写编译脚本, vi build-faad.</description>
+    </item>
+    
+    <item>
+      <title>使用AudioToolbox播放AAC</title>
+      <link>http://wangerk.com/blog-cn/2019/02/13/audio-toolbox-aac/</link>
+      <pubDate>Wed, 13 Feb 2019 20:55:53 +0800</pubDate>
+      
+      <guid>http://wangerk.com/blog-cn/2019/02/13/audio-toolbox-aac/</guid>
+      <description>前言 使用VideoToolbox硬编码H.264 使用VideoToolbox硬解码H.264 使用AudioToolbox编码AAC 在上一篇中，介绍了如何从麦克风采集声音并用AudioToolbox编码成AAC码流，这次是使用AudioToolbox来播放之前录制的AAC码流。
+介绍 在iOS设备上播放音频，可以使用AVAudioPlayer（AVFoundation框架内），但是不支持流式播放。
+ Apple recommends that you use this class for audio playback unless you are playing audio captured from a network stream or require very low I/O latency.
+ 本文尝试两种播放方式：
+ 使用AudioServicesPlaySystemSound（音频小于等于30s）； 使用Audio Queue Services音频队列；
+Guide  AAC码流结构图 AAC原始码流（又称为“裸流”）是由一个一个的ADTS frame组成的。他们的结构如下图所示。  了解AAC的码流结构，对Audio Queue Services的参数设置更清晰。
+ 具体实现 使用AudioServicesPlaySystemSound AudioServicesCreateSystemSoundID创建系统声音
+AudioServicesAddSystemSoundCompletion设置回调
+AudioServicesPlaySystemSound开始播放
+- (void)onClick:(UIButton *)button { [self.mButton setHidden:YES]; NSURL *audioURL=[[NSBundle mainBundle] URLForResource:@&amp;quot;abc&amp;quot; withExtension:@&amp;quot;aac&amp;quot;]; SystemSoundID soundID; //Creates a system sound object.</description>
     </item>
     
     <item>

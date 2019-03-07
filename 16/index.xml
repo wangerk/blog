@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>16s on 当然我在扯淡</title>
+    <link>http://wangerk.com/16/</link>
+    <description>Recent content in 16s on 当然我在扯淡</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 16 Feb 2019 08:57:08 +0800</lastBuildDate>
+    
+	<atom:link href="http://wangerk.com/16/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Mac OS X常见设置</title>
+      <link>http://wangerk.com/16/setting/</link>
+      <pubDate>Sat, 16 Feb 2019 08:57:08 +0800</pubDate>
+      
+      <guid>http://wangerk.com/16/setting/</guid>
+      <description>本小节知识点:  【理解】查看本机配置 【理解】系统开/关机 【理解】键盘设置 【理解】鼠标设置 【理解】网络设置  1.查看本机配置  点击屏幕左上角的黑色苹果   点击&amp;rdquo;关于本机&amp;rdquo;  2.系统开/关机  点击屏幕左上角的黑色苹果 选择&amp;rdquo;睡眠&amp;rdquo; or &amp;ldquo;重新启动&amp;rdquo; or &amp;ldquo;关机&amp;rdquo;   关机快捷键  command + option + control + △   3.键盘设置  点击屏幕左上角的黑色苹果 点击&amp;rdquo;系统偏好设置&amp;rdquo;   选择&amp;rdquo;键盘&amp;rdquo;   设置输入法  4.鼠标设置  查找鼠标   注意, 如果找不到需要关闭鼠标后重新打开   找到后点击继续   看到此图代表鼠标连接成功, 鼠标只需要配对一次, 以后系统会自动配对   注意默认情况下Mac系统不会像windows一样开启鼠标右键, 需要我们手动开启  5.网络设置  点击屏幕左上角的黑色苹果 点击&amp;rdquo;系统偏好设置&amp;rdquo;   选择&amp;rdquo;网络&amp;rdquo;   自动获取IP的方式上网   手动设置IP的方式上网  （本文建议零售价 ￥1，如果你觉得这篇文章有启发，可以点击这里付费)</description>
+    </item>
+    
+  </channel>
+</rss>

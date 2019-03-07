@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>AAC到PCM音频解码</title>
+    
+     <link rel="shortcut icon" href="/images/w.jpg">
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  
+  
+<div class="blog-post">
+  <h2>AAC到PCM音频解码</h2>
+        
+
+<blockquote>
+<p>最近遇到在 iOS 平台上实时播放 AAC 音频数据流, 一开始尝试用 AudioQueue 直接解 AAC 未果, 转而将 AAC 解码为 PCM, 最终实现了 AAC 实时流在 iOS 平台下的播放问题.</p>
+</blockquote>
+
+<p>AAC 转 PCM 需要借助解码库来实现, 目前了解到有两个库能干这个事 : <code>faad</code> 和 <code>ffmpeg</code>.</p>
+
+<ul>
+<li>faad 算是轻量级的解码库, 编译出来全平台静态库文件大小 2M 左右, API 也比较简单, 缺点是功能单一只处理 AAC , 它还有一个对应的编码库叫 faac.</li>
+<li>ffmpeg 体积庞大, 功能丰富, API 略显复杂.</li>
+</ul>
+
+<p>下面分别梳理使用这两个库完成解码的过程.</p>
+
+<h3 id="faad">faad</h3>
+
+<ul>
+<li>下载源码</li>
+</ul>
+
+<pre><code>#下载
+wget http://downloads.sourceforge.net/faac/faad2-2.7.tar.gz
+#解压缩
+tar xvzf faad2-2.7.tar.gz
+#重命名
+mv faad2-2.7 faad
+</code></pre>
+
+<ul>
+<li>写编译脚本, vi build-faad.sh</li>
+</ul>
+
+<pre><code>#!/bin/sh
+
+CONFIGURE_FLAGS=&quot;--enable-static --with-pic&quot;
+
+ARCHS=&quot;arm64 armv7s armv7 x86_64 i386&quot;
+
+# directories
+SOURCE=&quot;faad&quot;
+FAT=&quot;fat-faad&quot;
+
+SCRATCH=&quot;scratch-faad&quot;
+# must be an absolute path
+THIN=`pwd`/&quot;thin-faad&quot;
+
+COMPILE=&quot;y&quot;
+LIPO=&quot;y&quot;
+
+if [ &quot;$*&quot; ]
+then
+if [ &quot;$*&quot; = &quot;lipo&quot; ]
+then
+# skip compile
+COMPILE=
+else
+ARCHS=&quot;$*&quot;
+if [ $# -eq 1 ]
+then
+# skip lipo
+LIPO=
+fi
+fi
+fi
+
+if [ &quot;$COMPILE&quot; ]
+then
+CWD=`pwd`
+for ARCH in $ARCHS
+do
+echo &quot;building $ARCH...&quot;
+mkdir -p &quot;$SCRATCH/$ARCH&quot;
+cd &quot;$SCRATCH/$ARCH&quot;
+
+if [ &quot;$ARCH&quot; = &quot;i386&quot; -o &quot;$ARCH&quot; = &quot;x86_64&quot; ]
+then
+PLATFORM=&quot;iPhoneSimulator&quot;
+CPU=
+if [ &quot;$ARCH&quot; = &quot;x86_64&quot; ]
+then
+SIMULATOR=&quot;-mios-simulator-version-min=7.0&quot;
+HOST=
+else
+SIMULATOR=&quot;-mios-simulator-version-min=5.0&quot;
+HOST=&quot;--host=i386-apple-darwin&quot;
+fi
+else
+PLATFORM=&quot;iPhoneOS&quot;
+if [ $ARCH = &quot;armv7s&quot; ]
+then
+CPU=&quot;--cpu=swift&quot;
+else
+CPU=
+fi
+SIMULATOR=
+HOST=&quot;--host=arm-apple-darwin&quot;
+fi
+
+XCRUN_SDK=`echo $PLATFORM | tr '[:upper:]' '[:lower:]'`
+CC=&quot;xcrun -sdk $XCRUN_SDK clang -Wno-error=unused-command-line-argument-hard-error-in-future&quot;
+AS=&quot;$CWD/$SOURCE/extras/gas-preprocessor.pl $CC&quot;
+CFLAGS=&quot;-arch $ARCH $SIMULATOR&quot;
+CXXFLAGS=&quot;$CFLAGS&quot;
+LDFLAGS=&quot;$CFLAGS&quot;
+
+CC=$CC CFLAGS=$CXXFLAGS LDFLAGS=$LDFLAGS CPPFLAGS=$CXXFLAGS CXX=$CC CXXFLAGS=$CXXFLAGS  $CWD/$SOURCE/configure \
+$CONFIGURE_FLAGS \
+$HOST \
+--prefix=&quot;$THIN/$ARCH&quot; \
+--disable-shared \
+--without-mp4v2
+
+make clean &amp;&amp; make &amp;&amp; make install-strip
+cd $CWD
+done
+fi
+
+if [ &quot;$LIPO&quot; ]
+then
+echo &quot;building fat binaries...&quot;
+mkdir -p $FAT/lib
+set - $ARCHS
+CWD=`pwd`
+cd $THIN/$1/lib
+for LIB in *.a
+do
+cd $CWD
+lipo -create `find $THIN -name $LIB` -output $FAT/lib/$LIB
+done
+
+cd $CWD
+cp -rf $THIN/$1/include $FAT
+fi
+</code></pre>
+
+<blockquote>
+<p>保存编译脚本到解压出的 faad 目录同一级目录下, 并添加可执行权限<br />
+<code>chmod a+x build-faad.sh</code></p>
+</blockquote>
+
+<ul>
+<li><p>编译<br />
+<code>./build-faad.sh</code><br />
+当前目录下 fat-faad 即为编译结果所在位置, 里面有头文件和支持全平台(<code>armv7</code>, <code>armv7s</code> ,<code>i386</code>, <code>x86_64</code>, <code>arm64</code>)的静态库</p></li>
+
+<li><p>添加静态库到工程依赖 (鼠标拖 fat-faad 目录到 xcode 工程目录下), 创建解码文件<code>FAACDecoder.h</code>,<code>FAACDecoder.m</code></p></li>
+
+<li><p>FAACDecoder.h</p></li>
+</ul>
+
+<pre><code>//
+//  FAACDecoder.h
+//  EasyClient
+//
+//  Created by 吴鹏 on 16/9/3.
+//  Copyright © 2016年 EasyDarwin. All rights reserved.
+//
+
+#ifndef FAACDecoder_h
+#define FAACDecoder_h
+
+typedef struct {
+    NeAACDecHandle handle;
+    int sample_rate;
+    int channels;
+    int bit_rate;
+}FAADContext;
+
+FAADContext* faad_decoder_create(int sample_rate, int channels, int bit_rate);
+int faad_decode_frame(FAADContext *pParam, unsigned char *pData, int nLen, unsigned char *pPCM, unsigned int *outLen);
+void faad_decode_close(FAADContext *pParam);
+
+#endif /* FAACDecoder_h */
+</code></pre>
+
+<ul>
+<li>FAACDecoder.m</li>
+</ul>
+
+<pre><code>//
+//  FAACDecoder.m
+//  EasyClient
+//
+//  Created by 吴鹏 on 16/9/3.
+//  Copyright © 2016年 EasyDarwin. All rights reserved.
+//
+#import &lt;Foundation/Foundation.h&gt;
+#import &quot;FAACDecoder.h&quot;
+#import &quot;faad.h&quot;
+
+uint32_t _get_frame_length(const unsigned char *aac_header)
+{
+    uint32_t len = *(uint32_t *)(aac_header + 3);
+    len = ntohl(len); //Little Endian
+    len = len &lt;&lt; 6;
+    len = len &gt;&gt; 19;
+    return len;
+}
+
+FAADContext* faad_decoder_create(int sample_rate, int channels, int bit_rate)
+{
+    NeAACDecHandle handle = NeAACDecOpen();
+    if(!handle){
+        printf(&quot;NeAACDecOpen failed\n&quot;);
+        goto error;
+    }
+    NeAACDecConfigurationPtr conf = NeAACDecGetCurrentConfiguration(handle);
+    if(!conf){
+        printf(&quot;NeAACDecGetCurrentConfiguration failed\n&quot;);
+        goto error;
+    }
+    conf-&gt;defSampleRate = sample_rate;
+    conf-&gt;outputFormat = FAAD_FMT_16BIT;
+    conf-&gt;dontUpSampleImplicitSBR = 1;
+    NeAACDecSetConfiguration(handle, conf);
+    
+    FAADContext* ctx = malloc(sizeof(FAADContext));
+    ctx-&gt;handle = handle;
+    ctx-&gt;sample_rate = sample_rate;
+    ctx-&gt;channels = channels;
+    ctx-&gt;bit_rate = bit_rate;
+    return ctx;
+    
+error:
+    if(handle){
+        NeAACDecClose(handle);
+    }
+    return NULL;
+}
+
+int faad_decode_frame(FAADContext *p, unsigned char *pData, int nLen, unsigned char *pPCM, unsigned int *outLen)
+{
+    FAADContext* pCtx = (FAADContext*)pParam;
+    NeAACDecHandle handle = pCtx-&gt;handle;
+    long res = NeAACDecInit(handle, pData, nLen, (unsigned long*)&amp;pCtx-&gt;sample_rate, (unsigned char*)&amp;pCtx-&gt;channels);
+    if (res &lt; 0) {
+        printf(&quot;NeAACDecInit failed\n&quot;);
+        return -1;
+    }
+    NeAACDecFrameInfo info;
+    uint32_t framelen = _get_frame_length(pData);
+    unsigned char *buf = (unsigned char *)NeAACDecDecode(handle, &amp;info, pData, framelen);
+    if (buf &amp;&amp; info.error == 0) {
+        if (info.samplerate == 44100) {
+            //src: 2048 samples, 4096 bytes
+            //dst: 2048 samples, 4096 bytes
+            int tmplen = (int)info.samples * 16 / 8;
+            memcpy(pPCM,buf,tmplen);
+            *outLen = tmplen;
+        } else if (info.samplerate == 22050) {
+            //src: 1024 samples, 2048 bytes
+            //dst: 2048 samples, 4096 bytes
+            short *ori = (short*)buf;
+            short tmpbuf[info.samples * 2];
+            int tmplen = (int)info.samples * 16 / 8 * 2;
+            for (int32_t i = 0, j = 0; i &lt; info.samples; i += 2) {
+                tmpbuf[j++] = ori[i];
+                tmpbuf[j++] = ori[i + 1];
+                tmpbuf[j++] = ori[i];
+                tmpbuf[j++] = ori[i + 1];
+            }
+            memcpy(pPCM,tmpbuf,tmplen);
+            *outLen = tmplen;
+        }else if(info.samplerate == 8000){
+            //从双声道的数据中提取单通道
+            for(int i=0,j=0; i&lt;4096 &amp;&amp; j&lt;2048; i+=4, j+=2)
+            {
+                pPCM[j]= buf[i];
+                pPCM[j+1]=buf[i+1];
+            }
+            *outLen = (unsigned int)info.samples;
+        }
+    } else {
+        printf(&quot;NeAACDecDecode failed\n&quot;);
+        return -1;
+    }
+    return 0;
+}
+
+void faad_decode_close(void *pParam)
+{
+    if(!pParam){
+        return;
+    }
+    FAADContext* pCtx = (FAADContext*)pParam;
+    if(pCtx-&gt;handle){
+        NeAACDecClose(pCtx-&gt;handle);
+    }
+    free(pCtx);
+}
+</code></pre>
+
+<blockquote>
+<p>几个主要 API :</p>
+</blockquote>
+
+<ol>
+<li>NeAACDecOpen</li>
+<li>NeAACDecGetCurrentConfiguration</li>
+<li>NeAACDecSetConfiguration</li>
+<li>NeAACDecInit</li>
+<li>NeAACDecDecode</li>
+<li>NeAACDecClose</li>
+</ol>
+
+<h3 id="ffmpeg">ffmpeg</h3>
+
+<ul>
+<li><p>下载编译<br />
+参考 <a href="https://github.com/kewlbear/FFmpeg-iOS-build-script">https://github.com/kewlbear/FFmpeg-iOS-build-script</a></p></li>
+
+<li><p>添加 ffmpeg 静态库到工程依赖, 创建解码文件<code>AACDecoder.h</code>, <code>AACDecoder.m</code></p></li>
+
+<li><p>AACDecoder.h</p></li>
+</ul>
+
+<pre><code>#ifndef _AACDecoder_h
+#define _AACDecoder_h
+
+void *aac_decoder_create(int sample_rate, int channels, int bit_rate);
+int aac_decode_frame(void *pParam, unsigned char *pData, int nLen, unsigned char *pPCM, unsigned int *outLen);
+void aac_decode_close(void *pParam);
+
+#endif
+</code></pre>
+
+<ul>
+<li>AACDecoder.m</li>
+</ul>
+
+<pre><code>#include &quot;AACDecoder.h&quot;
+#include &quot;libavformat/avformat.h&quot;
+#include &quot;libswresample/swresample.h&quot;
+#include &quot;libavcodec/avcodec.h&quot;
+
+typedef struct AACDFFmpeg {
+    AVCodecContext *pCodecCtx;
+    AVFrame *pFrame;
+    struct SwrContext *au_convert_ctx;
+    int out_buffer_size;
+} AACDFFmpeg;
+
+void *aac_decoder_create(int sample_rate, int channels, int bit_rate)
+{
+    AACDFFmpeg *pComponent = (AACDFFmpeg *)malloc(sizeof(AACDFFmpeg));
+    AVCodec *pCodec = avcodec_find_decoder(AV_CODEC_ID_AAC);
+    if (pCodec == NULL)
+    {
+        printf(&quot;find aac decoder error\r\n&quot;);
+        return 0;
+    }
+    // 创建显示contedxt
+    pComponent-&gt;pCodecCtx = avcodec_alloc_context3(pCodec);
+    pComponent-&gt;pCodecCtx-&gt;channels = channels;
+    pComponent-&gt;pCodecCtx-&gt;sample_rate = sample_rate;
+    pComponent-&gt;pCodecCtx-&gt;bit_rate = bit_rate;
+    if(avcodec_open2(pComponent-&gt;pCodecCtx, pCodec, NULL) &lt; 0)
+    {
+        printf(&quot;open codec error\r\n&quot;);
+        return 0;
+    }
+    
+    pComponent-&gt;pFrame = av_frame_alloc();
+    
+
+    uint64_t out_channel_layout = channels &lt; 2 ? AV_CH_LAYOUT_MONO:AV_CH_LAYOUT_STEREO;
+    int out_nb_samples = 1024;
+    enum AVSampleFormat out_sample_fmt = AV_SAMPLE_FMT_S16;
+    
+    pComponent-&gt;au_convert_ctx = swr_alloc();
+    pComponent-&gt;au_convert_ctx = swr_alloc_set_opts(pComponent-&gt;au_convert_ctx, out_channel_layout, out_sample_fmt, sample_rate,
+                                      out_channel_layout, AV_SAMPLE_FMT_FLTP, sample_rate, 0, NULL);
+    swr_init(pComponent-&gt;au_convert_ctx);
+    int out_channels = av_get_channel_layout_nb_channels(out_channel_layout);
+    pComponent-&gt;out_buffer_size = av_samples_get_buffer_size(NULL, out_channels, out_nb_samples, out_sample_fmt, 1);
+
+    return (void *)pComponent;
+}
+
+int aac_decode_frame(void *pParam, unsigned char *pData, int nLen, unsigned char *pPCM, unsigned int *outLen)
+{
+    AACDFFmpeg *pAACD = (AACDFFmpeg *)pParam;
+    AVPacket packet;
+    av_init_packet(&amp;packet);
+    
+    packet.size = nLen;
+    packet.data = pData;
+    
+    int got_frame = 0;
+    int nRet = 0;
+    if (packet.size &gt; 0)
+    {
+        nRet = avcodec_decode_audio4(pAACD-&gt;pCodecCtx, pAACD-&gt;pFrame, &amp;got_frame, &amp;packet);
+        if (nRet &lt; 0)
+        {
+   printf(&quot;avcodec_decode_audio4:%d\r\n&quot;,nRet);
+            printf(&quot;avcodec_decode_audio4 %d  sameles = %d  outSize = %d\r\n&quot;, nRet, pAACD-&gt;pFrame-&gt;nb_samples, pAACD-&gt;out_buffer_size);
+            return nRet;
+        }
+
+        if(got_frame)
+        {
+            swr_convert(pAACD-&gt;au_convert_ctx, &amp;pPCM, pAACD-&gt;out_buffer_size, (const uint8_t **)pAACD-&gt;pFrame-&gt;data, pAACD-&gt;pFrame-&gt;nb_samples);
+            *outLen = pAACD-&gt;out_buffer_size;
+        }
+    }
+
+    av_free_packet(&amp;packet);
+    if (nRet &gt; 0)
+    {
+        return 0;
+    }
+    return -1;
+}
+
+void aac_decode_close(void *pParam)
+{
+    AACDFFmpeg *pComponent = (AACDFFmpeg *)pParam;
+    if (pComponent == NULL)
+    {
+        return;
+    }
+    
+    swr_free(&amp;pComponent-&gt;au_convert_ctx);
+    
+    if (pComponent-&gt;pFrame != NULL)
+    {
+        av_frame_free(&amp;pComponent-&gt;pFrame);
+        pComponent-&gt;pFrame = NULL;
+    }
+    
+    if (pComponent-&gt;pCodecCtx != NULL)
+    {
+        avcodec_close(pComponent-&gt;pCodecCtx);
+        avcodec_free_context(&amp;pComponent-&gt;pCodecCtx);
+        pComponent-&gt;pCodecCtx = NULL;
+    }
+    
+    free(pComponent);
+}
+</code></pre>
+
+  </div>
+
+
